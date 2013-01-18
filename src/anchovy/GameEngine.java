@@ -74,32 +74,34 @@ public class GameEngine {
 
 			// Determine component types we are dealing with.
 			if (currentCompName.contains("Condenser")) {
-				currentNewComponent = new Condenser(currentCompName);
+				currentNewComponent = new Condenser(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Generator")) {
-				currentNewComponent = new Generator(currentCompName);
+				currentNewComponent = new Generator(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Pump")) {
-				currentNewComponent = new Pump(currentCompName);
+				currentNewComponent = new Pump(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Reactor")) {
-				currentNewComponent = new Reactor(currentCompName);
+				currentNewComponent = new Reactor(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Turbine")) {
-				currentNewComponent = new Turbine(currentCompName);
+				currentNewComponent = new Turbine(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Valve")) {
-				currentNewComponent = new Valve(currentCompName);
+				currentNewComponent = new Valve(currentCompName, currentInfo);
+			} else if (currentCompName.contains("Infrastructure")){
+				currentNewComponent = new Infrastructure(currentCompName, currentInfo);
 			}
 			addComponent(currentNewComponent); // add the component to the power
-												// plant
-
+			// plant
+			/*
 			try {
 				assignInfoToComponent(currentInfo); // send the just added
 													// component its info.
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 
 		// Connect components together
 		infoIt = allPowerPlantInfo.iterator();// reset the iterator TODO i think
-												// this works.
+		// this works.
 		ArrayList<String> inputComponents = new ArrayList<String>();
 		ArrayList<String> outputComponents = new ArrayList<String>();
 
@@ -154,9 +156,9 @@ public class GameEngine {
 				attachComp = getPowerPlantComponent(connectionNameIt.next());
 				connectComponentTo(currentComponent, attachComp, false);
 			}
-
 		}
 	}
+
 
 	/**
 	 * Using the name of a component in the format of a string returns the
@@ -179,6 +181,14 @@ public class GameEngine {
 				currentComponent = c;
 			}
 		}
+		if(currentComponent == null)
+			try {
+				throw new Exception("The component: " + currentCompName + " was not found to exist in the power plant");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		return currentComponent;
 	}
 
@@ -318,7 +328,7 @@ public class GameEngine {
 
 				output += pair.first() + '/' + pair.second().toString() + '\n';
 			}
-			
+
 		}
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter("saves/" + FileName + ".fg"));
@@ -342,13 +352,13 @@ public class GameEngine {
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		clearPowerPlant(); 
 		ArrayList<String> data = new ArrayList<String>();
-		
+
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
 		String temp;
 		int c=0;
 		try {
 			while ((temp = br.readLine()) != null) {
-				
+
 				data.add(temp);	
 				if(temp.contains("Name of component"))
 				{
@@ -356,17 +366,17 @@ public class GameEngine {
 				}
 			}
 			br.close();
-			
+
 			int i = 0;
 			String textData[]=new String[data.size()];	
-			
-			
+
+
 			textData= data.toArray(new String[i]);
 			InfoPacket info = new InfoPacket();
 			while (i<data.size()-1) {
-				
+
 				String ch = textData[i].substring(0, textData[i].indexOf("/"));
-				
+
 				if (ch.equals("Name of component")) {
 					if(i != 0)
 					{
@@ -402,24 +412,24 @@ public class GameEngine {
 				}
 				else if (ch.equals("Outputs to"))
 				{
-				
+
 					String d = textData[i].substring(textData[i].indexOf("/")+1,
 							textData[i].length());
-					
+
 					info.namedValues.add(new Pair<String>(Label.oPto, d));
 					System.out.println(ch + "=" + d);
 				}
 				else if (ch.equals("Recieves input from"))
 				{
-				
+
 					String d = textData[i].substring(textData[i].indexOf("/")+1,
 							textData[i].length());
-					
+
 					info.namedValues.add(new Pair<String>(Label.rcIF, d));
 					System.out.println(ch + "=" + d);
 				}
 				i++;
-				
+
 			}
 			infoList.add(info);
 		} catch (IOException e) {
@@ -502,7 +512,7 @@ public class GameEngine {
 				case cNme:
 					componentName = (String) pair.second() + '\n';
 					break;
-				/*case rcIF:
+					/*case rcIF:
 					componentDescriptionNon += "Gets inputs from: "
 							+ pair.second().toString() + '\n';
 					break;
@@ -613,7 +623,7 @@ public class GameEngine {
 		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 3"));
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Condensor"));
 		infoList.add(info);
-		
+
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 3"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
@@ -663,13 +673,13 @@ public class GameEngine {
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
 		infoList.add(info);
 		// ///////////
-*/
+		 */
 		gameEngine.clearPowerPlant();
 		assert (gameEngine.getAllComponentInfo().isEmpty());
 
 		gameEngine.setupPowerPlantConfiguration(infoList);
 		gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());
-		
+
 		System.out.println("HellO");
 	}
 }
