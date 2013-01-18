@@ -9,6 +9,11 @@ public class InfoPacket {
 	public ArrayList<Pair<?>> namedValues = new ArrayList<Pair<?>>();
 	
 	@Override
+	/**
+	 * @inheritDoc
+	 * Determine whether two infoPackets are essentially the same. That is they have the same info pairs
+	 * however not necessarily in the same order. 
+	 */
 	public boolean equals(Object _infoPacket) {
 		InfoPacket infoPacket = (InfoPacket) _infoPacket;
 		
@@ -23,6 +28,11 @@ public class InfoPacket {
 		return true;
 	}
 	
+	/**
+	 * Determines whether the infoPacket contains a particular pair. 
+	 * @param p The pair that you are checking the existence of.
+	 * @return Whether the pair p was in the infoPacket.
+	 */
 	public Boolean hasPair(Pair<?> p) {
 		for(Pair<?> pair : namedValues) {
 			if(p.equals(pair))
