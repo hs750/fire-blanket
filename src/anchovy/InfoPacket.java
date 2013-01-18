@@ -8,12 +8,12 @@ public class InfoPacket {
 	 */
 	public ArrayList<Pair<?>> namedValues = new ArrayList<Pair<?>>();
 	
-	@Override
 	/**
-	 * @inheritDoc
+	 * {@inheritDoc}
 	 * Determine whether two infoPackets are essentially the same. That is they have the same info pairs
 	 * however not necessarily in the same order. 
 	 */
+	@Override
 	public boolean equals(Object _infoPacket) {
 		InfoPacket infoPacket = (InfoPacket) _infoPacket;
 		

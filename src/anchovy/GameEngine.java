@@ -306,7 +306,7 @@ public class GameEngine {
 		}
 	}
 	/**
-	 * Saves the contence of the given infoPacket to the given file.
+	 * Saves the contents of the given infoPacket to the given file.
 	 * @param packets The information to be saved.
 	 * @param FileName The name of the file the data will be saved to
 	 * @return Returns a string that will be written into the console output
@@ -340,8 +340,8 @@ public class GameEngine {
 	}
 
 	/**
-	 * Reads in the contence of a given file to the game. This is done by reading each line and adding it to the appropriate
-	 * infoPacket then using the infopackets to setup the state of the game and power plant.
+	 * Reads in the contents of a given file to the game. This is done by reading each line and adding it to the appropriate
+	 * infoPacket then using the info packets to setup the state of the game and power plant.
 	 * @param file The filename of the file to be read in.
 	 * @throws FileNotFoundException
 	 */

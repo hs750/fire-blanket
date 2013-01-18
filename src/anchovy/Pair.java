@@ -92,11 +92,11 @@ public class Pair<T> {
 		this.second = val;
 	}
 	
-	@Override
 	/**
-	 * @inheritDoc
+	 * {@inheritDoc}
 	 * Determines whether two pairs are essentially the same. That is that the two pairs have the same label and the (second) values are also equal.
 	 */
+	@Override
 	public boolean equals(Object _pair) {
 		Pair<?> pair = (Pair<?>) _pair;
 		
@@ -109,10 +109,11 @@ public class Pair<T> {
 		return true;
 	}
 	
-	@Override
 	/**
+	 * {@inheritDoc}
 	 * @return The condense of the pair as a string in the form FIRST <SPACE> SECOND
 	 */
+	@Override
 	public String toString() {
 		return this.first + " " + this.second.toString();
 	}
