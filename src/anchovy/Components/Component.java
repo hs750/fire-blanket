@@ -24,7 +24,7 @@ public abstract class Component {
 	private boolean failed = false; //TODO make it so that this will work with infoPackets
 
 	/**
-	 * Setup the component ready for use, set its name and initialize the lists of components it is connected to.
+	 * Setup the component ready for use, set its name and initialise the lists of components it is connected to.
 	 * @param name the name of the individual component, should be unique.
 	 */
 	public Component(String name){
@@ -36,8 +36,16 @@ public abstract class Component {
 		outputsTo = new ArrayList<Component>();
 		receivesInputFrom = new ArrayList<Component>();
 	}
-
+	/**
+	 * Setup the component ready for use, including taking info to set attributes of component.
+	 * Alos set its name and initialise the lists of components it is connected to.
+	 * @param name The name of the component 
+	 * @param info The infoPacket to use to initialise the component
+	 */
 	public Component(String name, InfoPacket info){
+		outputsTo = new ArrayList<Component>();
+		receivesInputFrom = new ArrayList<Component>();
+		
 		this.name = name;
 		Pair<?> currentpair = null;
 		Iterator<Pair<?>> pi = info.namedValues.iterator();
@@ -60,6 +68,7 @@ public abstract class Component {
 			calcRandomFailTime();
 		}
 	}
+	
 	/**
 	 * Calculates the failure time of the component normally distributed around the MTBF
 	 */
@@ -69,18 +78,17 @@ public abstract class Component {
 	}
 
 	/**
-	 * Repairs the component. will work at any time.
+	 * Repairs the component. Will work at any time, even if the component has not failed.
 	 */
-	//TODO make this procedure
 	public void repair(){
 		failed = false;
 		calcRandomFailTime();
 	}
 
 	/**
-	 * Create an information packet for the attributes of the general component. Usually used to get this part of the getInfo for the child componenets. 
+	 * Create an information packet for the attributes of the general component. Usually used to get this part of the getInfo for the child components. 
 	 * 
-	 * @return info an information packet containing; the component name, failure time and output flow rate, output and input comonents
+	 * @return info an information packet containing; the component name, failure time and output flow rate, output and input components
 	 */
 	protected InfoPacket getSuperInfo(){
 		InfoPacket info = new InfoPacket();
@@ -105,9 +113,8 @@ public abstract class Component {
 	/**
 	 * Assigns the values stored in the given info packet to the relevant attributes.
 	 * Renaming the component is possible via this method so care may be needed. 
-	 * DOES NOT DEAL WITH COMPONENT CONNECTIONS - must be done at game engine as components can't see other components until they are connected.
+	 * This method does not deal with connecting components together, this must be done at game engine as components can't see other components until they are connected.
 	 * @param info An info packet the the component. 
-	 * 
 	 */
 	protected void takeSuperInfo(InfoPacket info){
 		resetConections();
@@ -141,12 +148,14 @@ public abstract class Component {
 	}
 
 	/**
-	 * TODO write comment
-	 * @param name
+	 * @param name Change name of component to this.
 	 */
 	public void setName(String name){
 		this.name = name;
 	}
+	/**
+	 * @return The name of the component
+	 */
 	public String getName(){ return name;}
 
 	/**
@@ -166,16 +175,14 @@ public abstract class Component {
 	}
 
 	/**
-	 * TODO write comment
-	 * @param outputFlowRate
+	 * @param outputFlowRate Set the output flow rate of the component to this value
 	 */
 	public void setOuputFlowRate(double outputFlowRate){
 		this.outputFlowRate = outputFlowRate;
 	}
 
 	/**
-	 * TODO write comment
-	 * @return
+	 * @return The output flow rate of this component.
 	 */
 	public double getOutputFlowRate(){
 		return outputFlowRate;
@@ -183,8 +190,7 @@ public abstract class Component {
 
 	/**
 	 * Create an info packet containing data about all attributes for the component - should call super.getSuperInfo()
-	 * 
-	 * @return info an info packet containing all attributes for the component
+	 * @return info An info packet containing all attributes for the component
 	 */
 	public abstract InfoPacket getInfo();
 
@@ -195,12 +201,15 @@ public abstract class Component {
 	 * such as calculateTemperature()
 	 */
 	public abstract void calculate();
+	/**
+	 * Calculate whether the component has failed or not.
+	 * @return The failure state of the component.
+	 */
 	protected abstract boolean calculateFailed();
 
 	/**
 	 * The only specific calculation that all components must do as every component has an output flow.
 	 * Abstract because every type of component will calculate this in a different way.
-	 * 
 	 * @return The new output flow rate
 	 */
 	protected abstract double calculateOutputFlowRate();
@@ -209,86 +218,83 @@ public abstract class Component {
 	 * Sets all attributes of a component using the given info packet.
 	 * Abstract as this deals with the component child specific attributes.
 	 * should call super.takeSuperInfo()
-	 * 
 	 * @param info InfoPacket defining values of attributes of the component.
 	 */
 	public abstract void takeInfo(InfoPacket info) throws Exception;
 
 	/**
-	 * TODO write comment
-	 * @return
+	 * @return The mean time between failure of this component.
 	 */
 	public int getMeanTimeBetweenFailure() {
 		return meanTimeBetweenFailure;
 	}
 
 	/**
-	 * TODO write comment
-	 * @param meanTimeBetweenFailure
+	 * @param meanTimeBetweenFailure Change the components mean time between failure to this.
 	 */
 	public void setMeanTimeBetweenFailure(int meanTimeBetweenFailure) {
 		this.meanTimeBetweenFailure = meanTimeBetweenFailure;
 	}
 
 	/**
-	 * TODO write comment
-	 * @return
+	 * @return The time when this component will fail.
 	 */
 	public Double getFailureTime() {
 		return failureTime;
 	}
 
 	/**
-	 * TODO write comment
-	 * @param failureTime
+	 * @param failureTime Manually change the time that the component will fail
 	 */
 	public void setFailureTime(Double failureTime) {
 		this.failureTime = failureTime;
 	}
 
 	/**
-	 * TODO write comment
-	 * @return
+	 * @return The list containing all the components that this component outputs to.
 	 */
 	public ArrayList<Component> getOutputsTo() {
 		return outputsTo;
 	}
 
 	/**
-	 * TODO write comment
+	 * @param outputsTo The list of components that this component will output to.
 	 */
 	public void setOutputsTo(ArrayList<Component> outputsTo) {
 		this.outputsTo = outputsTo;
 	}
 
 	/**
-	 * TODO write comment
-	 * @return
+	 * @return The list containing all the components that this component recives inupt from.
 	 */
 	public ArrayList<Component> getRecievesInputFrom() {
 		return receivesInputFrom;
 	}
 
 	/**
-	 * TODO write comment
-	 * @param recievesInputFrom
+	 * @param recievesInputFrom The list of components that this component will take input from.
 	 */
 	public void setRecievesInputFrom(ArrayList<Component> recievesInputFrom) {
 		this.receivesInputFrom = recievesInputFrom;
 	}
 
 	/**
-	 * TODO write comment
-	 * @param outputFlowRate
+	 * @param outputFlowRate The rate at which water/steam/electrisity/other output is being output from this component.
 	 */
 	public void setOutputFlowRate(Double outputFlowRate) {
 		this.outputFlowRate = outputFlowRate;
 	}
 	
+	/**
+	 * @return Whether the component is currently failed or not. 
+	 */
 	public boolean isFailed() {
 		return failed;
 	}
-
+	/**
+	 * Set the state of the component to failed or not, used by child components to access and set the failed field when calculating whether the component has failed.
+	 * @param failed Component in failed state?
+	 */
 	public void setFailed(boolean failed) {
 		this.failed = failed;
 	}
