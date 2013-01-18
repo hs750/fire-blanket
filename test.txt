@@ -1,0 +1,141 @@
+Name of component/Valve 1
+FailuerTime/-2.6671220203779185
+Output flow rate/12.34
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 2
+Outputs to/Valve 2
+Outputs to/Pump 1
+Outputs to/Pump 1
+Outputs to/Valve 3
+Outputs to/Valve 3
+Outputs to/Pump 2
+Outputs to/Pump 2
+Outputs to/Valve 4
+Outputs to/Valve 4
+Outputs to/Pump 3
+Outputs to/Pump 3
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 2
+Recieves input from/Valve 2
+Recieves input from/Pump 1
+Recieves input from/Pump 1
+Recieves input from/Valve 3
+Recieves input from/Valve 3
+Recieves input from/Pump 2
+Recieves input from/Pump 2
+Recieves input from/Valve 4
+Recieves input from/Valve 4
+Recieves input from/Pump 3
+Recieves input from/Pump 3
+Position/true
+#Name of component/Valve 2
+FailuerTime/-1.9393685405958525
+Output flow rate/12.34
+Outputs to/Valve 1
+Outputs to/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Position/true
+#Name of component/Pump 1
+FailuerTime/20.279220044817066
+Output flow rate/12.34
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 3
+Outputs to/Valve 3
+Outputs to/Pump 2
+Outputs to/Valve 4
+Outputs to/Pump 3
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 3
+Recieves input from/Valve 3
+Recieves input from/Pump 2
+Recieves input from/Valve 4
+Recieves input from/Pump 3
+Revolutions per minute/5.0
+#Name of component/Valve 3
+FailuerTime/13.085290314692429
+Output flow rate/12.34
+Outputs to/Pump 1
+Outputs to/Valve 3
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 3
+Outputs to/Pump 1
+Outputs to/Pump 2
+Outputs to/Valve 4
+Outputs to/Pump 3
+Recieves input from/Pump 1
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 3
+Recieves input from/Pump 1
+Recieves input from/Valve 3
+Recieves input from/Pump 2
+Recieves input from/Valve 4
+Recieves input from/Pump 3
+Position/true
+#Name of component/Pump 2
+FailuerTime/16.11831987160219
+Output flow rate/12.34
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 3
+Outputs to/Pump 1
+Outputs to/Valve 4
+Outputs to/Valve 4
+Outputs to/Pump 3
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 3
+Recieves input from/Pump 1
+Recieves input from/Valve 4
+Recieves input from/Valve 4
+Recieves input from/Pump 3
+Revolutions per minute/5.0
+#Name of component/Valve 4
+FailuerTime/-9.7458091112149
+Output flow rate/12.34
+Outputs to/Pump 2
+Outputs to/Valve 4
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 3
+Outputs to/Pump 1
+Outputs to/Valve 4
+Outputs to/Pump 2
+Outputs to/Pump 3
+Recieves input from/Pump 2
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 3
+Recieves input from/Pump 1
+Recieves input from/Valve 4
+Recieves input from/Pump 2
+Recieves input from/Valve 4
+Recieves input from/Pump 3
+Position/true
+#Name of component/Pump 3
+FailuerTime/-3.0932183571245297
+Output flow rate/12.34
+Outputs to/Pump 3
+Outputs to/Valve 1
+Outputs to/Valve 1
+Outputs to/Valve 3
+Outputs to/Pump 1
+Outputs to/Valve 4
+Outputs to/Pump 2
+Outputs to/Pump 3
+Recieves input from/Valve 1
+Recieves input from/Valve 1
+Recieves input from/Valve 3
+Recieves input from/Pump 1
+Recieves input from/Valve 4
+Recieves input from/Pump 2
+Recieves input from/Pump 3
+Recieves input from/Pump 3
+Revolutions per minute/5.0
+#
