@@ -45,46 +45,7 @@ public class GameEngine {
 	}
 
 	public void repair(Component component) {
-		//Component Repair Costs
-		double pumpCost = 50;
-		double valveCost = 0;
-		double reactorCost = 500;
-		double turbineCost = 100;
-		double generatorCost = 0;
-		double condensorCost = 120;
-		
-		Iterator<Component> cIt = powrPlntComponents.iterator();
-		Component comp = null;
-		Generator generator = null;
-		double totalPower = 0;
-		
-		while(cIt.hasNext()){
-			comp = cIt.next();
-			if(comp instanceof Generator){
-				generator = (Generator) comp;
-				totalPower += generator.getElectrisityGenerated();
-				generator.setElectrisityGenerated(0);
-			}
-		}
-		
 		component.repair();
-		
-		String componentName = component.getName();
-		if(componentName.contains("Valve")){
-			totalPower -= valveCost;
-		}else if(componentName.contains("Pump")){
-			totalPower -= pumpCost;
-		}else if(componentName.contains("Reactor")){
-			totalPower -= reactorCost;
-		}else if(componentName.contains("Turbine")){
-			totalPower -= turbineCost;
-		}else if(componentName.contains("Generator")){
-			totalPower -= generatorCost;
-		}else if(componentName.contains("Condenser")){
-			totalPower -= condensorCost;
-		}
-		
-		generator.setElectrisityGenerated(totalPower);
 	}
 
 	/**
@@ -113,19 +74,17 @@ public class GameEngine {
 
 			// Determine component types we are dealing with.
 			if (currentCompName.contains("Condenser")) {
-				currentNewComponent = new Condenser(currentCompName, currentInfo);
+				currentNewComponent = new Condenser(currentCompName);
 			} else if (currentCompName.contains("Generator")) {
-				currentNewComponent = new Generator(currentCompName, currentInfo);
+				currentNewComponent = new Generator(currentCompName);
 			} else if (currentCompName.contains("Pump")) {
-				currentNewComponent = new Pump(currentCompName, currentInfo);
+				currentNewComponent = new Pump(currentCompName);
 			} else if (currentCompName.contains("Reactor")) {
-				currentNewComponent = new Reactor(currentCompName, currentInfo);
+				currentNewComponent = new Reactor(currentCompName);
 			} else if (currentCompName.contains("Turbine")) {
-				currentNewComponent = new Turbine(currentCompName, currentInfo);
+				currentNewComponent = new Turbine(currentCompName);
 			} else if (currentCompName.contains("Valve")) {
-				currentNewComponent = new Valve(currentCompName, currentInfo);
-			} else if (currentCompName.contains("Infrastructure")){
-				currentNewComponent = new Valve(currentCompName, currentInfo);
+				currentNewComponent = new Valve(currentCompName);
 			}
 			addComponent(currentNewComponent); // add the component to the power
 												// plant
@@ -314,9 +273,8 @@ public class GameEngine {
 	 *            the component to be added to the list of components
 	 */
 	public void addComponent(Component component) {
-				powrPlntComponents.add(component);
+		powrPlntComponents.add(component);
 	}
-	
 
 	/**
 	 * Connect two components together.
@@ -360,7 +318,7 @@ public class GameEngine {
 
 				output += pair.first() + '/' + pair.second().toString() + '\n';
 			}
-			output += '#';
+			
 		}
 		try {
 			BufferedWriter out = new BufferedWriter(new FileWriter("saves/" + FileName + ".fg"));
@@ -377,38 +335,57 @@ public class GameEngine {
 	public void readfile(String file) throws FileNotFoundException {
 		// FileReader fr=new FileReader(path);
 		// BufferedReader br=new BufferedReader(fr);
-		FileInputStream fstream = new FileInputStream("saves/" + file);
+		String path = new java.io.File("").getAbsolutePath() + "/saves/";
+		FileInputStream fstream = new FileInputStream(path + file + ".fg");
 		// Get the object of DataInputStream
 		DataInputStream in = new DataInputStream(fstream);
 		BufferedReader br = new BufferedReader(new InputStreamReader(in));
 		clearPowerPlant(); 
+		ArrayList<String> data = new ArrayList<String>();
+		
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
-		int c = 0;
+		String temp;
+		int c=0;
 		try {
-			while (br.readLine() != null) {
-				c++;
-				br.close();
+			while ((temp = br.readLine()) != null) {
+				
+				data.add(temp);	
+				if(temp.contains("Name of component"))
+				{
+					c++;
+				}
 			}
-			String[] textData = new String[c];
+			br.close();
+			
 			int i = 0;
-			while (br.readLine() != null) {
-				textData[i] = br.readLine();
+			String textData[]=new String[data.size()];	
+			
+			
+			textData= data.toArray(new String[i]);
+			InfoPacket info = new InfoPacket();
+			while (i<data.size()-1) {
+				
 				String ch = textData[i].substring(0, textData[i].indexOf("/"));
-				InfoPacket info = new InfoPacket();
-				if (ch == "Name of Component") {
-					String c1 = textData[i].substring(textData[i].indexOf("/"),
+				
+				if (ch.equals("Name of component")) {
+					if(i != 0)
+					{
+						infoList.add(info);
+						info = new InfoPacket();
+					}
+					String c1 = textData[i].substring(textData[i].indexOf("/")+1,
 							textData[i].length());
 					info.namedValues.add(new Pair<String>(Label.cNme, c1));
 					System.out.println(ch + "=" + c1);
 				}
 
-				else if (ch == "FaileurTime") {
+				else if (ch.equals("FailuerTime")) {
 					String d = textData[i].substring(
 							textData[i].indexOf("/") + 1, textData[i].length());
 					Float i1 = Float.parseFloat(d);
 					info.namedValues.add(new Pair<Float>(Label.falT, i1));
 					System.out.println(ch + "=" + i1);
-				} else if (ch == "Output flow rate")
+				} else if (ch.equals("Output flow rate"))
 
 				{
 					String d = textData[i].substring(
@@ -416,26 +393,45 @@ public class GameEngine {
 					Float i1 = Float.parseFloat(d);
 					info.namedValues.add(new Pair<Float>(Label.OPFL, i1));
 					System.out.println(ch + "=" + i1);
-				} else if (ch == "Position") {
+				} else if (ch.equals("Position")) {
 					String d = textData[i].substring(textData[i].indexOf("/"),
 							textData[i].length());
 					boolean ok = Boolean.parseBoolean(d);
 					info.namedValues.add(new Pair<Boolean>(Label.psit, ok));
 					System.out.println(ch + "=" + ok);
 				}
+				else if (ch.equals("Outputs to"))
+				{
+				
+					String d = textData[i].substring(textData[i].indexOf("/")+1,
+							textData[i].length());
+					
+					info.namedValues.add(new Pair<String>(Label.oPto, d));
+					System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals("Recieves input from"))
+				{
+				
+					String d = textData[i].substring(textData[i].indexOf("/")+1,
+							textData[i].length());
+					
+					info.namedValues.add(new Pair<String>(Label.rcIF, d));
+					System.out.println(ch + "=" + d);
+				}
 				i++;
-				infoList.add(info);
+				
 			}
-
+			infoList.add(info);
 		} catch (IOException e) {
-			System.out.println("Exception ");
+			System.out.println("Cannot load file");
 		}
 		setupPowerPlantConfiguration(infoList);
 
 	}
 
-	public String findAvailableSaves() {
-		String path = "/saves";
+	public String findAvailableSaves() 
+	{
+		String path = new java.io.File("").getAbsolutePath() + "/saves";
 		String files;
 		String result = new String();
 		File folder = new File(path);
@@ -444,8 +440,8 @@ public class GameEngine {
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
 				files = listOfFiles[i].getName();
-				if (files.endsWith(".fg") || files.endsWith(".fg")) {
-					result += files + '\n';
+				if (files.endsWith(".fg") || files.endsWith(".FG")) {
+					result += files.substring(0, files.lastIndexOf('.')) + '\n';
 				}
 			}
 		}
@@ -588,68 +584,64 @@ public class GameEngine {
 		// TODO create the main game loop
 		GameEngine gameEngine = new GameEngine();
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
-				
+
 		InfoPacket info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Reactor"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Turbine"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
+		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
 		infoList.add(info);
 
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 2"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Reactor"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
-				infoList.add(info);
+		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
+		infoList.add(info);
 
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 3"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Reactor"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 1"));
-		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 4"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Reactor"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 2"));
-		infoList.add(info);
-		
+		/*
+=======
+/*
+>>>>>>> branch 'master' of https://github.com/ansimionescu/Fire-blanket.git
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 1"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
 		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 3"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Condensor"));
 		infoList.add(info);
 		
+		info = new InfoPacket();
+		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 3"));
+		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 1"));
+		infoList.add(info);
+
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 2"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
 		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 4"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Condensor"));
 		infoList.add(info);
-		
+
 		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Coolant Pump"));
+		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 4"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
+		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 2"));
 		infoList.add(info);
-		
+
+		// ///////////
 		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Condenser"));
+		info.namedValues.add(new Pair<String>(Label.cNme, "Condensor"));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.temp, 10.00));
 		info.namedValues.add(new Pair<Double>(Label.pres, 10.00));
@@ -657,65 +649,27 @@ public class GameEngine {
 		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
 		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Turbine"));
+		// info.namedValues.add(new Pair<String>(Label.rcIF, "Turbine"));
+		// //doesn't exist yet
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
 		infoList.add(info);
 
 		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Reactor"));
-		info.namedValues.add(new Pair<Double>(Label.temp, 10.00));
-		info.namedValues.add(new Pair<Double>(Label.coRL, 5.00));
-		info.namedValues.add(new Pair<Double>(Label.pres, 10.00));
-		info.namedValues.add(new Pair<Double>(Label.wLvl, 10.00));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 3"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 4"));
-		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Turbine"));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
-		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Generator"));
+		info.namedValues.add(new Pair<String>(Label.cNme, "Coolant Pump"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Infrastructure Defences"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Turbine"));
+		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
+		info.namedValues.add(new Pair<String>(Label.oPto, "Condensor"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
 		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Infrastructure Defenses"));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Infrastructure Electric-Fence"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Infrastructure Generator"));
-		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, " Infrastructure Electric-Fence"));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Infrastructure Town"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Infrastructure Defences"));
-		infoList.add(info);
-		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Infrastructure Town"));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Infrastructure Electric-Fence"));
-		infoList.add(info);
-		
+		// ///////////
+*/
 		gameEngine.clearPowerPlant();
 		assert (gameEngine.getAllComponentInfo().isEmpty());
 
 		gameEngine.setupPowerPlantConfiguration(infoList);
 		gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());
-		gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "Test.txt");
+		
 		System.out.println("HellO");
 	}
 }

@@ -56,7 +56,15 @@ class Parser
 				{
 					i.namedValues.add(new Pair<Boolean>(Pair.Label.psit, false));
 				}
+			} else if(command.equals("repair"))
+			{
+				engine.repair(component);
 			}
+			try{
+				component.takeInfo(i);
+			}
+			catch(Exception e) 
+			{ e.printStackTrace(); }
 		}
 			else if(componentName.contains("save as"))
 			{
@@ -70,27 +78,21 @@ class Parser
 			else if(componentName.contains("load"))
 			{
 				engine.readfile(command);
+				engine.updateInterfaceComponents(engine.getAllComponentInfo());
 
 			}
 			else if(componentName.equals("show saves"))
 			{
 				return engine.findAvailableSaves();
 			}
-			else if(command.equals("repair"))
-			{
-				engine.repair(component);
-			}
+			
 			
 			else 
 			
 			{
 				result = "Component " + componentName + " does not exist";
-				}
-		try{
-			component.takeInfo(i);
-		}
-		catch(Exception e) 
-		{ e.printStackTrace(); }
+			}
+		
 	
 		engine.updateInterfaceComponents(engine.getAllComponentInfo());
 		return result;
@@ -105,6 +107,8 @@ class Parser
 			String lowerCase= text;
 			if(lowerCase.contains(" "))
 			{
+				if(lowerCase.equals("show saves"))
+					return parseCommand(lowerCase, lowerCase);
 			String s= lowerCase.substring(0, lowerCase.lastIndexOf(' '));
 			String i= lowerCase.substring(lowerCase.lastIndexOf(' ') + 1, lowerCase.length());
 			
