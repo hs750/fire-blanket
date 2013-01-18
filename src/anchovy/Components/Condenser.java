@@ -8,7 +8,7 @@ import anchovy.Pair;
 import anchovy.Pair.Label;
 
 /**
- * This class is the representation of the condesner within the power plant - This component recives steam from another component,
+ * This class is the representation of the condenser within the power plant - This component receives steam from another component,
  * then depending on what the state the power plant condensed it back to water to use elsewhere in the power plant.
  * 
  * @author Harrison
@@ -18,13 +18,14 @@ public class Condenser extends Component {
 	private double pressure;
 	private double waterLevel;
 	/**
-	 * Set up the power plant, most work is done in Component.
-	 * @param name The name of the component.
+	 * @see anchovy.Components.Component#Component(String)
 	 */
 	public Condenser(String name) {
 		super(name);
 	}
-
+	/**
+	 * @see anchovy.Components.Component#Component(String, InfoPacket)
+	 */
 	public Condenser(String name, InfoPacket info){
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -48,7 +49,9 @@ public class Condenser extends Component {
 			}
 		}
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getSuperInfo();
@@ -57,7 +60,9 @@ public class Condenser extends Component {
 		info.namedValues.add(new Pair<Double>(Label.wLvl, waterLevel));
 		return info;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void calculate() {
 		super.setFailed(calculateFailed());
@@ -70,6 +75,10 @@ public class Condenser extends Component {
 		}
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * Condenser only fails when it reaches it's fail time
+	 */
 	@Override
 	protected boolean calculateFailed(){
 		if(super.getFailureTime() == 0){
@@ -78,6 +87,7 @@ public class Condenser extends Component {
 			return false;
 		}
 	}
+	
 	/**
 	 * Calculate the temperature of the condenser, 
 	 * Temperature = old temp * ratio that pressure increased or decreased by - the coolent flow rate
@@ -142,6 +152,11 @@ public class Condenser extends Component {
 		return wLevel;
 	}
 	
+	
+	/**
+	 * {@inheritDoc}
+	 * The output flow rate of a Condenser is equel to that of the pumps that it is outputing to.
+	 */
 	@Override
 	protected double calculateOutputFlowRate() {
 		// Must distinguish between a pump that pumps steam in with a pump that pumps coolent round (possibly by name of pump having collent or alike in)
@@ -158,7 +173,9 @@ public class Condenser extends Component {
 
 		return totalOPFL;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
 		super.takeSuperInfo(info);
