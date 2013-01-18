@@ -21,7 +21,7 @@ public class GameEngine {
 	MainWindow window;
 
 	/**
-	 * Constructor for the game engine On creation it creates a list to store
+	 * Constructor for the game engine. On creation it creates a list to store
 	 * the components of the power plant and links to a user interface (what
 	 * ever type of user interface that may be)
 	 */
@@ -44,15 +44,19 @@ public class GameEngine {
 		 */
 	}
 
+	/**
+	 * Repairs the given component by calling the repair method of said component.
+	 * @param component The component to be repaired
+	 */
 	public void repair(Component component) {
 		component.repair();
 	}
 
 	/**
-	 * Using a list of Info Packets (generated from loading the same from file
-	 * or elsewhere) Adds each of the components described in the Info Packet
-	 * list to the list of components in the power plant Then sends the info
-	 * packet to that component to initialize all its values Once all components
+	 * Using a list of Info Packets (generated from loading from file
+	 * or elsewhere). Adds each of the components described in the Info Packet
+	 * list to the list of components in the power plant then sends the info
+	 * packet to that component to initialise all its values. Once all components
 	 * of the power plant are in the list and initialized, they are then all
 	 * connected together in the way described by the info packets.
 	 * 
@@ -62,6 +66,7 @@ public class GameEngine {
 	 */
 	public void setupPowerPlantConfiguration(
 			ArrayList<InfoPacket> allPowerPlantInfo) {
+		
 		Iterator<InfoPacket> infoIt = allPowerPlantInfo.iterator();
 		InfoPacket currentInfo = null;
 		String currentCompName = null;
@@ -72,7 +77,7 @@ public class GameEngine {
 			currentInfo = infoIt.next();
 			currentCompName = getComponentNameFromInfo(currentInfo);
 
-			// Determine component types we are dealing with.
+			// Determine component types we are dealing with. and initialise it.
 			if (currentCompName.contains("Condenser")) {
 				currentNewComponent = new Condenser(currentCompName, currentInfo);
 			} else if (currentCompName.contains("Generator")) {
@@ -88,8 +93,8 @@ public class GameEngine {
 			} else if (currentCompName.contains("Infrastructure")){
 				currentNewComponent = new Infrastructure(currentCompName, currentInfo);
 			}
-			addComponent(currentNewComponent); // add the component to the power
-			// plant
+			addComponent(currentNewComponent); // add the component to the power plant
+			
 			/*
 			try {
 				assignInfoToComponent(currentInfo); // send the just added
@@ -100,8 +105,8 @@ public class GameEngine {
 		}
 
 		// Connect components together
-		infoIt = allPowerPlantInfo.iterator();// reset the iterator TODO i think
-		// this works.
+		infoIt = allPowerPlantInfo.iterator();
+		
 		ArrayList<String> inputComponents = new ArrayList<String>();
 		ArrayList<String> outputComponents = new ArrayList<String>();
 
@@ -110,17 +115,16 @@ public class GameEngine {
 		Label currentLabel = null;
 
 		Component currentComponent = null;
-		//Iterator<Component> compIt = null;
 
 		Iterator<String> connectionNameIt = null;
 		Component attachComp = null;
 
-		// get info for each components
+		//Get info for each of the components
 		while (infoIt.hasNext()) {
 			currentInfo = infoIt.next();
 			pairIt = currentInfo.namedValues.iterator();
 
-			// get the useful information out of the info.
+			//Get the useful information out of the info.
 			while (pairIt.hasNext()) {
 				currentPair = pairIt.next();
 				currentLabel = currentPair.getLabel();
@@ -140,8 +144,7 @@ public class GameEngine {
 				}
 			}
 
-			// Get the component that we are going to connect other components
-			// to.
+			//Get the component that we are going to connect other components to.
 			currentComponent = getPowerPlantComponent(currentCompName);
 
 			// Attach each input component to the current component.
@@ -150,6 +153,7 @@ public class GameEngine {
 				attachComp = getPowerPlantComponent(connectionNameIt.next());
 				connectComponentTo(currentComponent, attachComp, true);
 			}
+			
 			// Attach each output component to the current compoennt
 			connectionNameIt = outputComponents.iterator();
 			while (connectionNameIt.hasNext()) {
@@ -161,11 +165,10 @@ public class GameEngine {
 
 
 	/**
-	 * Using the name of a component in the format of a string returns the
+	 * Using the name of a component in the format of a string, returns the
 	 * actual Component found in the list of components of the Power Plant
 	 * 
-	 * @param The
-	 *            name of a component.
+	 * @param currentCompName The name of a component.
 	 * @return The component specified by the given name.
 	 */
 	public Component getPowerPlantComponent(String currentCompName) {
@@ -174,6 +177,8 @@ public class GameEngine {
 		compIt = powrPlntComponents.iterator();
 		Component c = null;
 		String cName = null;
+		
+		//Find the component we are looking for.
 		while (compIt.hasNext()) {
 			c = compIt.next();
 			cName = c.getName();
@@ -181,6 +186,7 @@ public class GameEngine {
 				currentComponent = c;
 			}
 		}
+		
 		if(currentComponent == null)
 			try {
 				throw new Exception("The component: " + currentCompName + " was not found to exist in the power plant");
@@ -194,9 +200,7 @@ public class GameEngine {
 
 	/**
 	 * Extracts the first component name out of an info packet.
-	 * 
-	 * @param info
-	 *            An info packet for a component
+	 * @param info An info packet for a component
 	 * @return The component name contained within the given info packet.
 	 */
 	private String getComponentNameFromInfo(InfoPacket info) {
@@ -217,8 +221,7 @@ public class GameEngine {
 	 * Sends an info packet to a component the components is specified by the
 	 * name of the component in the info packet.
 	 * 
-	 * @param info
-	 *            Info Packet to be sent to a component
+	 * @param info Info Packet to be sent to a component
 	 */
 	public void assignInfoToComponent(InfoPacket info) throws Exception {
 		String compToSendTo = null;
@@ -278,24 +281,18 @@ public class GameEngine {
 
 	/**
 	 * Add a component to the list of components
-	 * 
-	 * @param component
-	 *            the component to be added to the list of components
+	 * @param component The component to be added to the list of components
 	 */
 	public void addComponent(Component component) {
 		powrPlntComponents.add(component);
 	}
 
 	/**
-	 * Connect two components together.
+	 * Connect two components together, in the given order.
 	 * 
-	 * @param comp1
-	 *            the component that we are working with
-	 * @param comp2
-	 *            the component that will be added to comp1
-	 * @param input_output
-	 *            denoted whether it is an input or an output; in = true, out =
-	 *            false
+	 * @param comp1 The component that we are working with
+	 * @param comp2 The component that will be added to comp1
+	 * @param input_output Denoted whether it is an input or an output; in = true, out = false
 	 */
 	public void connectComponentTo(Component comp1, Component comp2,
 			boolean input_ouput) {
@@ -309,9 +306,9 @@ public class GameEngine {
 		}
 	}
 	/**
-	 * 
-	 * @param packets
-	 * @param FileName the name of the file the data will be saved to
+	 * Saves the contence of the given infoPacket to the given file.
+	 * @param packets The information to be saved.
+	 * @param FileName The name of the file the data will be saved to
 	 * @return Returns a string that will be written into the console output
 	 */
 	public String saveGameState(ArrayList<InfoPacket> packets, String FileName) {
@@ -342,6 +339,12 @@ public class GameEngine {
 
 	}
 
+	/**
+	 * Reads in the contence of a given file to the game. This is done by reading each line and adding it to the appropriate
+	 * infoPacket then using the infopackets to setup the state of the game and power plant.
+	 * @param file The filename of the file to be read in.
+	 * @throws FileNotFoundException
+	 */
 	public void readfile(String file) throws FileNotFoundException {
 		// FileReader fr=new FileReader(path);
 		// BufferedReader br=new BufferedReader(fr);
@@ -439,6 +442,10 @@ public class GameEngine {
 
 	}
 
+	/**
+	 * Finds save files for the game.
+	 * @return The path of the save games
+	 */
 	public String findAvailableSaves() 
 	{
 		String path = new java.io.File("").getAbsolutePath() + "/saves";
@@ -461,7 +468,6 @@ public class GameEngine {
 	/**
 	 * Get all the info from all the components within the power plant. Used for
 	 * saving and displaying info to UI.
-	 * 
 	 * @return List of InfoPackets for ALL components in the power plant.
 	 */
 	public ArrayList<InfoPacket> getAllComponentInfo() {
@@ -477,7 +483,7 @@ public class GameEngine {
 	}
 
 	/**
-	 * Resets the components of the power plant to am empty list. Will be needed
+	 * Resets the components of the power plant to an empty list. Will be needed
 	 * for loading a power plant from file.
 	 */
 	public void clearPowerPlant() {
@@ -486,9 +492,7 @@ public class GameEngine {
 
 	/**
 	 * Updates interface with the latest changes to all the components.
-	 * 
-	 * @param packets
-	 *            Info about all the components in the game
+	 * @param packets Info about all the components in the game
 	 */
 	public void updateInterfaceComponents(ArrayList<InfoPacket> packets) 
 	{
@@ -573,6 +577,7 @@ public class GameEngine {
 	}
 
 	String fileName;
+	
 	/**
 	 * Checks if a file name is already stored in the system (happens if the game was started using load or if save as command was previously used)
 	 *  and can be used for further save games
