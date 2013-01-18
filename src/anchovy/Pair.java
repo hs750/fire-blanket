@@ -62,6 +62,11 @@ public class Pair<T> {
 		this.first = typeVal.name;
 		this.second = val;
 	}
+	
+	/**
+	 * 
+	 * @return The label contained within the pair.
+	 */
 	public Label getLabel(){return label;}
 	/**
 	 * Returns the label, i.e. the first element of the pair
@@ -88,6 +93,10 @@ public class Pair<T> {
 	}
 	
 	@Override
+	/**
+	 * @inheritDoc
+	 * Determines whether two pairs are essentially the same. That is that the two pairs have the same label and the (second) values are also equal.
+	 */
 	public boolean equals(Object _pair) {
 		Pair<?> pair = (Pair<?>) _pair;
 		
@@ -101,6 +110,9 @@ public class Pair<T> {
 	}
 	
 	@Override
+	/**
+	 * @return The condense of the pair as a string in the form FIRST <SPACE> SECOND
+	 */
 	public String toString() {
 		return this.first + " " + this.second.toString();
 	}
