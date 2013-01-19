@@ -98,14 +98,21 @@ public class Pair<T> {
 	 */
 	@Override
 	public boolean equals(Object _pair) {
-		Pair<?> pair = (Pair<?>) _pair;
-		
-		if(this.first().equals(pair.first()) == false)
-			return false;
-		
-		if(this.second().equals(pair.second()) == false)
-			return false;
-		
+		if(_pair instanceof Pair){
+			Pair<?> pair = (Pair<?>) _pair;
+
+			if(this.first().equals(pair.first()) == false)
+				return false;
+
+			if(this.second() == null & pair.second() == null){
+				return true;	
+			}
+			if(this.second() == null ^ pair.second() == null){
+				return false;
+			}
+			if(this.second().equals(pair.second()) == false)
+				return false;
+		}
 		return true;
 	}
 	
@@ -123,10 +130,15 @@ public class Pair<T> {
 	 */
 	public static void main(String args[]) {
 		Pair<Integer> a = new Pair<Integer>(Label.temp, 100);
+		Pair<Integer> b = new Pair<Integer>(Label.temp, 120);
+		
+		System.out.println("" + a.equals(b));
 		
 		System.out.println(a);
 		
 		a.update(120);
+		
+		System.out.println("" + a.equals(b));
 		
 		System.out.println(a);
 	}

@@ -2,6 +2,8 @@ package anchovy;
 
 import java.util.ArrayList;
 
+import anchovy.Pair.Label;
+
 public class InfoPacket {
 	/**
 	 * ArrayList containing the data == (string, value) pairs
@@ -15,16 +17,17 @@ public class InfoPacket {
 	 */
 	@Override
 	public boolean equals(Object _infoPacket) {
-		InfoPacket infoPacket = (InfoPacket) _infoPacket;
-		
-		if(this.namedValues.size() != infoPacket.namedValues.size())
-			return false;
-		
-		for(Pair<?> p : namedValues) {
-			if(infoPacket.hasPair(p) == false)
+		if(_infoPacket instanceof InfoPacket){
+			InfoPacket infoPacket = (InfoPacket) _infoPacket;
+
+			if(this.namedValues.size() != infoPacket.namedValues.size())
 				return false;
+
+			for(Pair<?> p : namedValues) {
+				if(infoPacket.hasPair(p) == false)
+					return false;
+			}
 		}
-		
 		return true;
 	}
 	
@@ -73,5 +76,15 @@ public class InfoPacket {
 		
 		// Printing the namedValues ArrayList
 		System.out.println(i.namedValues);
+		
+		InfoPacket f = new InfoPacket();
+		f.namedValues.add(new Pair<Integer>(Label.temp, 100));
+		f.namedValues.add(new Pair<Integer>(Label.temp, 200));
+		
+		InfoPacket d = new InfoPacket();
+		d.namedValues.add(new Pair<Integer>(Label.temp, 100));
+		d.namedValues.add(new Pair<Integer>(Label.temp, 200));
+		
+		System.out.println(d.equals(f));
 	}
 }
