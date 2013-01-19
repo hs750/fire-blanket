@@ -72,6 +72,12 @@ public class GameEngineTest {
 			e.printStackTrace();
 		}
 		Component v1 = gameEngine.getPowerPlantComponent("Valve 1");
+		info = new InfoPacket();
+		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
+		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));;
+		info.namedValues.add(new Pair<Double>(Label.falT, v1.getFailureTime()));
+		
 		InfoPacket v1Info = v1.getInfo();
 		assertTrue(v1Info.equals(info));
 		
@@ -81,28 +87,30 @@ public class GameEngineTest {
 	public void testSetupPowerPlantConfigureation(){
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
 		
-		InfoPacket info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
-		infoList.add(info);
+		InfoPacket info1 = new InfoPacket();
+		info1.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
+		info1.namedValues.add(new Pair<Boolean>(Label.psit, true));
+		info1.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+		info1.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
+		info1.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
+		infoList.add(info1);
 		
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 2"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
-		infoList.add(info);
+		InfoPacket info2 = new InfoPacket();
+		info2.namedValues.add(new Pair<String>(Label.cNme, "Valve 2"));
+		info2.namedValues.add(new Pair<Boolean>(Label.psit, true));
+		info2.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+		info2.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
+		info2.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
+		infoList.add(info2);
 		
 		gameEngine.clearPowerPlant();
 		assertTrue(gameEngine.getAllComponentInfo().isEmpty());
 		
 		gameEngine.setupPowerPlantConfiguration(infoList);
+		info1.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 1").getFailureTime()));
+		info2.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 2").getFailureTime()));
+
 		
-		//ArrayList<InfoPacket> allInfo =
 		assertTrue(gameEngine.getAllComponentInfo().equals(infoList));	
 	}
 }
