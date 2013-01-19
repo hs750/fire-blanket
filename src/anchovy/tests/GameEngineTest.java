@@ -26,16 +26,12 @@ public class GameEngineTest {
 		gameEngine.addComponent(valve1);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testAddComponent() {
 		
 		ArrayList<InfoPacket> info = gameEngine.getAllComponentInfo();
 		v1Info.add(valve1.getInfo());
-		assert(v1Info.equals(info));
+		assertTrue(v1Info.equals(info));
 		
 	}
 	
@@ -63,25 +59,21 @@ public class GameEngineTest {
 	}
 	
 	@Test
-	public void testSetComponentInfo(){
-		InfoPacket info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
+	public void testAssignInfoToComponent(){
+		InfoPacket info = gameEngine.getAllComponentInfo().get(0);
+	
+		
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		
 		try {
-			valve1.takeInfo(info);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
 			gameEngine.assignInfoToComponent(info);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Component v1 = gameEngine.getPowerPlantComponent("Valve 1");
+		InfoPacket v1Info = v1.getInfo();
+		assertTrue(v1Info.equals(info));
 		
 	}
 	
