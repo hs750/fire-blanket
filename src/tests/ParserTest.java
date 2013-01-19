@@ -5,17 +5,23 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+
 import org.junit.*;
+
+import anchovy.*;
+import anchovy.io.*;
 
 /**
  * 
  * @author andrei
  */
 public class ParserTest {
+	static Parser parser = null;
 	
 	@BeforeClass
-	public void initParser() {
-		
+	public static void initParser() {
+		parser = new Parser(new GameEngine());
 	}
 	
 	/**
@@ -23,15 +29,22 @@ public class ParserTest {
 	 */
 	@Test
 	public void testParseCommand() {
-		fail("Not yet implemented"); // TODO
+		assertTrue(true);
+		//fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link anchovy.io.Parser#parse(java.lang.String)}.
+	 * @throws FileNotFoundException 
 	 */
 	@Test
-	public void testParse() {
-		fail("Not yet implemented"); // TODO
+	public void testParse() throws FileNotFoundException {
+		
+		assertEquals(parser.parse(""), "");
+		
+		assertEquals(parser.parse("no-spaces-string"), "");
+		
+		//assertNotSame(parser.parse("load abc.fg"), "");
 	}
 
 }

@@ -8,7 +8,7 @@ import anchovy.InfoPacket;
 import anchovy.Pair;
 import anchovy.Components.*;
 
-class Parser {
+public class Parser {
 	private GameEngine engine;
 
 	public Parser(GameEngine Engine) {
@@ -82,7 +82,13 @@ class Parser {
 		engine.updateInterfaceComponents(engine.getAllComponentInfo());
 		return result;
 	}
-
+	
+	/**
+	 * Checks for bad input and splits the string in two tokens, then calls parseCommand.
+	 * @param in an input string (usually coming from the UI)
+	 * @return a message for the user
+	 * @throws FileNotFoundException
+	 */
 	public String parse(String in) throws FileNotFoundException {
 		if (in.length() == 0 || in.contains(" ") == false)
 			return "";
