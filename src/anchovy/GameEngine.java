@@ -46,10 +46,56 @@ public class GameEngine {
 
 	/**
 	 * Repairs the given component by calling the repair method of said component.
+	 * Then subtracts the repair cost of the repair from the total amount of electricity generated.
+	 * If there was not enough Electriciy, the component will not get repaired.
 	 * @param component The component to be repaired
 	 */
-	public void repair(Component component) {
-		component.repair();
+	public void repair(Component component) {//Component Repair Costs
+		double pumpCost = 50;
+		double valveCost = 0;
+		double reactorCost = 500;
+		double turbineCost = 100;
+		double generatorCost = 0;
+		double condensorCost = 120;
+		
+		Iterator<Component> cIt = powrPlntComponents.iterator();
+		Component comp = null;
+		Generator generator = null;
+		double totalPower = 0;
+		
+		while(cIt.hasNext()){
+			comp = cIt.next();
+			if(comp instanceof Generator){
+				generator = (Generator) comp;
+				totalPower += generator.getElectrisityGenerated();
+				generator.setElectrisityGenerated(0);
+			}
+		}
+		if(generator == null)
+			totalPower = 10000;
+		
+		String componentName = component.getName();
+		if(componentName.contains("Valve") & totalPower >= valveCost){
+			totalPower -= valveCost;
+			component.repair();
+		}else if(componentName.contains("Pump") & totalPower >= pumpCost){
+			totalPower -= pumpCost;
+			component.repair();
+		}else if(componentName.contains("Reactor") & totalPower >= reactorCost){
+			totalPower -= reactorCost;
+			component.repair();
+		}else if(componentName.contains("Turbine") & totalPower >= turbineCost){
+			totalPower -= turbineCost;
+			component.repair();
+		}else if(componentName.contains("Generator") & totalPower >= generatorCost){
+			totalPower -= generatorCost;
+			component.repair();
+		}else if(componentName.contains("Condenser") & totalPower >= condensorCost){
+			totalPower -= condensorCost;
+			component.repair();
+		}
+		if(generator != null)
+			generator.setElectrisityGenerated(totalPower);
 	}
 
 	/**
@@ -151,15 +197,21 @@ public class GameEngine {
 			connectionNameIt = inputComponents.iterator();
 			while (connectionNameIt.hasNext()) {
 				attachComp = getPowerPlantComponent(connectionNameIt.next());
-				connectComponentTo(currentComponent, attachComp, true);
+				
+				if(!currentComponent.getRecievesInputFrom().contains(attachComp) & !attachComp.getOutputsTo().contains(currentComponent))
+					connectComponentTo(currentComponent, attachComp, true);
 			}
 			
 			// Attach each output component to the current compoennt
 			connectionNameIt = outputComponents.iterator();
 			while (connectionNameIt.hasNext()) {
 				attachComp = getPowerPlantComponent(connectionNameIt.next());
-				connectComponentTo(currentComponent, attachComp, false);
+				
+				if(!currentComponent.getOutputsTo().contains(attachComp) & !attachComp.getRecievesInputFrom().contains(currentComponent))
+					connectComponentTo(currentComponent, attachComp, false);
 			}
+			inputComponents.clear();
+			outputComponents.clear();
 		}
 	}
 
