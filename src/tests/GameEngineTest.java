@@ -18,6 +18,11 @@ public class GameEngineTest {
 	Valve valve1 = null;
 	ArrayList<InfoPacket> v1Info = null;
 	
+	/**
+	 * Makes a basic power plant with one component (Valve 1) that is not connected to anything and has had not info assigned to it.
+	 * 
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		gameEngine = new GameEngine();
@@ -26,6 +31,9 @@ public class GameEngineTest {
 		gameEngine.addComponent(valve1);
 	}
 
+	/**
+	 * Test whether adding a component to the list of components in the power plant is sucsessful.
+	 */
 	@Test
 	public void testAddComponent() {
 		
@@ -35,6 +43,9 @@ public class GameEngineTest {
 		
 	}
 	
+	/**
+	 * Tests whether connecting two components is successful.
+	 */
 	@Test
 	public void testConnectComponents(){
 		gameEngine.connectComponentTo(valve1, valve1, true);
@@ -57,7 +68,9 @@ public class GameEngineTest {
 		}
 		
 	}
-	
+	/**
+	 * Tests whether the game engine is able to find the correct component and assign info to it. 
+	 */
 	@Test
 	public void testAssignInfoToComponent(){
 		InfoPacket info = gameEngine.getAllComponentInfo().get(0);
@@ -82,7 +95,9 @@ public class GameEngineTest {
 		assertTrue(v1Info.equals(info));
 		
 	}
-	
+	/**
+	 * Tests whether the game engine correctly sets up a power plant given a list of infoPackets
+	 */
 	@Test
 	public void testSetupPowerPlantConfigureation(){
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
@@ -110,10 +125,25 @@ public class GameEngineTest {
 		info1.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 1").getFailureTime()));
 		info2.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 2").getFailureTime()));
 		
-		infoList.clear();
+		infoList = new ArrayList<InfoPacket>();
 		infoList.add(info1);
 		infoList.add(info2);
 		
-		assertTrue(gameEngine.getAllComponentInfo().equals(infoList));	
+		ArrayList<InfoPacket> allCompInfo = gameEngine.getAllComponentInfo();
+		assertTrue(allCompInfo.equals(infoList));	
 	}
+	
+	/**
+	 * Tests whether components are repaired correctly.
+	 */
+	@Test
+	public void testRepair(){
+		Component v1 = gameEngine.getPowerPlantComponent("Valve 1");
+		v1.setFailed(true);
+		assertTrue(v1.isFailed());
+		
+		gameEngine.repair(v1);
+		assertTrue(!v1.isFailed());
+	}
+	
 }
