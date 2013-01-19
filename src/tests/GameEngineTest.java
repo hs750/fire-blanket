@@ -56,10 +56,11 @@ public class GameEngineTest {
 			info = it.next();
 			Iterator<Pair<?>> pIt = info.namedValues.iterator();
 			while(pIt.hasNext()){
-				if(pIt.next().getLabel() == Label.oPto){
-					assertTrue(pIt.next().second() == "Valve 1");
-				}else if(pIt.next().getLabel() == Label.rcIF){
-					assertTrue(pIt.next().second() == "Valve 1");
+				Pair<?> testedpair = pIt.next();
+				if(testedpair.getLabel() == Label.oPto){
+					assertTrue(testedpair.second() == "Valve 1");
+				}else if(testedpair.getLabel() == Label.rcIF){
+					assertTrue(testedpair.second() == "Valve 1");
 				}
 				
 			}
