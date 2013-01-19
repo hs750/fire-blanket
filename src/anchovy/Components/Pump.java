@@ -9,6 +9,7 @@ import anchovy.Pair.Label;
 /**
  * This class is the representation of the pump within the power plant.
  * @author Harrison
+ * TODO Pump OutputFlowRate does not take into account how much water is flowing into the pump.
  */
 public class Pump extends Component {
 
