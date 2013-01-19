@@ -1,6 +1,3 @@
-/**
- * 
- */
 package anchovy.Components;
 
 import java.util.Iterator;
@@ -16,16 +13,21 @@ import anchovy.Pair.Label;
 public class Pump extends Component {
 
 	private double RPM;
-	private double pumpFlowRatio = 0.5; // The ratio to which the ouput flow rate is proportional to the RPM of the pump
+	/** 
+	 * The ratio to which the output flow rate of the pump is proportional to its RPM
+	 */
+	private double pumpFlowRatio = 0.5; 
 
 	/**
-	 * @param name Unique name of the component
+	 * @see anchovy.Components.Component#Component(String)
 	 */
 	public Pump(String name) {
 		super(name);
 	}
 
-
+	/** 
+	 * @see anchovy.Components.Component#Component(String, InfoPacket)
+	 */
 	public Pump(String name, InfoPacket info){
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -44,8 +46,8 @@ public class Pump extends Component {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Components.Component#getInfo()
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public InfoPacket getInfo() {
@@ -54,8 +56,8 @@ public class Pump extends Component {
 		return info;
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Components.Component#calucalte()
+	/** 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void calculate() {
@@ -68,6 +70,10 @@ public class Pump extends Component {
 		}
 	}
 	
+	/** 
+	 * {@inheritDoc}
+	 * Pumps only fail when they reach there randomly calculated failure time.
+	 */
 	@Override
 	protected boolean calculateFailed() {
 		if(super.getFailureTime() == 0){
@@ -77,17 +83,18 @@ public class Pump extends Component {
 		}
 	}
 	
-	@Override
 	/**
+	 * {@inheritDoc}
 	 * The output flow rate of the pump is directly proportional to the RPM of the pump.
 	 */
+	@Override
 	protected double calculateOutputFlowRate() {
 		//The output flow rate of the pump is directly proportional to the RPM of the pump.
 		return RPM * getPumpFlowRatio(); 
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Components.Component#takeInfo(anchovy.InfoProposal)
+	/** 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
@@ -107,20 +114,31 @@ public class Pump extends Component {
 		}
 	}
 
+	/**
+	 * @return The ratio at which the pumps RPM is converted to water flow
+	 */
 	public double getPumpFlowRatio() {
 		return pumpFlowRatio;
 	}
 
+	/** 
+	 * @param pumpFlowRatio The ratio at which the pump with convert its RPM to water flow rate.
+	 */
 	public void setPumpFlowRatio(double pumpFlowRatio) {
 		this.pumpFlowRatio = pumpFlowRatio;
 	}
 
+	/**
+	 * @return The revolutions per minute of the pump
+	 */
 	public double getRPM() {
 		return RPM;
 	}
-
-	public void setRPM(double rPM) {
-		RPM = rPM;
+	/**
+	 * @param RPM The revolutions per minute that the pump with spin at.
+	 */
+	public void setRPM(double RPM) {
+		this.RPM = RPM;
 	}
 
 }
