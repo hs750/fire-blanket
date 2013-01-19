@@ -44,3 +44,11 @@ Thumbs.db
 *.jar
 *.war
 *.ear
+
+# JavaDoc Files #
+#################
+*.html
+*.css
+*.gif
+doc
+
