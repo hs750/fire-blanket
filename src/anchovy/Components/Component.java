@@ -15,6 +15,8 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public abstract class Component {
+	private Double amount;
+	private Double volume;
 	private String name;
 	private int meanTimeBetweenFailure; //MTBF
 	private Double failureTime;
@@ -28,6 +30,8 @@ public abstract class Component {
 	 * @param name the name of the individual component, should be unique.
 	 */
 	public Component(String name){
+		volume = 9000.0;
+		amount = 500.0;
 		outputFlowRate = 0.0;
 		this.name = name;
 		if(failureTime == null){
@@ -54,7 +58,11 @@ public abstract class Component {
 			currentpair = pi.next();
 			currentlabel = currentpair.getLabel();
 			switch (currentlabel){
-			case falT:
+			case Vlme:
+				volume = (Double) currentpair.second();
+			case Amnt:
+				amount = (Double) currentpair.second();
+ 			case falT:
 				failureTime = (Double) currentpair.second();
 				break;
 			case OPFL:

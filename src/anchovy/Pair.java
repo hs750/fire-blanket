@@ -13,6 +13,8 @@ public class Pair<T> {
 	 * More information about Java enums: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
 	 */
 	public static enum Label {
+		Vlme("Volume"),
+		Amnt("Amount of water/steam in the component"),
 		temp("Temperature"),
 		pres("Pressure"),
 		coRL("Controll rod level"),
@@ -26,6 +28,7 @@ public class Pair<T> {
 		rcIF("Recieves input from"),
 		elec("Electrisity Generated"),
 		cmpnum("Component number"),
+		MxIn("Maximum Allowed Input"), // for valves and pumps and stuff
 		etc("Feel free to add more stuff;" +
 				"it should have the enum term 4-char long to keep the convention");
 		

@@ -16,10 +16,10 @@ import anchovy.Pair.Label;
  */
 public class Valve extends Component {
 	/**
-	 * Whether the valve is open or closed.
+	 * Whether the valve is open(True) or closed(False).
 	 */
 	private Boolean position;
-	
+
 	/**
 	 * @see anchovy.Components.Component#Component(String)
 	 */
@@ -65,8 +65,8 @@ public class Valve extends Component {
 	public void calculate() {
 		super.setFailed(calculateFailed());
 		super.setOuputFlowRate(calculateOutputFlowRate());
-		
-		
+
+
 	}
 
 	/** 
@@ -115,6 +115,18 @@ public class Valve extends Component {
 		this.position = position;
 	}
 
+
+	/**
+	 * @param position The position that the valve will be in, false = closed, true = open
+	 */
+	public double getMaximumInput() {
+		if(position){
+			return 9000;
+		}else{
+			return 0;
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -135,7 +147,7 @@ public class Valve extends Component {
 			}
 		}
 	}
-	
+
 	public static void main(String[] args){
 		InfoPacket in = new InfoPacket();
 		in.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
