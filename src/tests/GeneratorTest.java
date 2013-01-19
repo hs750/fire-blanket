@@ -17,31 +17,31 @@ import anchovy.Pair.Label;
 public class GeneratorTest {
 	private Generator generator1;
 	private InfoPacket info;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
+	/**
+	 * Before each test, create a new generator and an info packet.
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		generator1 = new Generator("Generator 1");
 		info = new InfoPacket();
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	/**
+	 * Put values in the infopacket used in the tests.
+	 */
 	private void setUpInfo1(){
 		info.namedValues.add(new Pair<String>(Label.cNme, "Generator 1"));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.elec, 1000.0));
 		info.namedValues.add(new Pair<Double>(Label.falT, 20.0));
+		info.namedValues.add(new Pair<Double>(Label.Amnt, 60.0));
 	}
+	
+	/**
+	 * Test whether the Generator correctly takes an infoPacket
+	 */
 	@Test
 	public void testTakeInfo() {
 		setUpInfo1();
@@ -53,26 +53,37 @@ public class GeneratorTest {
 			e.printStackTrace();
 		}
 		
-		assert(generator1.getName().equals("Generator 1"));
-		assert(generator1.getOutputFlowRate() == 12.34);
-		assert(generator1.getElectrisityGenerated() == 1000.0);
-		assert(generator1.getFailureTime() == 20.0);
+		assertTrue(generator1.getName().equals("Generator 1"));
+		assertTrue(generator1.getOutputFlowRate() == 12.34);
+		assertTrue(generator1.getElectrisityGenerated() == 1000.0);
+		assertTrue(generator1.getFailureTime() == 20.0);
 		
 	}
-
+	/**
+	 * Test whether the generator correctly returns an infopacket.
+	 */
 	@Test
 	public void testGetInfo(){
-		setUpInfo1();
+		generator1.setElectrisityGenerated(1000);
+		generator1.setFailureTime(1234.0);
+		generator1.setOuputFlowRate(123.0);
+		InfoPacket genInfo = generator1.getInfo();
 		
-		assert(info.equals(generator1.getInfo()));
+		assertTrue(genInfo.namedValues.contains(new Pair<String>(Label.cNme, "Generator 1")));
+		assertTrue(genInfo.namedValues.contains(new Pair<Double>(Label.elec, 1000.0)));
+		assertTrue(genInfo.namedValues.contains(new Pair<Double>(Label.falT, 1234.0)));
+		assertTrue(genInfo.namedValues.contains(new Pair<Double>(Label.OPFL, 123.0)));
 	}
+	
+	/**
+	 * Test whether the generator calculates its values correctly
+	 */
 	@Test
 	public void testCalc(){
 		setUpInfo1();
 		try {
 			generator1.takeInfo(info);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -81,10 +92,11 @@ public class GeneratorTest {
 		tInfo.namedValues.add(new Pair<String>(Label.cNme, "T1"));
 		tInfo.namedValues.add(new Pair<Double>(Label.OPFL, 45.0));
 		
+		t1.setRPM(1234.5);
+		
 		try {
 			t1.takeInfo(tInfo);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -92,6 +104,6 @@ public class GeneratorTest {
 				
 		generator1.calculate();
 		
-		assert(generator1.getElectrisityGenerated() == 1000 + t1.getOutputFlowRate() * 1.5);
+		assertTrue(generator1.getElectrisityGenerated() == 1000 + t1.getRPM() * 1.5);
 	}
 }
