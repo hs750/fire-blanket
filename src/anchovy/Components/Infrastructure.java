@@ -7,6 +7,13 @@ import anchovy.InfoPacket;
 import anchovy.Pair;
 import anchovy.Pair.Label;
 
+/**
+ * This class is the representation of infrastructure which is supported by the operation of the power plant.
+ * Unlike the other components, infrastructure components take an input flow rate in the form of electricity and consume it.
+ * These are used to give the plant a purpose as it has something to power. 
+ * @author Kieren 
+ *
+ */
 public class Infrastructure extends Component {
 	/**
 	 * The electricity that is needed to power this piece of infrastructure.
