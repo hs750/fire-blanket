@@ -616,17 +616,13 @@ public class GameEngine {
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
 		infoList.add(info);
 
-		/*
-=======
-/*
->>>>>>> branch 'master' of https://github.com/ansimionescu/Fire-blanket.git
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 1"));
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
 		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 3"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condensor"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
 		infoList.add(info);
 
 		info = new InfoPacket();
@@ -643,7 +639,7 @@ public class GameEngine {
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
 		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 4"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condensor"));
+		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
 		infoList.add(info);
 
 		info = new InfoPacket();
@@ -656,7 +652,7 @@ public class GameEngine {
 
 		// ///////////
 		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Condensor"));
+		info.namedValues.add(new Pair<String>(Label.cNme, "Condenser"));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.temp, 10.00));
 		info.namedValues.add(new Pair<Double>(Label.pres, 10.00));
@@ -674,11 +670,11 @@ public class GameEngine {
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Condensor"));
+		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
 		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
 		infoList.add(info);
 		// ///////////
-		 */
+		 
 		gameEngine.clearPowerPlant();
 		assert (gameEngine.getAllComponentInfo().isEmpty());
 
