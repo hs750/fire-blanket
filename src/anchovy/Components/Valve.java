@@ -11,18 +11,25 @@ import anchovy.Pair;
 import anchovy.Pair.Label;
 
 /**
- * Representation of Valve withing the power plant.
+ * Representation of Valve within the power plant.
  * @author Harrison
  */
 public class Valve extends Component {
-	private Boolean position;
 	/**
-	 * @param name The unique name of the component
+	 * Whether the valve is open or closed.
+	 */
+	private Boolean position;
+	
+	/**
+	 * @see anchovy.Components.Component#Component(String)
 	 */
 	public Valve(String name) {
 		super(name);
 	}
 
+	/** 
+	 * @see anchovy.Components.Component#Component(String, InfoPacket)
+	 */
 	public Valve(String name, InfoPacket info) {
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -41,8 +48,8 @@ public class Valve extends Component {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Component#getInfo()
+	/** 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public InfoPacket getInfo() {
@@ -51,8 +58,8 @@ public class Valve extends Component {
 		return info;
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Component#calucalte()
+	/** 
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void calculate() {
@@ -62,21 +69,22 @@ public class Valve extends Component {
 		
 	}
 
-	
+	/** 
+	 * {@inheritDoc}
+	 * Valves cannot fail so, calculating whether it has failed will always return false.
+	 */
 	@Override
 	protected boolean calculateFailed() {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Component#calculateOutputFlowRate()
-	 */
-	@Override
 	/**
-	 * Ouputut fow rate of valve is directly based of of the unput flow rate.
+	 * {@inheritDoc}
+	 * Output flow rate of valve is directly based of of the input flow rate.
 	 * If valve is open, output flow  = input flow
 	 * otherwise the output flow = 0.
 	 */
+	@Override
 	protected double calculateOutputFlowRate() {
 		if(position){
 			ArrayList<Component> recievesInputFrom = super.getRecievesInputFrom();
@@ -94,17 +102,21 @@ public class Valve extends Component {
 
 	}
 
-
+	/**
+	 * @return The boolean representation of the position of the valve, false = closed, true = open
+	 */
 	public Boolean getPosition() {
 		return position;
 	}
-
+	/**
+	 * @param position The position that the valve will be in, false = closed, true = open
+	 */
 	public void setPosition(Boolean position) {
 		this.position = position;
 	}
 
-	/* (non-Javadoc)
-	 * @see anchovy.Component#takeInfo(anchovy.InfoProposal)
+	/**
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
@@ -123,9 +135,7 @@ public class Valve extends Component {
 			}
 		}
 	}
-	/*
-	 * sandbox
-	 */
+	
 	public static void main(String[] args){
 		InfoPacket in = new InfoPacket();
 		in.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
