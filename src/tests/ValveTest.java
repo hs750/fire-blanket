@@ -13,6 +13,10 @@ import anchovy.Pair.Label;
 public class ValveTest {
 	Valve v1 = null;
 	InfoPacket infoTest = null;
+	/**
+	 * Setup a new valve and info packets to test with.
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		v1 = new Valve("Valve 1");
@@ -27,18 +31,20 @@ public class ValveTest {
 		infoTest.namedValues.add(new Pair<Boolean> (Label.psit, true));
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
+	/**
+	 * Test that a valve returns an infoPacket containing the correct info.
+	 */
 	@Test
 	public void testGetInfo() {
 		
 		InfoPacket v1Info = v1.getInfo();
-		assert(v1Info.equals(infoTest));
+		assertTrue(v1Info.namedValues.contains(new Pair<String>(Label.cNme, "Valve 1")));
+		assertTrue(v1Info.namedValues.contains(new Pair<Boolean>(Label.psit, true)));
 		
 	}
-	
+	/**
+	 * Test whether the a valve correctly take info in.
+	 */
 	@Test
 	public void testTakeInfo(){
 		assertEquals(true, v1.getPosition());
@@ -54,30 +60,31 @@ public class ValveTest {
 			e.printStackTrace();
 		}
 		
-		infoTest.namedValues.add(new Pair<Double> (Label.OPFL, 12.3));
-		infoTest.namedValues.add(new Pair<Double> (Label.falT, 100.0));
-		assert(v1.getInfo().equals(infoTest));
-		
 		assertEquals(false, v1.getPosition());
 		
 	}
 	
+	/**
+	 * Test that a valve calculates correctly.
+	 * That is that it outputs its input flow if open, or 0 if closed.
+	 */
 	@Test 
 	public void testCalculate(){
 		Valve v2 = new Valve("Valve 2");
 		v2.setOuputFlowRate(200);
 		v1.connectToInput(v2);
+		v1.setOuputFlowRate(100.0);
 		
-		assert(v1.getOutputFlowRate() == 100.0);
+		assertTrue(v1.getOutputFlowRate() == 100.0);
 		
 		v1.calculate();
 		
-		assert(v1.getOutputFlowRate() == 200.0);
+		assertTrue(v1.getOutputFlowRate() == 200.0);
 		
 		v1.setPosition(false);
 		v1.calculate();
 		
-		assert(v1.getOutputFlowRate() == 0);
+		assertTrue(v1.getOutputFlowRate() == 0);
 		
 	}
 
