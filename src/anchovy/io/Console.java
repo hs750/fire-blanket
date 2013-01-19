@@ -41,11 +41,10 @@ public class Console implements ActionListener {
 		writeToConsole('>' + text);
 		String parserOutput = "";
 
-		try {
-			parserOutput = parser.parse(text);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
+	
+		parserOutput = parser.parse(text);
+		
+		
 
 		if (parserOutput.length() != 0)
 			writeToConsole(parserOutput);
