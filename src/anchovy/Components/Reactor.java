@@ -7,7 +7,7 @@ import anchovy.InfoPacket;
 import anchovy.Pair;
 import anchovy.Pair.Label;
 /**
- * This is the prepresentation of the Reactor withing the power plant.
+ * This is the representation of the Reactor within the power plant.
  * @author Harrison
  */
 public class Reactor extends Component {
@@ -16,13 +16,15 @@ public class Reactor extends Component {
 	private double controlRodLevel;
 	private double waterLevel = 50;
 	/**
-	 * 
-	 * @param name Unique name of component.
+	 * @see anchovy.Components.Component#Component(String)
 	 */
 	public Reactor(String name){
 		super(name);
 	}
 
+	/** 
+	 * @see anchovy.Components.Component#Component(String)
+	 */
 	public Reactor(String name, InfoPacket info){
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -49,7 +51,10 @@ public class Reactor extends Component {
 			}
 		}
 	}
-
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = getSuperInfo();
@@ -60,15 +65,27 @@ public class Reactor extends Component {
 		return info;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void calculate() {
-		double oldTemp = temperature;
-		temperature = calculateTemperature();
-		pressure = calcuatePressure(oldTemp);
-		waterLevel = calculateWaterLevel();
-		super.setOuputFlowRate(calculateOutputFlowRate());
+		super.setFailed(calculateFailed());
+		if(!super.isFailed()){
+			double oldTemp = temperature;
+			temperature = calculateTemperature();
+			pressure = calcuatePressure(oldTemp);
+			waterLevel = calculateWaterLevel();
+			super.setOuputFlowRate(calculateOutputFlowRate());
+		}
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 * Reactors can fail for several different reasons.
+	 * If the temperature or pressure are too high or the water level is too low.
+	 * They also fail when they reach their randomly calculated fail time.
+	 */
 	@Override
 	protected boolean calculateFailed() {
 		if(super.getFailureTime() == 0){
@@ -116,8 +133,8 @@ public class Reactor extends Component {
 	}
 	/**
 	 * Calculate the water level in the reactor.
-	 * Water level = water level  + input fow rates - rate of steam production.
-	 * @return The new water level in the reacotr
+	 * Water level = water level  + input flow rates - rate of steam production.
+	 * @return The new water level in the reactor
 	 */
 	protected double calculateWaterLevel(){
 		//proportional to current water level + opfl and ipfl
@@ -132,11 +149,18 @@ public class Reactor extends Component {
 		return (inputFlowRate + waterLevel) - super.getOutputFlowRate();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * The output flow rate of the Reactor is proportional to the pressure within the reactor.
+	 */
 	@Override
 	protected double calculateOutputFlowRate(){
 		// OPFL is proportional to the pressure. 
 		return pressure / 2;
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
 		super.takeSuperInfo(info);
@@ -165,26 +189,39 @@ public class Reactor extends Component {
 		}
 	}
 
+	/**
+	 * @return The temperature in the reactor
+	 */
 	public double getTemperature() {
 		return temperature;
 	}
-
+	/**
+	 * @param temperature The temperature of the reactor
+	 */
 	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
-
+	/**
+	 * @return The pressure within the reactor
+	 */
 	public double getPressure() {
 		return pressure;
 	}
-
+	/**
+	 * @param pressure The pressure that the reactor will be at.
+	 */
 	public void setPressure(double pressure) {
 		this.pressure = pressure;
 	}
-
+	/**
+	 * @return The level the the control rods inside the reactor at at.
+	 */
 	public double getControlRodLevel() {
 		return controlRodLevel;
 	}
-
+	/**
+	 * @param controlRodLevel The level that the control rods in the reactor will be at, max = 100, min = 0
+	 */
 	public void setControlRodLevel(double controlRodLevel) {
 		if (controlRodLevel > 100)
 			this.controlRodLevel =100;
@@ -194,10 +231,15 @@ public class Reactor extends Component {
 			this.controlRodLevel = controlRodLevel;
 	}
 
+	/**
+	 * @return The level of the water in the reactor.
+	 */
 	public double getWaterLevel() {
 		return waterLevel;
 	}
-
+	/**
+	 * @param waterLevel The level that the water in the reactor will be at. Max = 100, min = 0;
+	 */
 	public void setWaterLevel(double waterLevel) {
 		if(waterLevel < 100 & waterLevel > 0)
 			this.waterLevel = waterLevel;
