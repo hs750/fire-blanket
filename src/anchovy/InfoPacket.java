@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 import anchovy.Pair.Label;
 
+/**
+ * The class is used as the communication protocol throughout the game.
+ * It consists of a list of pairs which contain the a label representing what the pair contains and a value which if the value associated with the label.
+ * Components, loading the game and user commands create info packets, then components, saving the game and the output of the user interface receive info packets.
+ * 
+ * @author Andrei
+ * @author Harrison
+ *
+ */
 public class InfoPacket {
 	/**
 	 * ArrayList containing the data == (string, value) pairs
