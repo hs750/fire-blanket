@@ -8,20 +8,24 @@ import anchovy.Pair;
 import anchovy.Pair.Label;
 
 /**
- * This is the representation of the tuebine within the poewr plant.
+ * This is the representation of the turbine within the power plant.
  * @author Harrison
  */
 public class Turbine extends Component {
 	private double RPM;
-	private double RPMRatio = 0.5; //Ratio governing how much of the steam flow transfers to rpm
 	/**
-	 * 
-	 * @param name Unique name of the turbine.
+	 * Ratio governing how much of the steam flow transfers to RPM of the turbine.
+	 */
+	private double RPMRatio = 0.5; 
+	/**
+	 * @see anchovy.Components.Component#Component(String)
 	 */
 	public Turbine(String name) {
 		super(name);
 	}
-
+	/** 
+	 * @see anchovy.Components.Component#Component(String, InfoPacket)
+	 */
 	public Turbine(String name, InfoPacket info) {
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -39,14 +43,18 @@ public class Turbine extends Component {
 			}
 		}
 	}
-
+	 /** 
+	  * {@inheritDoc}
+	  */
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getSuperInfo();
 		info.namedValues.add(new Pair<Double>(Label.RPMs, RPM));
 		return info;
 	}
-
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void calculate() {
 		super.setFailed(calculateFailed());
@@ -59,7 +67,10 @@ public class Turbine extends Component {
 		}
 		
 	}
-	
+	/**
+	 * {@inheritDoc}
+	 * Turbines only fail when they reach the randomly generated fail time.
+	 */
 	@Override
 	protected boolean calculateFailed(){
 		if(super.getFailureTime() == 0){
@@ -69,8 +80,8 @@ public class Turbine extends Component {
 	}
 	/**
 	 * Calculate the RPM of the turbine
-	 * RPM is based ont he fow rate of steam in to the turbine / the ratio which energy is lost in pushing the turbine. 
-	 * @return
+	 * RPM is based on the flow rate of steam in to the turbine / the ratio which energy is lost in pushing the turbine. 
+	 * @return The RPM of the turbine from the current cycle
 	 */
 	protected double calculateRPM(){
 		//RPM is proportional to the input flow rate of steam into the turbine.
@@ -93,13 +104,19 @@ public class Turbine extends Component {
 		}
 		return totalIPFL;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 * Output flow rate of turbine is equal to the input flow rate.
+	 */
 	@Override
 	protected double calculateOutputFlowRate() {
 		//OutputFlowRate = input flow rate
 		return getTotalInputFlowRate();
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
 		super.takeSuperInfo(info);
@@ -118,20 +135,30 @@ public class Turbine extends Component {
 		}
 	}
 
+	/**
+	 * @return The revolutions per minute of the turbine
+	 */
 	public double getRPM() {
 		return RPM;
 	}
-
-	public void setRPM(double rPM) {
-		RPM = rPM;
+	/**
+	 * @param RPM The revolutions per minute that the turbine will spin at.
+	 */
+	public void setRPM(double RPM) {
+		this.RPM = RPM;
 	}
-
+	/**
+	 * @return The ratio that steam flow round the turbine is converted to RPM
+	 */
 	public double getRPMRatio() {
 		return RPMRatio;
 	}
 
-	public void setRPMRatio(double rPMRatio) {
-		RPMRatio = rPMRatio;
+	/**
+	 * @param RPMRatio The ratio at which the steam flow is converted to RPM
+	 */
+	public void setRPMRatio(double RPMRatio) {
+		this.RPMRatio = RPMRatio;
 	}
 
 }
