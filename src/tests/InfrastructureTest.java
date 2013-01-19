@@ -6,6 +6,7 @@ package tests;
 import static org.junit.Assert.*;
 import anchovy.InfoPacket;
 import anchovy.Pair;
+import anchovy.Components.Generator;
 import anchovy.Components.Infrastructure;
 import anchovy.Pair.Label;
 
@@ -32,6 +33,10 @@ public class InfrastructureTest {
 	private InfoPacket info;
 	private Infrastructure inf1;
 	
+	/**
+	 * Setup an infrastructure to test.
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		info = new InfoPacket();
@@ -49,9 +54,50 @@ public class InfrastructureTest {
 		info.namedValues.add(new Pair<String>(Label.rcIF, ""));
 		inf1 = new Infrastructure("Infrastructure 1", info);
 	}
+	
+	/**
+	 * Test whether the infrastructure calculates correctly.
+	 * That is that it the onfrastructure uses some of the input flow of electrisity and then 
+	 */
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testCalculate() {
+		Generator gen = new Generator("Generator 1");
+		gen.setOuputFlowRate(100.0);
+		
+		inf1.connectToInput(gen);
+		inf1.setElectrisityneeded(50);
+		inf1.calculate();
+		
+		double inf1Out = inf1.getOutputFlowRate();
+		assertTrue(inf1Out == 50);
 	}
-
+	
+	/**
+	 * Test whether the infrastructure takes info correctly
+	 */
+	@Test
+	public void testTakeInfo(){
+		InfoPacket i1 = new InfoPacket();
+		i1.namedValues.add(new Pair<Double>(Label.elec, 400.0));
+		i1.namedValues.add(new Pair<String>(Label.cNme, "Infrastructure 1"));
+		try {
+			inf1.takeInfo(i1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertTrue(inf1.getElectrisityneeded() == 400.0);
+	}
+	
+	/**
+	 * Test whether the infrastructure gives the correct info.
+	 */
+	@Test
+	public void testGetInfo(){
+		inf1.setElectrisityneeded(100.0);
+		InfoPacket inf1I = inf1.getInfo();
+		
+		assertTrue(inf1I.namedValues.contains(new Pair<String>(Label.cNme, "Infrastructure 1")));
+		assertTrue(inf1I.namedValues.contains(new Pair<Double>(Label.elec, 100.0)));
+		assertTrue(inf1I.namedValues.contains(new Pair<Double>(Label.OPFL, 100.0)));
+	}
 }
