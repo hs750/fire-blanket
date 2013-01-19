@@ -60,8 +60,10 @@ public abstract class Component {
 			switch (currentlabel){
 			case Vlme:
 				volume = (Double) currentpair.second();
+				break;
 			case Amnt:
 				amount = (Double) currentpair.second();
+				break;
  			case falT:
 				failureTime = (Double) currentpair.second();
 				break;
