@@ -120,7 +120,8 @@ public class GameEngine {
 		Component currentNewComponent = null;
 
 		// Create component list.
-		while (infoIt.hasNext()) {
+		while (infoIt.hasNext()) 
+		{
 			currentInfo = infoIt.next();
 			currentCompName = getComponentNameFromInfo(currentInfo);
 
@@ -421,17 +422,19 @@ public class GameEngine {
 			}
 			br.close();
 
-			int i = 0;
-			String textData[]=new String[data.size()];	
+			
+			String textData[] = new String[data.size()];	
 
 
-			textData= data.toArray(new String[i]);
+			textData= data.toArray(new String[0]);
 			InfoPacket info = new InfoPacket();
-			while (i<data.size()-1) {
+			
+			int i = 0;
+			while (i < data.size()) {
 
 				String ch = textData[i].substring(0, textData[i].indexOf("&"));
 				String d = textData[i].substring(textData[i].indexOf("&") + 1, textData[i].length());
-				if (ch.equals(Label.cNme)) {
+				if (ch.equals(Label.cNme.toString())) {
 					if(i != 0)
 					{
 						infoList.add(info);
@@ -441,73 +444,73 @@ public class GameEngine {
 					//System.out.println(ch + "=" + c1);
 				}
 
-				else if (ch.equals(Label.falT)) {
+				else if (ch.equals(Label.falT.toString())) {
 					Double i1 = Double.parseDouble(d);
 					info.namedValues.add(new Pair<Double>(Label.falT, i1));
 					//System.out.println(ch + "=" + i1);
 				} 
-				else if (ch.equals(Label.OPFL))
+				else if (ch.equals(Label.OPFL.toString()))
 				{
 					Float i1 = Float.parseFloat(d);
 					info.namedValues.add(new Pair<Float>(Label.OPFL, i1));
 					System.out.println(ch + "=" + i1);
-				} else if (ch.equals(Label.psit)) 
+				} else if (ch.equals(Label.psit.toString())) 
 				{
 					boolean ok = Boolean.parseBoolean(d);
 					info.namedValues.add(new Pair<Boolean>(Label.psit, ok));
 					//System.out.println(ch + "=" + ok);
 				}
-				else if (ch.equals(Label.oPto))
+				else if (ch.equals(Label.oPto.toString()))
 				{
 					info.namedValues.add(new Pair<String>(Label.oPto, d));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.rcIF))
+				else if (ch.equals(Label.rcIF.toString()))
 				{
 					info.namedValues.add(new Pair<String>(Label.rcIF, d));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.pres))
+				else if (ch.equals(Label.pres.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.Vlme))
+				else if (ch.equals(Label.Vlme.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.Vlme, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.pres))
+				else if (ch.equals(Label.pres.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.RPMs))
+				else if (ch.equals(Label.RPMs.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.RPMs, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.temp))
+				else if (ch.equals(Label.temp.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.temp, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.wLvl))
+				else if (ch.equals(Label.wLvl.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.wLvl, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals(Label.Amnt))
+				else if (ch.equals(Label.Amnt.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.Amnt, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
 				}
 				
-				else if (ch.equals("Controll rod level"))
+				else if (ch.equals(Label.coRL.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.coRL, Double.parseDouble(d)));
