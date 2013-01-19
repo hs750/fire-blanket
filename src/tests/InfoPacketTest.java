@@ -16,6 +16,10 @@ public class InfoPacketTest {
 	Pair<?> pair = null;
 	String componentName = "Reactor 1";
 	
+	/**
+	 * Before each test create an infopacekt for a Component
+	 * @throws Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		info.namedValues.add(new Pair<String>(Label.cNme, componentName));
@@ -25,7 +29,9 @@ public class InfoPacketTest {
 		info.namedValues.add(new Pair<Double>(Label.wLvl, 45.67));
 	}
 
-
+	/**
+	 * Test whether the infoPacket returns the correct name of the component that it represents.
+	 */
 	@Test
 	public void testName() {
 		Iterator<Pair<?>> i = info.namedValues.iterator();
@@ -44,7 +50,9 @@ public class InfoPacketTest {
 		}
 		assertEquals(componentName, s);
 	}
-	
+	/**
+	 * Test whether the attributes of the component are present within the infopacket
+	 */
 	@Test
 	public void testAttributes(){
 		Iterator<Pair<?>> i = info.namedValues.iterator();
