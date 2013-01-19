@@ -5,7 +5,19 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ InfoPacketTest.class, PairTest.class, GameEngineTest.class, ValveTest.class, GeneratorTest.class, PumpTest.class })
+@SuiteClasses({ 
+	GameEngineTest.class,
+	GeneratorTest.class,
+	InfoPacketTest.class,
+	InfrastructureTest.class,
+	PairTest.class,
+	ParserTest.class,
+	PumpTest.class,
+	ReactorTest.class,
+	TurbineTest.class,
+	ValveTest.class
+	
+})
 public class AllTests {
 
 }

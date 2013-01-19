@@ -60,8 +60,10 @@ public abstract class Component {
 			switch (currentlabel){
 			case Vlme:
 				volume = (Double) currentpair.second();
+				break;
 			case Amnt:
 				amount = (Double) currentpair.second();
+				break;
  			case falT:
 				failureTime = (Double) currentpair.second();
 				break;
@@ -214,7 +216,7 @@ public abstract class Component {
 	}
 
 	/**
-	 * @param outputFlowRate Set the output flow rate of the component to this value
+	 * @param outputFlowRate The rate at which water/steam/electricity/other output is being output from this component.
 	 */
 	public void setOuputFlowRate(double outputFlowRate){
 		this.outputFlowRate = outputFlowRate;
@@ -315,13 +317,6 @@ public abstract class Component {
 	 */
 	public void setRecievesInputFrom(ArrayList<Component> recievesInputFrom) {
 		this.receivesInputFrom = recievesInputFrom;
-	}
-
-	/**
-	 * @param outputFlowRate The rate at which water/steam/electrisity/other output is being output from this component.
-	 */
-	public void setOutputFlowRate(Double outputFlowRate) {
-		this.outputFlowRate = outputFlowRate;
 	}
 	
 	/**
