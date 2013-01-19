@@ -15,8 +15,6 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public abstract class Component {
-	private Double amount;
-	private Double volume;
 	private String name;
 	private int meanTimeBetweenFailure; //MTBF
 	private Double failureTime;
@@ -30,8 +28,6 @@ public abstract class Component {
 	 * @param name the name of the individual component, should be unique.
 	 */
 	public Component(String name){
-		volume = 9000.0;
-		amount = 500.0;
 		outputFlowRate = 0.0;
 		this.name = name;
 		if(failureTime == null){
@@ -49,7 +45,7 @@ public abstract class Component {
 	public Component(String name, InfoPacket info){
 		outputsTo = new ArrayList<Component>();
 		receivesInputFrom = new ArrayList<Component>();
-		
+
 		this.name = name;
 		Pair<?> currentpair = null;
 		Iterator<Pair<?>> pi = info.namedValues.iterator();
@@ -58,13 +54,7 @@ public abstract class Component {
 			currentpair = pi.next();
 			currentlabel = currentpair.getLabel();
 			switch (currentlabel){
-			case Vlme:
-				volume = (Double) currentpair.second();
-				break;
-			case Amnt:
-				amount = (Double) currentpair.second();
-				break;
- 			case falT:
+			case falT:
 				failureTime = (Double) currentpair.second();
 				break;
 			case OPFL:
@@ -78,7 +68,7 @@ public abstract class Component {
 			calcRandomFailTime();
 		}
 	}
-	
+
 	/**
 	 * Calculates the failure time of the component normally distributed around the MTBF
 	 */
@@ -95,32 +85,6 @@ public abstract class Component {
 		calcRandomFailTime();
 	}
 
-	/**
-	 * Create an information packet for the attributes of the general component. Usually used to get this part of the getInfo for the child components. 
-	 * 
-	 * @return info an information packet containing; the component name, failure time and output flow rate, output and input components
-	 */
-	protected InfoPacket getSuperInfo(){
-		InfoPacket info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, name));
-		info.namedValues.add(new Pair<Double>(Label.falT, failureTime));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, outputFlowRate));
-		info.namedValues.add(new Pair<Double>(Label.Vlme, volume));
-		info.namedValues.add(new Pair<Double>(Label.Amnt, amount));
-
-		Iterator<Component> i = outputsTo.iterator();
-		Component c = null;
-		while (i.hasNext()){
-			c = i.next();
-			info.namedValues.add(new Pair<String>(Label.oPto, c.getName()));
-		}
-		i = receivesInputFrom.iterator();
-		while (i.hasNext()){
-			c = i.next();
-			info.namedValues.add(new Pair<String>(Label.rcIF, c.getName()));
-		}
-		return info;
-	}
 
 	/**
 	 * Assigns the values stored in the given info packet to the relevant attributes.
@@ -137,12 +101,6 @@ public abstract class Component {
 			pair = i.next();
 			label = pair.getLabel();
 			switch (label){
-			case Amnt:
-				setAmount((Double) pair.second());
-				break;
-			case Vlme:
-				setVolume((Double) pair.second());
-				break;
 			case cNme:
 				setName((String) pair.second());
 				break;
@@ -175,29 +133,6 @@ public abstract class Component {
 	 * @return The name of the component
 	 */
 	public String getName(){ return name;}
-	
-	/**
-	 * @param amnt Change amount of steam/water in component to this.
-	 */
-		public void setAmount(double amnt){
-		amount = amnt;
-	}
-		
-	/**
-	 * @return The amount of steam/water of the component
-	 */
-	public double getAmount(){ return amount;}
-	
-	/**
-	 * @param vlme Change volume of component to this.
-	 */
-	public void setVolume(double vlme){
-		volume = vlme;
-	}
-	/**
-	 * @return The volume of the component
-	 */
-	public double getVolume(){ return volume;}
 
 	/**
 	 * Connects the given component to the list of components that are output to.
@@ -233,7 +168,25 @@ public abstract class Component {
 	 * Create an info packet containing data about all attributes for the component - should call super.getSuperInfo()
 	 * @return info An info packet containing all attributes for the component
 	 */
-	public abstract InfoPacket getInfo();
+	public InfoPacket getInfo(){
+		InfoPacket compinfo = new InfoPacket();
+		compinfo.namedValues.add(new Pair<String>(Label.cNme, name));
+		compinfo.namedValues.add(new Pair<Double>(Label.falT, failureTime));
+		compinfo.namedValues.add(new Pair<Double>(Label.OPFL, outputFlowRate));
+
+		Iterator<Component> i = outputsTo.iterator();
+		Component c = null;
+		while (i.hasNext()){
+			c = i.next();
+			compinfo.namedValues.add(new Pair<String>(Label.oPto, c.getName()));
+		}
+		i = receivesInputFrom.iterator();
+		while (i.hasNext()){
+			c = i.next();
+			compinfo.namedValues.add(new Pair<String>(Label.rcIF, c.getName()));
+		}
+		return compinfo;
+	}
 
 	/**
 	 * By having a single calculate method, any component can be told to calculate
@@ -261,7 +214,28 @@ public abstract class Component {
 	 * should call super.takeSuperInfo()
 	 * @param info InfoPacket defining values of attributes of the component.
 	 */
-	public abstract void takeInfo(InfoPacket info) throws Exception;
+	public void takeInfo(InfoPacket info) throws Exception{
+		resetConections();
+		Iterator<Pair<?>> i = info.namedValues.iterator();
+		Pair<?> pair = null;
+		Label label = null;
+		while(i.hasNext()){
+			pair = i.next();
+			label = pair.getLabel();
+			switch (label){
+			case cNme:
+				setName((String) pair.second());
+				break;
+			case falT:
+				setFailureTime((Double) pair.second());
+				break;
+			case OPFL:
+				setOuputFlowRate((Double) pair.second());	
+			default:
+				break;
+			}
+		}
+	}
 
 	/**
 	 * @return The mean time between failure of this component.
@@ -318,7 +292,9 @@ public abstract class Component {
 	public void setRecievesInputFrom(ArrayList<Component> recievesInputFrom) {
 		this.receivesInputFrom = recievesInputFrom;
 	}
-	
+
+
+
 	/**
 	 * @return Whether the component is currently failed or not. 
 	 */
@@ -332,4 +308,5 @@ public abstract class Component {
 	public void setFailed(boolean failed) {
 		this.failed = failed;
 	}
+
 }

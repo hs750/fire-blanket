@@ -11,7 +11,7 @@ import anchovy.Pair.Label;
  * This is the representation of the turbine within the power plant.
  * @author Harrison
  */
-public class Turbine extends Component {
+public class Turbine extends WaterComponent {
 	private double RPM;
 	/**
 	 * Ratio governing how much of the steam flow transfers to RPM of the turbine.
@@ -43,12 +43,12 @@ public class Turbine extends Component {
 			}
 		}
 	}
-	 /** 
-	  * {@inheritDoc}
-	  */
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = super.getSuperInfo();
+		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double>(Label.RPMs, RPM));
 		return info;
 	}
@@ -65,7 +65,7 @@ public class Turbine extends Component {
 			RPM = 0;
 			super.setOuputFlowRate(0);
 		}
-		
+
 	}
 	/**
 	 * {@inheritDoc}
@@ -160,5 +160,19 @@ public class Turbine extends Component {
 	public void setRPMRatio(double RPMRatio) {
 		this.RPMRatio = RPMRatio;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public InfoPacket outputWater() {
+		InfoPacket waterpack = new InfoPacket();
+		double packAmount = getPressure()/10;
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+		setAmount(getAmount() - packAmount);
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
+		return waterpack;
+	}
+
 
 }

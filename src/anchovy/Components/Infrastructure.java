@@ -42,7 +42,7 @@ public class Infrastructure extends Component {
 	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = super.getSuperInfo();
+		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double>(Label.elec, electrisityneeded ));
 		return info;
 	}
@@ -119,5 +119,5 @@ public class Infrastructure extends Component {
 	public void setElectrisityneeded(double electrisityneeded) {
 		this.electrisityneeded = electrisityneeded;
 	}
-
+	
 }

@@ -10,8 +10,7 @@ import anchovy.Pair.Label;
  * This is the representation of the Reactor within the power plant.
  * @author Harrison
  */
-public class Reactor extends Component {
-	private double temperature;
+public class Reactor extends WaterComponent {
 	private double pressure;
 	private double controlRodLevel;
 	private double waterLevel = 50;
@@ -34,9 +33,6 @@ public class Reactor extends Component {
 			currentpair = pi.next();
 			currentlabel = currentpair.getLabel();
 			switch (currentlabel){
-			case temp:
-				temperature = (Double) currentpair.second();
-				break;
 			case pres:
 				pressure = (Double) currentpair.second();
 				break;
@@ -51,14 +47,13 @@ public class Reactor extends Component {
 			}
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = getSuperInfo();
-		info.namedValues.add(new Pair<Double>(Label.temp, temperature));
+		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double>(Label.pres, pressure));
 		info.namedValues.add(new Pair<Double>(Label.coRL, controlRodLevel));
 		info.namedValues.add(new Pair<Double>(Label.wLvl, waterLevel));
@@ -72,9 +67,8 @@ public class Reactor extends Component {
 	public void calculate() {
 		super.setFailed(calculateFailed());
 		if(!super.isFailed()){
-			double oldTemp = temperature;
-			temperature = calculateTemperature();
-			pressure = calcuatePressure(oldTemp);
+			double oldTemp = getTemperature();
+			setTemperature(calculateTemperature());
 			waterLevel = calculateWaterLevel();
 			super.setOuputFlowRate(calculateOutputFlowRate());
 		}
@@ -90,7 +84,7 @@ public class Reactor extends Component {
 	protected boolean calculateFailed() {
 		if(super.getFailureTime() == 0){
 			return true;
-		}else if(temperature > 300){
+		}else if(getTemperature() > 300){
 			return true;
 		}else if(pressure > 200){
 			return true;
@@ -109,27 +103,13 @@ public class Reactor extends Component {
 	protected double calculateTemperature(){
 		//The temperature is affected by the level of the control rods, current temperature.
 		//Higher control rod level the hotter it gets.
-		double t = temperature;
+		double t = getTemperature();
 		if(t > 100){
 			t = t + t * ((controlRodLevel-50)/2); //If boiling lowering control rod level past 50% decreases temp otherwise it increases.
 		}else{
 			t = t + t * ((controlRodLevel-5)/2); //If not boiling then control rod increases temp unless fully down
 		}
 		return t;
-	}
-	/**
-	 * Calculate the new pressure of the reactor.
-	 * Pressure = Temperature * constant from Pressure Temperature law
-	 * 
-	 * @param oldTemp The old temperature of the reactor from last iteration.
-	 * @return The new pressure of the reactor.
-	 */
-	protected double calcuatePressure(double oldTemp){
-		// calculate pressure reletive to the current/old temperature
-		double p = pressure;
-		double ratio = temperature/oldTemp;
-		p = p * ratio;
-		return p;
 	}
 	/**
 	 * Calculate the water level in the reactor.
@@ -190,18 +170,6 @@ public class Reactor extends Component {
 	}
 
 	/**
-	 * @return The temperature in the reactor
-	 */
-	public double getTemperature() {
-		return temperature;
-	}
-	/**
-	 * @param temperature The temperature of the reactor
-	 */
-	public void setTemperature(double temperature) {
-		this.temperature = temperature;
-	}
-	/**
 	 * @return The pressure within the reactor
 	 */
 	public double getPressure() {
@@ -243,6 +211,23 @@ public class Reactor extends Component {
 	public void setWaterLevel(double waterLevel) {
 		if(waterLevel < 100 & waterLevel > 0)
 			this.waterLevel = waterLevel;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public InfoPacket outputWater() {
+		InfoPacket waterpack = new InfoPacket();
+		if (getTemperature() < 100){
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, 0.0));
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, 0.0));
+		}else{
+			double packAmount = getPressure()/10;
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+			setAmount(getAmount() - packAmount);
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
+		}
+		return waterpack;
 	}
 
 }

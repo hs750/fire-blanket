@@ -278,39 +278,9 @@ public class GameEngine {
 	 */
 	public void assignInfoToComponent(InfoPacket info) throws Exception {
 		String compToSendTo = null;
-
-		// Pair<?> pair = null;
-		// Iterator<Pair<?>> pi = info.namedValues.iterator();
-		// Label label = null;
-		// while(pi.hasNext() && compToSendTo == null){
-		// pair = pi.next();
-		// label = pair.getLabel();
-		// switch (label){
-		// case cNme:
-		// compToSendTo = (String) pair.second();
-		// default:
-		// break;
-		// }
-		// }
-
 		compToSendTo = getComponentNameFromInfo(info);
-
-		// Iterator<Component> ci = powrPlntComponents.iterator();
-		// boolean comNotFound = true;
 		Component com = null;
-		// while(ci.hasNext() && comNotFound){
-		// comNotFound = true;
-		// com = ci.next();
-		// if(com.getName() == compToSendTo){
-		// comNotFound = false;
-		//
-		// }
-		// }
-
 		com = getPowerPlantComponent(compToSendTo);
-		/*
-		 * if the component wasn't found throw an exception stating this
-		 */
 		if (com == null) {
 			throw new Exception(
 					"The component you were trying to send info to doesn't exit: " + compToSendTo);

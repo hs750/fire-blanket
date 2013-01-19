@@ -14,7 +14,7 @@ import anchovy.Pair.Label;
  * Representation of Valve within the power plant.
  * @author Harrison
  */
-public class Valve extends Component {
+public class Valve extends WaterComponent {
 	/**
 	 * Whether the valve is open(True) or closed(False).
 	 */
@@ -25,6 +25,7 @@ public class Valve extends Component {
 	 */
 	public Valve(String name) {
 		super(name);
+		position = true;
 	}
 
 	/** 
@@ -53,7 +54,7 @@ public class Valve extends Component {
 	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = super.getSuperInfo();
+		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Boolean>(Label.psit, position));
 		return info;
 	}
@@ -132,7 +133,7 @@ public class Valve extends Component {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeSuperInfo(info);
+		super.takeInfo(info);
 		Iterator<Pair<?>> i = info.namedValues.iterator();
 		Pair<?> pair = null;
 		Label label = null;
@@ -171,6 +172,19 @@ public class Valve extends Component {
 		v.calculate();
 		System.out.println("Flow out from v: " + v.getOutputFlowRate());
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public InfoPacket outputWater() {
+		InfoPacket waterpack = new InfoPacket();
+		double packAmount = getAmount();
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+		setAmount(getAmount() - packAmount);
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
+		return waterpack;
 	}
 
 }

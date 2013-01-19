@@ -11,7 +11,7 @@ import anchovy.Pair.Label;
  * @author Harrison
  * TODO Pump OutputFlowRate does not take into account how much water is flowing into the pump.
  */
-public class Pump extends Component {
+public class Pump extends WaterComponent {
 
 	private double RPM;
 	/** 
@@ -52,7 +52,7 @@ public class Pump extends Component {
 	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = super.getSuperInfo();
+		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double> (Label.RPMs, RPM));
 		return info;
 	}
@@ -141,5 +141,19 @@ public class Pump extends Component {
 	public void setRPM(double RPM) {
 		this.RPM = RPM;
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public InfoPacket outputWater() {
+		InfoPacket waterpack = new InfoPacket();
+		double packAmount = getRPM();
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+		setAmount(getAmount() - packAmount);
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
+		return waterpack;
+	}
+
 
 }

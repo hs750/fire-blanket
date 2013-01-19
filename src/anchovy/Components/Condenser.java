@@ -13,9 +13,7 @@ import anchovy.Pair.Label;
  * 
  * @author Harrison
  */
-public class Condenser extends Component {
-	private double temperature;
-	private double pressure;
+public class Condenser extends WaterComponent {
 	private double waterLevel;
 	/**
 	 * @see anchovy.Components.Component#Component(String)
@@ -35,12 +33,6 @@ public class Condenser extends Component {
 			currentpair = pi.next();
 			currentlabel = currentpair.getLabel();
 			switch (currentlabel){
-			case temp:
-				temperature = (Double) currentpair.second();
-				break;
-			case pres:
-				pressure = (Double) currentpair.second();
-				break;
 			case wLvl:
 				waterLevel = (Double) currentpair.second();
 				break;
@@ -54,9 +46,8 @@ public class Condenser extends Component {
 	 */
 	@Override
 	public InfoPacket getInfo() {
-		InfoPacket info = super.getSuperInfo();
-		info.namedValues.add(new Pair<Double>(Label.temp, temperature));
-		info.namedValues.add(new Pair<Double>(Label.pres, pressure));
+		InfoPacket info = super.getInfo();
+		info.namedValues.add(new Pair<Double>(Label.pres, getPressure()));
 		info.namedValues.add(new Pair<Double>(Label.wLvl, waterLevel));
 		return info;
 	}
@@ -67,14 +58,14 @@ public class Condenser extends Component {
 	public void calculate() {
 		super.setFailed(calculateFailed());
 		if(!super.isFailed()){
-			double oldPressure = pressure;
-			pressure = calculatePressure();
-			temperature = calculateTemp(oldPressure);
+			// double oldPressure = pressure;
+			//pressure = calculatePressure();
+			//setTemperature(calculateTemp(oldPressure));
 			waterLevel = calculateWaterLevel();
 			super.setOuputFlowRate(calculateOutputFlowRate());
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * Condenser only fails when it reaches it's fail time
@@ -87,55 +78,55 @@ public class Condenser extends Component {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Calculate the temperature of the condenser, 
 	 * Temperature = old temp * ratio that pressure increased or decreased by - the coolent flow rate
 	 * @param oldPressure pressure before the last calculation of pressure.
 	 * @return The new temperature.
 	 */
-	protected double calculateTemp(double oldPressure){
-		//Temperature = old temp * pressure increase/decrease raito - coolent flow rate
-
-		ArrayList<Component> inputs = super.getRecievesInputFrom();
-		Iterator<Component> it = inputs.iterator();
-		Component c = null;
-
-		double totalCoolantFlowRate = 0;
-
-		while(it.hasNext()){
-			c = it.next();
-			if(c.getName().contains("Coolant")){
-				totalCoolantFlowRate += c.getOutputFlowRate();
-			}
-		}
-		double ratio = pressure/oldPressure;
-		return temperature * ratio - totalCoolantFlowRate;
-	}
+	//	protected double calculateTemp(double oldPressure){
+	//		//Temperature = old temp * pressure increase/decrease raito - coolent flow rate
+	//
+	//		ArrayList<Component> inputs = super.getRecievesInputFrom();
+	//		Iterator<Component> it = inputs.iterator();
+	//		Component c = null;
+	//
+	//		double totalCoolantFlowRate = 0;
+	//
+	//		while(it.hasNext()){
+	//			c = it.next();
+	//			if(c.getName().contains("Coolant")){
+	//				totalCoolantFlowRate += c.getOutputFlowRate();
+	//			}
+	//		}
+	//		//double ratio = pressure/oldPressure;
+	//		//return (getTemperature() * ratio - totalCoolantFlowRate);
+	//	}
 
 	/**
 	 * Calculates the pressure within the condenser
 	 * Pressure  = current pressure + input flow rate of steam - output flow rate of water.
 	 * @return The new pressure
 	 */
-	protected double calculatePressure(){
-		//The pressure of the condenser is the current pressure + input flow of steam - output flow of water.
-		ArrayList<Component> inputs = super.getRecievesInputFrom();
-		Iterator<Component> it = inputs.iterator();
-		Component c = null;
-		double totalInputFlowRate = 0;
-		while(it.hasNext()){
-			c = it.next();
-			if(!(c.getName().contains("Coolant"))){
-				totalInputFlowRate += c.getOutputFlowRate();
-			}
-		}
-		if(temperature > 100){
-			return pressure + totalInputFlowRate - super.getOutputFlowRate();
-		}else{
-			return (pressure-pressure/temperature) + totalInputFlowRate - super.getOutputFlowRate();
-		}
-	}
+	//	protected double calculatePressure(){
+	//		//The pressure of the condenser is the current pressure + input flow of steam - output flow of water.
+	//		ArrayList<Component> inputs = super.getRecievesInputFrom();
+	//		Iterator<Component> it = inputs.iterator();
+	//		Component c = null;
+	//		double totalInputFlowRate = 0;
+	//		while(it.hasNext()){
+	//			c = it.next();
+	//			if(!(c.getName().contains("Coolant"))){
+	//				totalInputFlowRate += c.getOutputFlowRate();
+	//			}
+	//		}
+	//		if(getTemperature() > 100){
+	//			return getPressure() + totalInputFlowRate - super.getOutputFlowRate();
+	//		}else{
+	//			return (pressure-pressure/getTemperature()) + totalInputFlowRate - super.getOutputFlowRate();
+	//		}
+	//	}
 	/**
 	 * Calculate the water level within the condenser
 	 * water level = steam condensed + current water level - water flow rate out.
@@ -144,15 +135,15 @@ public class Condenser extends Component {
 	protected double calculateWaterLevel(){
 		//Water level = steam condensed + water level - water out
 		double wLevel;
-		if(temperature > 100){
+		if(getTemperature() > 100){
 			wLevel = waterLevel - super.getOutputFlowRate();
 		}else{
-			wLevel = (waterLevel - super.getOutputFlowRate()) + pressure / 10;
+			wLevel = (waterLevel - super.getOutputFlowRate()) + getPressure() / 10;
 		}
 		return wLevel;
 	}
-	
-	
+
+
 	/**
 	 * {@inheritDoc}
 	 * The output flow rate of a Condenser is equel to that of the pumps that it is outputing to.
@@ -186,12 +177,6 @@ public class Condenser extends Component {
 			pair = it.next();
 			label = pair.getLabel();
 			switch(label){
-			case temp:
-				temperature = (Double) pair.second();
-				break;
-			case pres:
-				pressure = (Double) pair.second();
-				break;
 			case wLvl:
 				waterLevel = (Double) pair.second();
 			default:
@@ -200,6 +185,28 @@ public class Condenser extends Component {
 		}
 
 
+	}
+	@Override	
+	/**
+	 * {@inheritDoc}
+	 */
+	public InfoPacket outputWater() {
+		InfoPacket waterpack = new InfoPacket();
+		if (getTemperature() < 100){
+			double packAmount = getPressure()/10;
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+			setAmount(getAmount() - packAmount);
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
+		}else{
+			double packAmount = getPressure()/10;
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
+			waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, 100.0));
+			double totalHeat = getTemperature()*getAmount();
+			double remainingHeat = totalHeat - (packAmount*100.0);
+			setAmount(getAmount() - packAmount);
+			setTemperature(remainingHeat/getAmount());			
+		}
+		return null;
 	}
 
 }

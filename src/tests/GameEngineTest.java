@@ -84,6 +84,7 @@ public class GameEngineTest {
 		info.namedValues.add(new Pair<Double>(Label.falT, v1.getFailureTime()));
 		info.namedValues.add(new Pair<Double>(Label.Amnt, 40.0));
 		info.namedValues.add(new Pair<Double>(Label.Vlme, 0.0));
+		info.namedValues.add(new Pair<Double>(Label.temp, 50.0));// valves have temperature now to make my hairbrained schemes work - kieran 
 		
 		InfoPacket v1Info = v1.getInfo();
 		assertTrue(v1Info.equals(info));
@@ -104,6 +105,7 @@ public class GameEngineTest {
 		info1.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
 		info1.namedValues.add(new Pair<Double>(Label.Amnt, 40.0));
 		info1.namedValues.add(new Pair<Double>(Label.Vlme, 0.0));
+		info1.namedValues.add(new Pair<Double>(Label.temp, 50.0));// valves have temperature now to make my hairbrained schemes work - kieran 
 		infoList.add(info1);
 		
 		InfoPacket info2 = new InfoPacket();
@@ -114,6 +116,7 @@ public class GameEngineTest {
 		info2.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
 		info2.namedValues.add(new Pair<Double>(Label.Amnt, 40.0));
 		info2.namedValues.add(new Pair<Double>(Label.Vlme, 0.0));
+		info2.namedValues.add(new Pair<Double>(Label.temp, 50.0));// valves have temperature now to make my hairbrained schemes work - kieran 
 		
 		infoList.add(info2);
 		
