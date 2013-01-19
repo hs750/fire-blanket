@@ -7,23 +7,52 @@ import anchovy.GameEngine;
 import anchovy.InfoPacket;
 import anchovy.Pair;
 import anchovy.Components.*;
-
+/**
+ * This class is responsible for parsing text commands supplied by the user and then executing a fitting gameEngine method
+ * or interacting with a certain component
+ * Valid commands are: save; save as; show saves; load; valveName open/close
+ * pumpName on/off;
+ * Control Rods name lower/raise;
+ * componentName repair
+ * 
+ */
 public class Parser {
 	private GameEngine engine;
 
-	public Parser(GameEngine Engine) {
+	public Parser(GameEngine Engine)
+	{
 		engine = Engine;
 	}
 
-	public String parseCommand(String componentName, String command)
-			throws FileNotFoundException {
+	/**
+	 * Using the two input string determines what command should be executed by the gameEngine or 
+	 * one of the components
+	 * @command command Command that will applied to a component
+	 * @param componentName part of the input supplied by the user
+	 * @return returns a message to the user that gets written into the output of the console
+	 */
+	public String parseCommand(String componentName, String command) throws FileNotFoundException 
+			{
 		String result = new String();
-		Component component = engine.getPowerPlantComponent(componentName);
-		InfoPacket i = new InfoPacket();
+		//Check for for engine commands first
+		if (componentName.contains("save as")) {
+			return engine.saveGameState(engine.getAllComponentInfo(), command);
+		} else if (componentName.equals("save")) {
+			return engine.save(engine.getAllComponentInfo());
+			
+		} else if (componentName.contains("load")) {
+			engine.readfile(command);
+			engine.updateInterfaceComponents(engine.getAllComponentInfo());
 
-		if (component != null) {
-
-			if (component.getName().contains("Valve")) {
+		} else if (componentName.equals("show saves")) {
+			return engine.findAvailableSaves();
+		}
+		//then check for components
+		try {
+			Component component = engine.getPowerPlantComponent(componentName);
+			InfoPacket i = new InfoPacket();
+			if (component.getName().contains("Valve")) 
+			{
 				// i.namedValues.add(new Pair<String>(Pair.Label.cNme,
 				// component.getName()));
 				if (command.equals("open")) {
@@ -33,8 +62,8 @@ public class Parser {
 							.add(new Pair<Boolean>(Pair.Label.psit, false));
 				}
 			} else if (component.getName().contains("Pump")) {
-				i.namedValues.add(new Pair<String>(Pair.Label.cNme, component
-						.getName()));
+				//i.namedValues.add(new Pair<String>(Pair.Label.cNme, component
+				//		.getName()));
 				if (command.equals("on")) {
 					i.namedValues.add(new Pair<Boolean>(Pair.Label.psit, true));
 				} else if (command.equals("off")) {
@@ -44,8 +73,8 @@ public class Parser {
 			}
 
 			else if (component.getName().contains("Control rods")) {
-				i.namedValues.add(new Pair<String>(Pair.Label.cNme, component
-						.getName()));
+				//i.namedValues.add(new Pair<String>(Pair.Label.cNme, component
+				//		.getName()));
 				if (command.equals("lower")) {
 					i.namedValues.add(new Pair<Boolean>(Pair.Label.psit, true));
 				} else if (command.equals("raise")) {
@@ -60,21 +89,8 @@ public class Parser {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (componentName.contains("save as")) {
-			return engine.saveGameState(engine.getAllComponentInfo(), command);
-		} else if (componentName.equals("save")) {
-
-			return engine.save(engine.getAllComponentInfo());
-		} else if (componentName.contains("load")) {
-			engine.readfile(command);
-			engine.updateInterfaceComponents(engine.getAllComponentInfo());
-
-		} else if (componentName.equals("show saves")) {
-			return engine.findAvailableSaves();
 		}
-
-		else
-
+		catch(Exception e)
 		{
 			result = "Component " + componentName + " does not exist";
 		}
@@ -89,22 +105,30 @@ public class Parser {
 	 * @return a message for the user
 	 * @throws FileNotFoundException
 	 */
-	public String parse(String in) throws FileNotFoundException {
-		if (in.length() == 0 || in.contains(" ") == false)
-			return "";
-		
-		String inLower = in.toLowerCase();
-		
-		if (inLower.equals("save")) {
-			return parseCommand(inLower, inLower);
+	public String parse(String text) throws FileNotFoundException {
+		if(text.length() != 0)
+		{
+			String lowerCase= text;
+			if(lowerCase.equals("save"))
+			{
+				return parseCommand(lowerCase,lowerCase);
+			}
+			//String lowerCase = text.toLowerCase(); //Convert string to lower case to avoid case mismatches
+			
+			if(lowerCase.contains(" "))
+			{
+				if(lowerCase.equals("show saves") || lowerCase.equals("save as"))
+					return parseCommand(lowerCase, lowerCase);
+			String s= lowerCase.substring(0, lowerCase.lastIndexOf(' '));
+			String i= lowerCase.substring(lowerCase.lastIndexOf(' ') + 1, lowerCase.length());
+
+
+			return parseCommand(s,i);
+			}
+			
+			else return "Invalid command";
 		}
-		
-		if (inLower.equals("show saves")) {
-			return parseCommand(inLower, inLower);
-		}
-		
-		StringTokenizer st = new StringTokenizer(inLower, " \t,;'-()");
-		
-		return parseCommand(st.nextToken(), st.nextToken());
+
+		else return "";
 	}
 }

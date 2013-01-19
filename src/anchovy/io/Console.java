@@ -8,14 +8,20 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * Class responsible for the command line like in the UI. Handles enter keypress
- * event and then accordingly moves the data around.
- * 
+ * Class responsible for the command line like behaviour in the UI. Handles enter keypress
+ * event and then accordingly moves the data around. Used by the mainWindow class.
+ * Should only interact with an object of this class using writeToConsole method.
  * @author Tadas
  * 
  */
 public class Console implements ActionListener {
 
+	/**
+	 * Class constructor
+	 * @param textField UI component used for entering commands
+	 * @param output UI component that displays console outputs
+	 * @param prsr Pass the parser that will parse all the text commands and then communicate with the rest of the engine
+	 */
 	Console(JTextField textField, JTextArea output, Parser prsr) {
 		txtField = textField;
 		txtArea = output;
@@ -57,6 +63,7 @@ public class Console implements ActionListener {
 	 */
 	public void writeToConsole(String text) {
 		txtArea.append('\n' + text);
+		txtArea.setCaretPosition(txtArea.getDocument().getLength());
 	}
 
 	private JTextField txtField;

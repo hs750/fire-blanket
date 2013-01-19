@@ -19,6 +19,7 @@ public class GameEngine {
 	// Parser parser;
 	// UI ui = null; Commented out for now
 	MainWindow window;
+	String fileName; 
 
 	/**
 	 * Constructor for the game engine. On creation it creates a list to store
@@ -385,7 +386,7 @@ public class GameEngine {
 			System.out.println(output);
 			out.close();
 		} catch (IOException e) {
-			System.out.println("Exception ");
+			return "Saving failed.";
 		}
 		return "File saved";
 
@@ -543,7 +544,8 @@ public class GameEngine {
 	}
 
 	/**
-	 * Updates interface with the latest changes to all the components.
+	 * Updates interface with the latest changes to all the components. Sorts all the info
+	 * into modifiable components and non modifiable components
 	 * @param packets Info about all the components in the game
 	 */
 	public void updateInterfaceComponents(ArrayList<InfoPacket> packets) 
@@ -615,10 +617,10 @@ public class GameEngine {
 			}
 			if (componentDescriptionNon.length() != 0
 					&& componentName.length() != 0)
-				nonmodifiable += componentName + componentDescriptionNon;
+				nonmodifiable += componentName + componentDescriptionNon + '\n';
 			if (componentDescriptionModi.length() != 0
 					&& componentName.length() != 0)
-				modifiable += componentName + componentDescriptionModi;
+				modifiable += componentName + componentDescriptionModi + '\n';
 			componentName = "";
 			componentDescriptionNon = "";
 			componentDescriptionModi = "";
@@ -628,7 +630,7 @@ public class GameEngine {
 
 	}
 
-	String fileName;
+	
 	
 	/**
 	 * Checks if a file name is already stored in the system (happens if the game was started using load or if save as command was previously used)

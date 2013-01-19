@@ -121,6 +121,7 @@ public class MainWindow
 
 		Modifiable.setText("Cow");
 		Modifiable.setLineWrap(true);
+		Modifiable.setEditable(false);
 		Modifiable.setWrapStyleWord(true);
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalBox.add(horizontalStrut);
@@ -187,7 +188,7 @@ public class MainWindow
 		Component verticalStrut_1 = Box.createVerticalStrut(5);
 		verticalBox.add(verticalStrut_1);
 
-
+/*
 		JMenuBar menuBar = new JMenuBar();
 		frmFireBlanket.setJMenuBar(menuBar);
 
@@ -205,6 +206,7 @@ public class MainWindow
 
 		JMenuItem mntmHighScores = new JMenuItem("High scores");
 		mnOptions.add(mntmHighScores);
+		*/
 		console = new Console(Commandline, CommandlineOutput, new Parser(engine));
 		//Hooking up all the events to action listeners.
 		Commandline.addActionListener(console);
