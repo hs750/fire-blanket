@@ -109,7 +109,10 @@ public class GameEngineTest {
 		gameEngine.setupPowerPlantConfiguration(infoList);
 		info1.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 1").getFailureTime()));
 		info2.namedValues.add(new Pair<Double>(Label.falT, gameEngine.getPowerPlantComponent("Valve 2").getFailureTime()));
-
+		
+		infoList.clear();
+		infoList.add(info1);
+		infoList.add(info2);
 		
 		assertTrue(gameEngine.getAllComponentInfo().equals(infoList));	
 	}
