@@ -103,6 +103,8 @@ public abstract class Component {
 		info.namedValues.add(new Pair<String>(Label.cNme, name));
 		info.namedValues.add(new Pair<Double>(Label.falT, failureTime));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, outputFlowRate));
+		info.namedValues.add(new Pair<Double>(Label.Vlme, volume));
+		info.namedValues.add(new Pair<Double>(Label.Amnt, amount));
 
 		Iterator<Component> i = outputsTo.iterator();
 		Component c = null;
@@ -133,6 +135,12 @@ public abstract class Component {
 			pair = i.next();
 			label = pair.getLabel();
 			switch (label){
+			case Amnt:
+				setAmount((Double) pair.second());
+				break;
+			case Vlme:
+				setVolume((Double) pair.second());
+				break;
 			case cNme:
 				setName((String) pair.second());
 				break;
@@ -165,6 +173,29 @@ public abstract class Component {
 	 * @return The name of the component
 	 */
 	public String getName(){ return name;}
+	
+	/**
+	 * @param amnt Change amount of steam/water in component to this.
+	 */
+		public void setAmount(double amnt){
+		amount = amnt;
+	}
+		
+	/**
+	 * @return The amount of steam/water of the component
+	 */
+	public double getAmount(){ return amount;}
+	
+	/**
+	 * @param vlme Change volume of component to this.
+	 */
+	public void setVolume(double vlme){
+		volume = vlme;
+	}
+	/**
+	 * @return The volume of the component
+	 */
+	public double getVolume(){ return volume;}
 
 	/**
 	 * Connects the given component to the list of components that are output to.
