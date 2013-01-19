@@ -12,13 +12,15 @@ import anchovy.Pair.Label;
  * Unlike the other components, infrastructure components take an input flow rate in the form of electricity and consume it.
  * These are used to give the plant a purpose as it has something to power. 
  * @author Kieren 
+ * @author Harrison
  *
  */
 public class Infrastructure extends Component {
 	/**
 	 * The electricity that is needed to power this piece of infrastructure.
 	 */
-	double electrisityneeded;
+	double electrisityneeded = 0;
+	
 	boolean failed = false;
 	
 	/**
@@ -41,6 +43,7 @@ public class Infrastructure extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getSuperInfo();
+		info.namedValues.add(new Pair<Double>(Label.elec, electrisityneeded ));
 		return info;
 	}
 	/** 
@@ -48,7 +51,7 @@ public class Infrastructure extends Component {
 	 */
 	@Override
 	public void calculate() {
-		calculateOutputFlowRate();
+		super.setOuputFlowRate(calculateOutputFlowRate());
 	}
 	
 	/** 
@@ -76,6 +79,19 @@ public class Infrastructure extends Component {
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
 		super.takeSuperInfo(info);
+		Iterator<Pair<?>> i = info.namedValues.iterator();
+		Pair<?> pair = null;
+		Label label = null;
+		while(i.hasNext()){
+			pair = i.next();
+			label = pair.getLabel();
+			switch (label){
+			case elec:
+				electrisityneeded = (Double) pair.second();
+			default:
+				break;
+			}
+		}
 
 	}
 	/**
@@ -90,6 +106,18 @@ public class Infrastructure extends Component {
 			return false;
 		}
 
+	}
+	/**
+	 * @return The electricity that this infrastructure needs to keep functioning
+	 */
+	public double getElectrisityneeded() {
+		return electrisityneeded;
+	}
+	/**
+	 * @param electrisityneeded The amount of electricity that this infrastructure needs to keep functioning.
+	 */
+	public void setElectrisityneeded(double electrisityneeded) {
+		this.electrisityneeded = electrisityneeded;
 	}
 
 }
