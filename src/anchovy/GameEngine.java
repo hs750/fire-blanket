@@ -750,16 +750,22 @@ public class GameEngine {
 		System.out.println("HellO");
 		
 		//The Game control loop
+		int autosaveTime = 0;
 		while(true){
-
+			autosaveTime++;
+			
 			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the Screen with the current Values after the wait.
 			gameEngine.calculateAllComponents();									//Calculate new Values.
 			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
 			
-			//gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
+			if(autosaveTime == 10){
+				//gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
 																						//Doesnt currently work due to null values in components - adding defaul values should fix
+				autosaveTime = 0;
+			}
+			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(700);
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
