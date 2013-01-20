@@ -18,7 +18,7 @@ public class Valve extends WaterComponent {
 	/**
 	 * Whether the valve is open(True) or closed(False).
 	 */
-	private Boolean position;
+	private Boolean position = true;
 
 	/**
 	 * @see anchovy.Components.Component#Component(String)

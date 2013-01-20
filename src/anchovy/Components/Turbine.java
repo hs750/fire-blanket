@@ -12,7 +12,7 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public class Turbine extends WaterComponent {
-	private double RPM;
+	private double RPM = 0.0;
 	/**
 	 * Ratio governing how much of the steam flow transfers to RPM of the turbine.
 	 */

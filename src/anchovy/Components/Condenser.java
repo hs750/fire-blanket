@@ -14,7 +14,7 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public class Condenser extends WaterComponent {
-	private double waterLevel;
+	private double waterLevel = 0.0;
 	/**
 	 * @see anchovy.Components.Component#Component(String)
 	 */

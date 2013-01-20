@@ -13,7 +13,7 @@ import anchovy.Pair.Label;
  */
 public class Pump extends WaterComponent {
 
-	private double RPM;
+	private double RPM = 0.0;
 	/** 
 	 * The ratio to which the output flow rate of the pump is proportional to its RPM
 	 */

@@ -18,7 +18,7 @@ public abstract class Component {
 	private String name;
 	private int meanTimeBetweenFailure; //MTBF
 	private Double failureTime;
-	private Double outputFlowRate;
+	private Double outputFlowRate = 0.0;
 	private ArrayList<Component> outputsTo = new ArrayList<Component>();
 	private ArrayList<Component> receivesInputFrom = new ArrayList<Component>();
 	private boolean failed = false; //TODO make it so that this will work with infoPackets
@@ -28,7 +28,6 @@ public abstract class Component {
 	 * @param name the name of the individual component, should be unique.
 	 */
 	public Component(String name){
-		outputFlowRate = 0.0;
 		this.name = name;
 		if(failureTime == null){
 			calcRandomFailTime();

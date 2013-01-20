@@ -11,8 +11,8 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public class Reactor extends WaterComponent {
-	private double pressure;
-	private double controlRodLevel;
+	private double pressure = 0.0;
+	private double controlRodLevel = 50.0;
 	private double waterLevel = 50;
 	/**
 	 * @see anchovy.Components.Component#Component(String)
