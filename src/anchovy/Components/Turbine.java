@@ -173,6 +173,11 @@ public class Turbine extends WaterComponent {
 		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
 		return waterpack;
 	}
+	
+	@Override
+	public double maxInput() {
+		return getVolume() - getAmount();
+	}
 
 
 }

@@ -230,4 +230,9 @@ public class Reactor extends WaterComponent {
 		return waterpack;
 	}
 
+	@Override
+	public double maxInput() {
+		return 1987654321;
+	}
+
 }

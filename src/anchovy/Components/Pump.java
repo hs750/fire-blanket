@@ -155,5 +155,10 @@ public class Pump extends WaterComponent {
 		return waterpack;
 	}
 
+	@Override
+	public double maxInput() {
+		return RPM;
+	}
+
 
 }

@@ -187,4 +187,14 @@ public class Valve extends WaterComponent {
 		return waterpack;
 	}
 
+	@Override
+	public double maxInput() {
+		if (position = true){
+			return getVolume() - getAmount();
+		}
+		else{
+			return 0;
+		}
+	}
+
 }

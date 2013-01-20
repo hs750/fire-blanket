@@ -208,5 +208,9 @@ public class Condenser extends WaterComponent {
 		}
 		return null;
 	}
+	@Override
+	public double maxInput() {
+		return 1987654321;
+	}
 
 }
