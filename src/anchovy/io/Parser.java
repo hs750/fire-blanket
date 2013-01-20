@@ -54,13 +54,13 @@ public class Parser {
 		} else if (componentName.equals("show saves")) {
 			return engine.findAvailableSaves();
 		} else if (componentName.equals("new game")){
-			//try {
-				//engine.readfile("new game");
+			try {
+				engine.readfile("new game");
 				return getGameIntroString(command);
-			//} catch (FileNotFoundException e) {
-				//return "File not found.";
-			//}
-			//engine.updateInterfaceComponents(engine.getAllComponentInfo());
+			} catch (FileNotFoundException e) {
+				return "File not found.";
+			}
+			engine.updateInterfaceComponents(engine.getAllComponentInfo());
 		} else if (componentName.equals("exit") | componentName.equals("quit")){
 			System.exit(0);
 		}
