@@ -60,10 +60,11 @@ public class ParserTest {
 
 	/**
 	 * Test method for {@link anchovy.io.Parser#parse(java.lang.String)}.
+	 * @throws Exception 
 	 * @throws FileNotFoundException 
 	 */
 	@Test
-	public void testParse()  {
+	public void testParse() throws Exception  {
 		
 		assertEquals(parser.parse(""), "");
 		
