@@ -54,9 +54,9 @@ public class Reactor extends WaterComponent {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.pres, pressure));
-		info.namedValues.add(new Pair<Double>(Label.coRL, controlRodLevel));
-		info.namedValues.add(new Pair<Double>(Label.wLvl, waterLevel));
+		info.namedValues.add(new Pair<Double>(Label.pres, getPressure()));
+		info.namedValues.add(new Pair<Double>(Label.coRL, getControlRodLevel()));
+		info.namedValues.add(new Pair<Double>(Label.wLvl, getAmount()));
 		return info;
 	}
 
@@ -65,7 +65,7 @@ public class Reactor extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-		
+		transmitOutputWater();
 		if(!super.isFailed()){
 			super.setFailed(calculateFailed());
 			double oldTemp = getTemperature();
@@ -202,7 +202,7 @@ public class Reactor extends WaterComponent {
 	 *  ---DEPRECATED---
 	 */
 	public double getWaterLevel() {
-		return waterLevel;
+		return getAmount();
 	}
 	/**
 	 * @param waterLevel The level that the water in the reactor will be at. Max = 100, min = 0;

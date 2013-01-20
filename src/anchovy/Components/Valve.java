@@ -55,7 +55,7 @@ public class Valve extends WaterComponent {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Boolean>(Label.psit, position));
+		info.namedValues.add(new Pair<Boolean>(Label.psit, getPosition()));
 		return info;
 	}
 
@@ -64,6 +64,8 @@ public class Valve extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
+
+		transmitOutputWater();
 		super.setFailed(calculateFailed());
 		super.setOuputFlowRate(calculateOutputFlowRate());
 

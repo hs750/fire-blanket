@@ -172,8 +172,8 @@ public abstract class Component {
 	 */
 	public InfoPacket getInfo(){
 		InfoPacket compinfo = new InfoPacket();
-		compinfo.namedValues.add(new Pair<String>(Label.cNme, name));
-		compinfo.namedValues.add(new Pair<Double>(Label.falT, failureTime));
+		compinfo.namedValues.add(new Pair<String>(Label.cNme, getName()));
+		compinfo.namedValues.add(new Pair<Double>(Label.falT, getFailureTime()));
 		compinfo.namedValues.add(new Pair<Double>(Label.OPFL, outputFlowRate));
 
 		Iterator<Component> i = outputsTo.iterator();

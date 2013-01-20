@@ -49,7 +49,7 @@ public class Turbine extends WaterComponent {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.RPMs, RPM));
+		info.namedValues.add(new Pair<Double>(Label.RPMs, getRPM()));
 		return info;
 	}
 	/** 
@@ -57,6 +57,8 @@ public class Turbine extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
+
+		transmitOutputWater();
 		super.setFailed(calculateFailed());
 		if(!super.isFailed()){
 			RPM = calculateRPM();

@@ -104,6 +104,14 @@ public abstract class WaterComponent extends Component {
 	public void setAmount(double amnt){
 		amount = amnt;
 	}
+	
+
+	public void connectToOutput(Component component){
+		super.connectToOutput(component);
+		if (component instanceof WaterComponent){
+			outputsWaterTo.add((WaterComponent)component);
+		}	
+	}
 
 	/**
 	 * @return The amount of steam/water of the component
@@ -156,7 +164,7 @@ public abstract class WaterComponent extends Component {
 				packetTemp = (Double) currentpair.second();
 				break;
 			case Amnt:
-				amount = (Double) currentpair.second();
+				packetAmount = (Double) currentpair.second();
 				break;
 			default:
 				break;
@@ -165,12 +173,14 @@ public abstract class WaterComponent extends Component {
 		double totalPacketHeat = packetTemp * packetAmount;
 		double totalInternalHeat = getTemperature() * getAmount();
 		double totalWaterAmount = getAmount() + packetAmount;
-		setTemperature((totalPacketHeat+ totalInternalHeat)/totalWaterAmount);
+		if (totalWaterAmount != 0){
+			setTemperature((totalPacketHeat+ totalInternalHeat)/totalWaterAmount);			
+		}
 		setAmount(totalWaterAmount);
 	}	
 
 	public void sortOutputs(){
-		Collections.sort( (List) outputsWaterTo, new MaxInputComparator() );
+		Collections.sort( (List<WaterComponent>) outputsWaterTo, new MaxInputComparator() );
 	}
 
 	public void transmitOutputWater(){

@@ -48,7 +48,7 @@ public class Condenser extends WaterComponent {
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double>(Label.pres, getPressure()));
-		info.namedValues.add(new Pair<Double>(Label.wLvl, waterLevel));
+		info.namedValues.add(new Pair<Double>(Label.wLvl, getAmount()));
 		return info;
 	}
 	/**
@@ -56,6 +56,8 @@ public class Condenser extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
+
+		transmitOutputWater();
 		super.setFailed(calculateFailed());
 		if(!super.isFailed()){
 			// double oldPressure = pressure;
@@ -208,7 +210,7 @@ public class Condenser extends WaterComponent {
 			setAmount(getAmount() - packAmount);
 			setTemperature(remainingHeat/getAmount());			
 		}
-		return null;
+		return waterpack;
 	}
 	@Override
 	public double maxInput() {

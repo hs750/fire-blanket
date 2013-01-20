@@ -67,6 +67,7 @@ public class Generator extends Component {
 	 */
 	@Override
 	public void calculate() {
+
 		super.setOuputFlowRate(calculateOutputFlowRate());
 		electrisityGenerated += super.getOutputFlowRate();
 	}
