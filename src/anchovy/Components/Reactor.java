@@ -11,9 +11,9 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public class Reactor extends WaterComponent {
-	private double pressure = 0.0;
+	private double pressure = 0.0; //---DEPRECATED--- pressure is now just a function of temp, Amnt, and Vlme
 	private double controlRodLevel = 50.0;
-	private double waterLevel = 50;
+	private double waterLevel = 50;// ---DEPRECATED---
 	/**
 	 * @see anchovy.Components.Component#Component(String)
 	 */
@@ -115,6 +115,7 @@ public class Reactor extends WaterComponent {
 	 * Calculate the water level in the reactor.
 	 * Water level = water level  + input flow rates - rate of steam production.
 	 * @return The new water level in the reactor
+	 *  ---DEPRECATED---
 	 */
 	protected double calculateWaterLevel(){
 		//proportional to current water level + opfl and ipfl
@@ -132,6 +133,7 @@ public class Reactor extends WaterComponent {
 	/**
 	 * {@inheritDoc}
 	 * The output flow rate of the Reactor is proportional to the pressure within the reactor.
+	 *  ---DEPRECATED---
 	 */
 	@Override
 	protected double calculateOutputFlowRate(){
@@ -170,13 +172,8 @@ public class Reactor extends WaterComponent {
 	}
 
 	/**
-	 * @return The pressure within the reactor
-	 */
-	public double getPressure() {
-		return pressure;
-	}
-	/**
 	 * @param pressure The pressure that the reactor will be at.
+	 *  ---DEPRECATED---
 	 */
 	public void setPressure(double pressure) {
 		this.pressure = pressure;
@@ -201,12 +198,14 @@ public class Reactor extends WaterComponent {
 
 	/**
 	 * @return The level of the water in the reactor.
+	 *  ---DEPRECATED---
 	 */
 	public double getWaterLevel() {
 		return waterLevel;
 	}
 	/**
 	 * @param waterLevel The level that the water in the reactor will be at. Max = 100, min = 0;
+	 *  ---DEPRECATED---
 	 */
 	public void setWaterLevel(double waterLevel) {
 		if(waterLevel < 100 & waterLevel > 0)

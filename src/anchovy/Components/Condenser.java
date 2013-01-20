@@ -14,7 +14,7 @@ import anchovy.Pair.Label;
  * @author Harrison
  */
 public class Condenser extends WaterComponent {
-	private double waterLevel = 0.0;
+	private double waterLevel = 0.0;//---DEPRECATED---
 	/**
 	 * @see anchovy.Components.Component#Component(String)
 	 */
@@ -131,6 +131,7 @@ public class Condenser extends WaterComponent {
 	 * Calculate the water level within the condenser
 	 * water level = steam condensed + current water level - water flow rate out.
 	 * @return The new water level.
+	 * ---DEPRECATED---
 	 */
 	protected double calculateWaterLevel(){
 		//Water level = steam condensed + water level - water out
@@ -147,6 +148,7 @@ public class Condenser extends WaterComponent {
 	/**
 	 * {@inheritDoc}
 	 * The output flow rate of a Condenser is equel to that of the pumps that it is outputing to.
+	 *  ---DEPRECATED---
 	 */
 	@Override
 	protected double calculateOutputFlowRate() {

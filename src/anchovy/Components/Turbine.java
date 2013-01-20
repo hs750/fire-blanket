@@ -91,6 +91,7 @@ public class Turbine extends WaterComponent {
 	/**
 	 * Get the total flow rate from components that is being input into this component.
 	 * @return Total input flow rate.
+	 *  ---DEPRECATED---
 	 */
 	private double getTotalInputFlowRate() {
 		ArrayList<Component> inputs = super.getRecievesInputFrom();
@@ -107,6 +108,7 @@ public class Turbine extends WaterComponent {
 	/**
 	 * {@inheritDoc}
 	 * Output flow rate of turbine is equal to the input flow rate.
+	 *  ---DEPRECATED---
 	 */
 	@Override
 	protected double calculateOutputFlowRate() {

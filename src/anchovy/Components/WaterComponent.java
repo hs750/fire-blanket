@@ -42,7 +42,6 @@ public abstract class WaterComponent extends Component {
 				break;
 			}
 		}
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

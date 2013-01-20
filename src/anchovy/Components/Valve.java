@@ -84,6 +84,7 @@ public class Valve extends WaterComponent {
 	 * Output flow rate of valve is directly based of of the input flow rate.
 	 * If valve is open, output flow  = input flow
 	 * otherwise the output flow = 0.
+	 *  ---DEPRECATED---
 	 */
 	@Override
 	protected double calculateOutputFlowRate() {
@@ -148,7 +149,9 @@ public class Valve extends WaterComponent {
 			}
 		}
 	}
-
+	/**
+	 * ---DEPRECATED---
+	 */
 	public static void main(String[] args){
 		InfoPacket in = new InfoPacket();
 		in.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));

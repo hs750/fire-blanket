@@ -18,7 +18,7 @@ public abstract class Component {
 	private String name;
 	private int meanTimeBetweenFailure; //MTBF
 	private Double failureTime;
-	private Double outputFlowRate = 0.0;
+	private Double outputFlowRate = 0.0;	//---DEPRECATED---
 	private ArrayList<Component> outputsTo = new ArrayList<Component>();
 	private ArrayList<Component> receivesInputFrom = new ArrayList<Component>();
 	private boolean failed = false; //TODO make it so that this will work with infoPackets
@@ -90,6 +90,7 @@ public abstract class Component {
 	 * Renaming the component is possible via this method so care may be needed. 
 	 * This method does not deal with connecting components together, this must be done at game engine as components can't see other components until they are connected.
 	 * @param info An info packet the the component. 
+	 * ---DEPRECATED---
 	 */
 	protected void takeSuperInfo(InfoPacket info){
 		resetConections();
@@ -151,6 +152,7 @@ public abstract class Component {
 
 	/**
 	 * @param outputFlowRate The rate at which water/steam/electricity/other output is being output from this component.
+	 * ---DEPRECATED---
 	 */
 	public void setOuputFlowRate(double outputFlowRate){
 		this.outputFlowRate = outputFlowRate;
@@ -158,6 +160,7 @@ public abstract class Component {
 
 	/**
 	 * @return The output flow rate of this component.
+	 * ---DEPRECATED
 	 */
 	public double getOutputFlowRate(){
 		return outputFlowRate;
@@ -204,6 +207,7 @@ public abstract class Component {
 	 * The only specific calculation that all components must do as every component has an output flow.
 	 * Abstract because every type of component will calculate this in a different way.
 	 * @return The new output flow rate
+	 * ---DEPRECATED---
 	 */
 	protected abstract double calculateOutputFlowRate();
 
