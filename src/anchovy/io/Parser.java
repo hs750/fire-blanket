@@ -111,6 +111,8 @@ public class Parser {
 				else if (command.equals("repair")) 
 				{
 					engine.repair(component);
+					engine.updateInterfaceComponents(engine.getAllComponentInfo());
+					return componentName + " has been repaired";
 				}
 			}
 			
