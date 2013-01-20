@@ -776,7 +776,7 @@ public class GameEngine {
 			
 			
 			String failedComps = "These components have currently failed: ";			//Gather a list of failed components.
-			ArrayList failedC = gameEngine.componentFailed();
+			ArrayList<Component> failedC = gameEngine.componentFailed();
 			if(failedC.size() > 0){
 				Iterator<Component> cIt = failedC.iterator();
 				while(cIt.hasNext()){
@@ -785,7 +785,7 @@ public class GameEngine {
 				gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
 			}
 			if(autosaveTime == 10){
-				gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
+					gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
 				autosaveTime = 0;
 			}
 			
