@@ -787,6 +787,7 @@ public class GameEngine {
 			gameEngine.calculateAllComponents();									//Calculate new Values.
 			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
 			
+			gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");
 			try {
 				Thread.sleep(1000);
 			} catch(InterruptedException ex) {
