@@ -544,6 +544,17 @@ public class GameEngine {
 	public void clearPowerPlant() {
 		powrPlntComponents = new ArrayList<Component>();
 	}
+	
+	/**
+	 * Loops through the list of components in the power plant and calls the calculate method in each of them.
+	 * Resulting in the power plant moving to its next state.
+	 */
+	public void calculateAllComponents(){
+		Iterator<Component> compIt = powrPlntComponents.iterator();
+		while(compIt.hasNext()){
+			compIt.next().calculate();
+		}
+	}
 
 	/**
 	 * Updates interface with the latest changes to all the components. Sorts all the info
@@ -738,5 +749,19 @@ public class GameEngine {
 		gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());
 
 		System.out.println("HellO");
+		
+		//The Game control loop
+		while(true){
+
+			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the Screen with the current Values after the wait.
+			gameEngine.calculateAllComponents();									//Calculate new Values.
+			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
+			
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException ex) {
+				Thread.currentThread().interrupt();
+			}
+		}
 	}
 }

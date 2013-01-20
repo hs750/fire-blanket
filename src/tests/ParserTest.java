@@ -52,7 +52,7 @@ public class ParserTest {
 		info.namedValues.add(new Pair<Boolean>(Label.psit, false));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		parser.parseCommand("Valve 1", "close");
-		assertTrue(engine.getPowerPlantComponent("Valve 1").getInfo().equals(info));
+		assertTrue(engine.getPowerPlantComponent("Valve 1").getInfo().namedValues.contains(new Pair<Boolean>(Label.psit, false)));
 		
 	}
 
