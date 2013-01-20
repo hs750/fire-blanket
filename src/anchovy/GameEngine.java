@@ -663,7 +663,6 @@ public class GameEngine {
 	}
 
 	public static void main(String[] args) {
-		// TODO create the main game loop
 		GameEngine gameEngine = new GameEngine();
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
 
@@ -757,6 +756,8 @@ public class GameEngine {
 			gameEngine.calculateAllComponents();									//Calculate new Values.
 			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
 			
+			//gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
+																						//Doesnt currently work due to null values in components - adding defaul values should fix
 			try {
 				Thread.sleep(1000);
 			} catch(InterruptedException ex) {

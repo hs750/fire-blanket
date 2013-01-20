@@ -148,6 +148,10 @@ public class GameEngineTest {
 		gameEngine.repair(v1);
 		assertTrue(!v1.isFailed());
 	}
+	
+	/**
+	 * Save the state of each of the components in the power plant, then load the same file in and test whether the infoPacket output was the same as the infoPacket read in.
+	 */
 	@Test
 	public void testSavingLoading()
 	{
@@ -161,6 +165,9 @@ public class GameEngineTest {
 		}
 		assertTrue(allCompInfo.equals(gameEngine.getAllComponentInfo()));
 	}
+	/**
+	 * Test whether the the game can search for and display the location of a particular game save.
+	 */
 	@Test
 	public void testShowAvailableSaves()
 	{
