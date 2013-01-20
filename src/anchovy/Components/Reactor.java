@@ -65,8 +65,9 @@ public class Reactor extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-		super.setFailed(calculateFailed());
+		
 		if(!super.isFailed()){
+			super.setFailed(calculateFailed());
 			double oldTemp = getTemperature();
 			setTemperature(calculateTemperature());
 			waterLevel = calculateWaterLevel();

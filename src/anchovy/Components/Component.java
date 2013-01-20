@@ -80,7 +80,7 @@ public abstract class Component {
 	 * Repairs the component. Will work at any time, even if the component has not failed.
 	 */
 	public void repair(){
-		failed = false;
+		setFailed(false);
 		calcRandomFailTime();
 	}
 
@@ -308,7 +308,7 @@ public abstract class Component {
 	 * Set the state of the component to failed or not, used by child components to access and set the failed field when calculating whether the component has failed.
 	 * @param failed Component in failed state?
 	 */
-	public void setFailed(boolean failed) {
+	synchronized public void setFailed(boolean failed) {
 		this.failed = failed;
 	}
 
