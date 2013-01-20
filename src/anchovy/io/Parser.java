@@ -46,10 +46,12 @@ public class Parser {
 			
 			try {
 				engine.readfile(command);
+				engine.updateInterfaceComponents(engine.getAllComponentInfo());
+				return "Loaded game Successfully";
 			} catch (FileNotFoundException e) {
 				return "File not found.";
 			}
-			engine.updateInterfaceComponents(engine.getAllComponentInfo());
+			
 
 		} else if (componentName.equals("show saves")) {
 			return engine.findAvailableSaves();
