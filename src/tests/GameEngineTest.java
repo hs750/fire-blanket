@@ -152,6 +152,8 @@ public class GameEngineTest {
 	@Test
 	public void testSavingLoading()
 	{
+		Valve v = (Valve) gameEngine.getPowerPlantComponent("Valve 1");
+		v.setPosition(false);
 		ArrayList<InfoPacket> allCompInfo = gameEngine.getAllComponentInfo();
 		gameEngine.saveGameState(allCompInfo, "test");
 		try{
