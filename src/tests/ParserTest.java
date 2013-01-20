@@ -27,8 +27,9 @@ public class ParserTest {
 		
 		parser = new Parser(engine = new GameEngine());
 		Valve valve1 = new Valve("Valve 1");
-		
+		Valve valve5 = new Valve("Valve 5");
 		engine.addComponent(valve1);
+		engine.addComponent(valve5);
 		InfoPacket info = new InfoPacket();
 		
 		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
@@ -50,7 +51,7 @@ public class ParserTest {
 	{
 		InfoPacket info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, false));
+		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
 		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
 		parser.parseCommand("Valve 1", "close");
 		assertTrue(engine.getPowerPlantComponent("Valve 1").getInfo().namedValues.contains(new Pair<Boolean>(Label.psit, false)));
@@ -64,10 +65,21 @@ public class ParserTest {
 	@Test
 	public void testParse()  {
 		
-		assertEquals(parser.parse(""), "Invalid command");
+		assertEquals(parser.parse(""), "");
 		
-		assertEquals(parser.parse("no-spaces-string"), "");
-		
+		assertEquals(parser.parse("no-spaces-string"), "Invalid command");
+		InfoPacket info = new InfoPacket();
+		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 5"));
+		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+		try {
+			engine.getPowerPlantComponent("Valve 5").takeInfo(info);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		parser.parse("Valve 5 close");
+		assertTrue(engine.getPowerPlantComponent("Valve 5").getInfo().namedValues.contains(new Pair<Boolean>(Label.psit, false)));
 		//assertNotSame(parser.parse("load abc.fg"), "");
 	}
 
