@@ -43,9 +43,10 @@ public class ParserTest {
 	
 	/**
 	 * Test method for {@link anchovy.io.Parser#parseCommand(java.lang.String, java.lang.String)}.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testParseCommand() throws FileNotFoundException 
+	public void testParseCommand() throws Exception 
 	{
 		InfoPacket info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));

@@ -193,12 +193,20 @@ public class GameEngine {
 			}
 
 			//Get the component that we are going to connect other components to.
-			currentComponent = getPowerPlantComponent(currentCompName);
+			try {
+				currentComponent = getPowerPlantComponent(currentCompName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			// Attach each input component to the current component.
 			connectionNameIt = inputComponents.iterator();
 			while (connectionNameIt.hasNext()) {
-				attachComp = getPowerPlantComponent(connectionNameIt.next());
+				try {
+					attachComp = getPowerPlantComponent(connectionNameIt.next());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				if(!currentComponent.getRecievesInputFrom().contains(attachComp) & !attachComp.getOutputsTo().contains(currentComponent))
 					connectComponentTo(currentComponent, attachComp, true);
@@ -207,7 +215,11 @@ public class GameEngine {
 			// Attach each output component to the current compoennt
 			connectionNameIt = outputComponents.iterator();
 			while (connectionNameIt.hasNext()) {
-				attachComp = getPowerPlantComponent(connectionNameIt.next());
+				try {
+					attachComp = getPowerPlantComponent(connectionNameIt.next());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				if(!currentComponent.getOutputsTo().contains(attachComp) & !attachComp.getRecievesInputFrom().contains(currentComponent))
 					connectComponentTo(currentComponent, attachComp, false);
@@ -224,8 +236,9 @@ public class GameEngine {
 	 * 
 	 * @param currentCompName The name of a component.
 	 * @return The component specified by the given name.
+	 * @throws Exception A component with the given name could not be found
 	 */
-	public Component getPowerPlantComponent(String currentCompName) {
+	public Component getPowerPlantComponent(String currentCompName) throws Exception {
 		Component currentComponent = null;
 		Iterator<Component> compIt;
 		compIt = powrPlntComponents.iterator();
@@ -242,12 +255,8 @@ public class GameEngine {
 		}
 		
 		if(currentComponent == null)
-			try {
-				throw new Exception("The component: " + currentCompName + " was not found to exist in the power plant");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				throw new Exception("The component: " + currentCompName + " does not exist");
+			
 
 		return currentComponent;
 	}

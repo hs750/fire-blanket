@@ -47,9 +47,10 @@ public class GameEngineTest {
 	
 	/**
 	 * Tests whether connecting two components is successful and done in the correct way.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testConnectComponents(){
+	public void testConnectComponents() throws Exception{
 		gameEngine.connectComponentTo(valve1, valve1, true);
 		
 		Component c = gameEngine.getPowerPlantComponent("Valve 1");
@@ -60,9 +61,10 @@ public class GameEngineTest {
 	}
 	/**
 	 * Tests whether the game engine is able to find the correct component and assign info to it. 
+	 * @throws Exception 
 	 */
 	@Test
-	public void testAssignInfoToComponent(){
+	public void testAssignInfoToComponent() throws Exception{
 		InfoPacket info = gameEngine.getAllComponentInfo().get(0);
 	
 		
@@ -94,9 +96,10 @@ public class GameEngineTest {
 	}
 	/**
 	 * Tests whether the game engine correctly sets up a power plant given a list of infoPackets
+	 * @throws Exception 
 	 */
 	@Test
-	public void testSetupPowerPlantConfigureation(){
+	public void testSetupPowerPlantConfigureation() throws Exception{
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
 		
 		InfoPacket info1 = new InfoPacket();
@@ -139,9 +142,10 @@ public class GameEngineTest {
 	
 	/**
 	 * Tests whether components are repaired correctly.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testRepair(){
+	public void testRepair() throws Exception{
 		Component v1 = gameEngine.getPowerPlantComponent("Valve 1");
 		v1.setFailed(true);
 		assertTrue(v1.isFailed());
@@ -152,9 +156,10 @@ public class GameEngineTest {
 	
 	/**
 	 * Save the state of each of the components in the power plant, then load the same file in and test whether the infoPacket output was the same as the infoPacket read in.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testSavingLoading()
+	public void testSavingLoading() throws Exception
 	{
 		Valve v = (Valve) gameEngine.getPowerPlantComponent("Valve 1");
 		v.setPosition(false);
@@ -173,9 +178,10 @@ public class GameEngineTest {
 	}
 	/**
 	 * Test whether the the game can search for and display the location of a particular game save.
+	 * @throws Exception 
 	 */
 	@Test
-	public void testShowAvailableSaves()
+	public void testShowAvailableSaves() throws Exception
 	{
 		Valve v = (Valve) gameEngine.getPowerPlantComponent("Valve 1");
 		v.setPosition(false);
