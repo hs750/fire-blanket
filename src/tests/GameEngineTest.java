@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -147,5 +148,25 @@ public class GameEngineTest {
 		gameEngine.repair(v1);
 		assertTrue(!v1.isFailed());
 	}
-	
+	@Test
+	public void testSavingLoading()
+	{
+		ArrayList<InfoPacket> allCompInfo = gameEngine.getAllComponentInfo();
+		gameEngine.saveGameState(allCompInfo, "test");
+		try{
+			gameEngine.readfile("test");
+		} catch(FileNotFoundException e)
+		{
+			assertTrue(false);
+		}
+		assertTrue(allCompInfo.equals(gameEngine.getAllComponentInfo()));
+	}
+	@Test
+	public void testShowAvailableSaves()
+	{
+		gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "show saves");
+		
+		
+		assertTrue(gameEngine.findAvailableSaves().contains("show saves"));
+	}
 }

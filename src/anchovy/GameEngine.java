@@ -120,7 +120,8 @@ public class GameEngine {
 		Component currentNewComponent = null;
 
 		// Create component list.
-		while (infoIt.hasNext()) {
+		while (infoIt.hasNext()) 
+		{
 			currentInfo = infoIt.next();
 			currentCompName = getComponentNameFromInfo(currentInfo);
 
@@ -329,7 +330,8 @@ public class GameEngine {
 		}
 	}
 	/**
-	 * Saves the contents of the given infoPacket to the given file.
+	 * Saves the contents of the given infoPacket to the given file. 
+	 * uses '&' internally so it cannon be used in component names or pair labels
 	 * @param packets The information to be saved.
 	 * @param FileName The name of the file the data will be saved to
 	 * @return Returns a string that will be written into the console output
@@ -345,8 +347,8 @@ public class GameEngine {
 			Iterator<Pair<?>> namedValueIter = pckt.namedValues.iterator();
 			while (namedValueIter.hasNext()) {
 				Pair<?> pair = namedValueIter.next();
-
-				output += pair.first() + '/' + pair.second().toString() + '\n';
+				System.out.println(pair.first() + '&' + pair.second().toString() + '\n');
+				output += pair.first() + '&' + pair.second().toString() + '\n';
 			}
 
 		}
@@ -365,6 +367,7 @@ public class GameEngine {
 	/**
 	 * Reads in the contents of a given file to the game. This is done by reading each line and adding it to the appropriate
 	 * infoPacket then using the info packets to setup the state of the game and power plant.
+	 * uses '&' internally so it cannon be used in component names or pair labels
 	 * @param file The filename of the file to be read in.
 	 * @throws FileNotFoundException
 	 */
@@ -381,78 +384,107 @@ public class GameEngine {
 
 		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
 		String temp;
-		int c=0;
 		try {
 			while ((temp = br.readLine()) != null) {
 
 				data.add(temp);	
-				if(temp.contains("Name of component"))
-				{
-					c++;
-				}
+
 			}
 			br.close();
 
-			int i = 0;
-			String textData[]=new String[data.size()];	
+			
+			String textData[] = new String[data.size()];	
 
 
-			textData= data.toArray(new String[i]);
+			textData= data.toArray(new String[0]);
 			InfoPacket info = new InfoPacket();
-			while (i<data.size()-1) {
+			
+			int i = 0;
+			while (i < data.size()) {
 
-				String ch = textData[i].substring(0, textData[i].indexOf("/"));
-
-				if (ch.equals("Name of component")) {
+				String ch = textData[i].substring(0, textData[i].indexOf("&"));
+				String d = textData[i].substring(textData[i].indexOf("&") + 1, textData[i].length());
+				if (ch.equals(Label.cNme.toString())) {
 					if(i != 0)
 					{
 						infoList.add(info);
 						info = new InfoPacket();
 					}
-					String c1 = textData[i].substring(textData[i].indexOf("/")+1,
-							textData[i].length());
-					info.namedValues.add(new Pair<String>(Label.cNme, c1));
-					System.out.println(ch + "=" + c1);
+					info.namedValues.add(new Pair<String>(Label.cNme, d));
+					//System.out.println(ch + "=" + c1);
 				}
 
-				else if (ch.equals("FailuerTime")) {
-					String d = textData[i].substring(
-							textData[i].indexOf("/") + 1, textData[i].length());
-					Float i1 = Float.parseFloat(d);
-					info.namedValues.add(new Pair<Float>(Label.falT, i1));
-					System.out.println(ch + "=" + i1);
-				} else if (ch.equals("Output flow rate"))
-
+				else if (ch.equals(Label.falT.toString())) {
+					Double i1 = Double.parseDouble(d);
+					info.namedValues.add(new Pair<Double>(Label.falT, i1));
+					//System.out.println(ch + "=" + i1);
+				} 
+				else if (ch.equals(Label.OPFL.toString()))
 				{
-					String d = textData[i].substring(
-							textData[i].indexOf("/") + 1, textData[i].length());
 					Float i1 = Float.parseFloat(d);
 					info.namedValues.add(new Pair<Float>(Label.OPFL, i1));
 					System.out.println(ch + "=" + i1);
-				} else if (ch.equals("Position")) {
-					String d = textData[i].substring(textData[i].indexOf("/"),
-							textData[i].length());
+				} else if (ch.equals(Label.psit.toString())) 
+				{
 					boolean ok = Boolean.parseBoolean(d);
 					info.namedValues.add(new Pair<Boolean>(Label.psit, ok));
-					System.out.println(ch + "=" + ok);
+					//System.out.println(ch + "=" + ok);
 				}
-				else if (ch.equals("Outputs to"))
+				else if (ch.equals(Label.oPto.toString()))
 				{
-
-					String d = textData[i].substring(textData[i].indexOf("/")+1,
-							textData[i].length());
-
 					info.namedValues.add(new Pair<String>(Label.oPto, d));
-					System.out.println(ch + "=" + d);
+					//System.out.println(ch + "=" + d);
 				}
-				else if (ch.equals("Recieves input from"))
+				else if (ch.equals(Label.rcIF.toString()))
+				{
+					info.namedValues.add(new Pair<String>(Label.rcIF, d));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.pres.toString()))
+				{
+					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.Vlme.toString()))
 				{
 
-					String d = textData[i].substring(textData[i].indexOf("/")+1,
-							textData[i].length());
+					info.namedValues.add(new Pair<Double>(Label.Vlme, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.pres.toString()))
+				{
+					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.RPMs.toString()))
+				{
 
-					info.namedValues.add(new Pair<String>(Label.rcIF, d));
-					System.out.println(ch + "=" + d);
+					info.namedValues.add(new Pair<Double>(Label.RPMs, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.temp.toString()))
+				{
+					info.namedValues.add(new Pair<Double>(Label.temp, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.wLvl.toString()))
+				{
+
+					info.namedValues.add(new Pair<Double>(Label.wLvl, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				else if (ch.equals(Label.Amnt.toString()))
+				{
+
+					info.namedValues.add(new Pair<Double>(Label.Amnt, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
+				}
+				
+				else if (ch.equals(Label.coRL.toString()))
+				{
+
+					info.namedValues.add(new Pair<Double>(Label.coRL, Double.parseDouble(d)));
+					//System.out.println(ch + "=" + d);
 				}
 				i++;
 
@@ -467,7 +499,7 @@ public class GameEngine {
 
 	/**
 	 * Finds save files for the game.
-	 * @return The path of the save games
+	 * @return Returns all available save games
 	 */
 	public String findAvailableSaves() 
 	{
