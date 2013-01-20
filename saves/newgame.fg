@@ -1,6 +1,81 @@
-Name of component&Valve 1
-FailuerTime&-30.492682521565907
-Output flow rate&0.0
-Volume&9000.0
-Amount of water/steam in the component&500.0
-Position&false
+Name of component&Steam Valve 1
+Position&true
+Output flow rate&100.0
+Receives input from&Reactor
+Outputs to&Turbine
+Name of component&Steam Valve 2
+Position&true
+Output flow rate&100.0
+Receives input from&Reactor
+Outputs to&Condenser
+Name of component&Reactor
+Controll rod level&50.0
+Water level&50.0
+Temperature&50.0
+Pressure&50.0
+Output flow rate&200.0
+Outputs to&Steam Valve 1
+Outputs to&Steam Valve 2
+Receives input from&Water Valve 1
+Receives input from&Water Valve 2
+Name of component&Water Valve 1
+Position&true
+Output flow rate&100.0
+Receives input from&Pump 1
+Outputs to&Reactor
+Name of component&Water Valve 2
+Position&true
+Output flow rate&100.0
+Receives input from&Pump 2
+Outputs to&Reactor
+Name of component&Pump 1
+Revolutions per minute&200.0
+Output flow rate&100.0
+Outputs to&Water Valve 1
+Receives input from&Condenser
+Name of component&Pump 2
+Revolutions per minute&200.0
+Output flow rate&100.0
+Outputs to&Water Valve 2
+Receives input from&Condenser
+Name of component&Condenser
+Water level&50.0
+Pressure&50.0
+Temperature&50.0
+Output flow rate&200.0
+Outputs to&Pump 1
+Outputs to&Pump 2
+Receives input from&Turbine
+Receives input from&Steam Valve 2
+Receives input from&Coolant Pump
+Name of component&Coolant Pump
+Revolutions per minute&500.0
+Output flow rate&250.0
+Outputs to&Condenser
+Outputs to&Coolant Pump
+Receives input from&Coolant Pump
+Name of component&Turbine
+Revolutions per minute&50.0
+Output flow rate&100.0
+Outputs to&Condenser
+Outputs to&Generator
+Receives input from&Steam Valve 1
+Name of component&Generator
+Output flow rate&500
+Electrisity Generated&5000
+Receives input from&Turbine
+Outputs to&Final Defence Infrastructure
+Name of component&Final Defence Infrastructure
+Electrisity Generated&20.0
+Output flow rate&480.0
+Outputs to&Housing Infrastructure
+Receives input from&Generator
+Name of component&Housing Infrastructure
+Electrisity Generated&15.0
+Output flow rate&465.0
+Outputs to&Fence Infrastructure
+Receives input from&Final Defence Infrastructure
+Name of component&Fence Infrastructure
+Electrisity Generated&5.0
+Output flow rate&460.0
+Receives input from&Housing Infrastructure
