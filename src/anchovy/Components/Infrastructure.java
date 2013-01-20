@@ -33,7 +33,12 @@ public class Infrastructure extends Component {
 	 * @see anchovy.Components.Component#Component(String, InfoPacket)
 	 */
 	public Infrastructure(String name, InfoPacket info) {
-		super(name, info);
+		super(name);
+		try {
+			takeInfo(info);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
