@@ -413,8 +413,15 @@ public class GameEngine {
 			int i = 0;
 			while (i < data.size()) {
 
-				String ch = textData[i].substring(0, textData[i].indexOf("&"));
-				String d = textData[i].substring(textData[i].indexOf("&") + 1, textData[i].length());
+				String ch = "";
+				String d = "";
+				try{
+				ch = textData[i].substring(0, textData[i].indexOf("&"));
+				d = textData[i].substring(textData[i].indexOf("&") + 1, textData[i].length());
+				}catch(StringIndexOutOfBoundsException e){
+					ch = "";
+					d = "";
+				}
 				if (ch.equals(Label.cNme.toString())) {
 					if(i != 0)
 					{
