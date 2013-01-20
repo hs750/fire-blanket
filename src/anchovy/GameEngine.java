@@ -377,8 +377,10 @@ public class GameEngine {
 			Iterator<Pair<?>> namedValueIter = pckt.namedValues.iterator();
 			while (namedValueIter.hasNext()) {
 				Pair<?> pair = namedValueIter.next();
-				System.out.println(pair.first() + '&' + pair.second().toString() + '\n');
-				output += pair.first() + '&' + pair.second().toString() + '\n';
+				if(pair.second() != null){
+					System.out.println(pair.first() + '&' + pair.second().toString() + '\n');
+					output += pair.first() + '&' + pair.second().toString() + '\n';
+				}
 			}
 
 		}
@@ -789,8 +791,7 @@ public class GameEngine {
 			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
 			
 			if(autosaveTime == 10){
-				//gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
-																						//Doesnt currently work due to null values in components - adding defaul values should fix
+				gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
 				autosaveTime = 0;
 			}
 			
