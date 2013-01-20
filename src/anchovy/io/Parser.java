@@ -55,7 +55,7 @@ public class Parser {
 			return engine.findAvailableSaves();
 		} else if (componentName.equals("new game")){
 			try {
-				engine.readfile("new game");
+				engine.readfile("newgame");
 				engine.updateInterfaceComponents(engine.getAllComponentInfo());
 				return getGameIntroString(command);
 			} catch (FileNotFoundException e) {
