@@ -105,9 +105,9 @@ public class Reactor extends WaterComponent {
 		//Higher control rod level the hotter it gets.
 		double t = getTemperature();
 		if(t > 100){
-			t = t + t * ((controlRodLevel-50)/2); //If boiling lowering control rod level past 50% decreases temp otherwise it increases.
+			t = t + t * ((controlRodLevel-50)/20); //If boiling lowering control rod level past 50% decreases temp otherwise it increases.
 		}else{
-			t = t + t * ((controlRodLevel-5)/2); //If not boiling then control rod increases temp unless fully down
+			t = t + t * ((controlRodLevel-5)/20); //If not boiling then control rod increases temp unless fully down
 		}
 		return t;
 	}
