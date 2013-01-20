@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -155,6 +156,8 @@ public class GameEngineTest {
 	@Test
 	public void testSavingLoading()
 	{
+		Valve v = (Valve) gameEngine.getPowerPlantComponent("Valve 1");
+		v.setPosition(false);
 		ArrayList<InfoPacket> allCompInfo = gameEngine.getAllComponentInfo();
 		gameEngine.saveGameState(allCompInfo, "test");
 		try{
@@ -164,6 +167,9 @@ public class GameEngineTest {
 			assertTrue(false);
 		}
 		assertTrue(allCompInfo.equals(gameEngine.getAllComponentInfo()));
+		
+		File f = new File("saves/test.fg");
+		f.delete();
 	}
 	/**
 	 * Test whether the the game can search for and display the location of a particular game save.
@@ -171,9 +177,14 @@ public class GameEngineTest {
 	@Test
 	public void testShowAvailableSaves()
 	{
+		Valve v = (Valve) gameEngine.getPowerPlantComponent("Valve 1");
+		v.setPosition(false);
 		gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "show saves");
 		
 		
 		assertTrue(gameEngine.findAvailableSaves().contains("show saves"));
+		
+		File f = new File("saves/show saves.fg");
+		f.delete();
 	}
 }

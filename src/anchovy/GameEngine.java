@@ -421,8 +421,8 @@ public class GameEngine {
 				} 
 				else if (ch.equals(Label.OPFL.toString()))
 				{
-					Float i1 = Float.parseFloat(d);
-					info.namedValues.add(new Pair<Float>(Label.OPFL, i1));
+					Double i1 = Double.parseDouble(d);
+					info.namedValues.add(new Pair<Double>(Label.OPFL, i1));
 					System.out.println(ch + "=" + i1);
 				} else if (ch.equals(Label.psit.toString())) 
 				{
