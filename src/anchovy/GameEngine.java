@@ -487,6 +487,8 @@ public class GameEngine {
 
 					info.namedValues.add(new Pair<Double>(Label.coRL, Double.parseDouble(d)));
 					//System.out.println(ch + "=" + d);
+				}else if(ch.equals(Label.elec.toString())){
+					info.namedValues.add(new Pair<Double>(Label.elec, Double.parseDouble(d)));
 				}
 				i++;
 
