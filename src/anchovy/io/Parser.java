@@ -74,18 +74,23 @@ public class Parser {
 			Component component = null;
 			
 			//Used for components that also need a numerical parameter (pumps and control rods for now)
-			if (componentName.contains("Pump") || componentName.contains("rods")) 
+			if (componentName.contains("Pump")) 
 			{
 				String alterName = componentName.substring(0, componentName.lastIndexOf(' '));
 				component = engine.getPowerPlantComponent(alterName);
 				if (componentName.contains("RPM") || componentName.contains("rpm")) 
 				{
 					i.namedValues.add(new Pair<Double>(Label.RPMs, Double.parseDouble(command)));
-				} else if(componentName.contains("set") || componentName.contains("SET")) 
+				}
+			} else if(componentName.contains("rods")){
+				String alterName = componentName.substring(0, componentName.lastIndexOf(' '));
+				alterName = alterName.substring(0,alterName.lastIndexOf(" rods"));
+				component = engine.getPowerPlantComponent(alterName);
+				if(componentName.contains("set") || componentName.contains("SET")) 
 				{
 					i.namedValues.add(new Pair<Double>(Label.coRL, Double.parseDouble(command)));
 				}
-			} 
+			}
 			else
 			{
 				component = engine.getPowerPlantComponent(componentName);
