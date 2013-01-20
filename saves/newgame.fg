@@ -9,7 +9,7 @@ Output flow rate&100.0
 Receives input from&Reactor
 Outputs to&Condenser
 Name of component&Reactor
-Controll rod level&50.0
+Controll rod level&30.0
 Water level&50.0
 Temperature&50.0
 Pressure&50.0
