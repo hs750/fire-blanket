@@ -92,9 +92,11 @@ public class MainWindow
 	 */
 	private void initializeInterface(GameEngine engine) 
 	{
+		int textPaneVertical = 450;
+		int textPaneHorizontal = 400;
 		frmFireBlanket = new JFrame();
 		frmFireBlanket.setResizable(false);
-		frmFireBlanket.setMinimumSize(new Dimension(460, 500));
+		//frmFireBlanket.setMinimumSize(new Dimension(460, 500));
 		frmFireBlanket.setTitle("Fire Blanket");
 		frmFireBlanket.setBounds(100, 100, 769, 532);
 		frmFireBlanket.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,7 +118,7 @@ public class MainWindow
 
 		JScrollPane scrollPaneModifiable = new JScrollPane(Modifiable);
 		scrollPaneModifiable.setBorder(null);
-		scrollPaneModifiable.setPreferredSize(new Dimension(350, 300));
+		scrollPaneModifiable.setPreferredSize(new Dimension(textPaneHorizontal, textPaneVertical));
 		horizontalBox.add(scrollPaneModifiable);
 
 		Modifiable.setText("Cow");
@@ -130,7 +132,7 @@ public class MainWindow
 		Nonmodifiable.setEditable(false);
 		JScrollPane scrollPaneNonModifiable = new JScrollPane(Nonmodifiable);
 		scrollPaneNonModifiable.setBorder(null);
-		scrollPaneNonModifiable.setPreferredSize(new Dimension(350, 300));
+		scrollPaneNonModifiable.setPreferredSize(new Dimension(textPaneHorizontal, textPaneVertical));
 		horizontalBox.add(scrollPaneNonModifiable);
 		Nonmodifiable.setText("Cat");
 		Nonmodifiable.setLineWrap(true);
@@ -155,14 +157,13 @@ public class MainWindow
 		CommandlineOutput.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		CommandlineOutput.setLineWrap(true);
 		CommandlineOutput.setWrapStyleWord(true);
-
 		//TODO get this sorted out
 		DefaultCaret caret = (DefaultCaret)CommandlineOutput.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
 		JScrollPane scrollPane = new JScrollPane(CommandlineOutput);
 		scrollPane.setBorder(null);
-		scrollPane.setPreferredSize(new Dimension(450, 110));
+		scrollPane.setPreferredSize(new Dimension(500, 110));
 		horizontalBox_1.add(scrollPane);
 
 		Component horizontalStrut_4 = Box.createHorizontalStrut(5);
