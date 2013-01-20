@@ -52,3 +52,6 @@ Thumbs.db
 *.gif
 doc
 
+# autosaves #
+#############
+autosave.fg
