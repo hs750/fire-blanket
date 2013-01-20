@@ -172,59 +172,59 @@ public class Parser {
 				"automatic updates. One such system would change the world forever. \n" +
 				"Precisely one week from the initial deployment of the SEPR solutions, disaster shook the world. " +
 				"Propagating from one server to the next using obscure net technologies, an unidentified program began initiating the update protocols of the world's major nuclear power plants. " +
-				"Inexplicably replacing SCADA systems with the student's simulations, the world's power plants began melting down in quick succession. \n"+
-				"The ensuing blanket of fire engulfed the world, reducing civilisation to smouldering ash. \n"+
+				"Inexplicably replacing SCADA systems with the student's simulations, the world's power plants began melting down in quick succession. \n\n"+
+				"The ensuing blanket of fire engulfed the world, reducing civilisation to smouldering ash. \n\n"+
 				"But the human race proved more resilient than could have been hoped, and pockets of life survived. " +
 				"One such region, spared of destruction by the recent decommission of its own power plant was none other than the city that spawned its downfall. " +
-				"York had survived, and with it, it's university. \n"+
+				"York had survived, and with it, it's university. \n\n"+
 				"In the weeks that followed, urgent discussion took place across what was left of the city. " +
 				"Unified by an impromptu council of community leaders and prominent academics, the course was set for humanity's fate. " +
-				"The survivors would require food, shelter, infrastructure and means of self-protection, and for this they would require electricity. \n"+
+				"The survivors would require food, shelter, infrastructure and means of self-protection, and for this they would require electricity. \n\n"+
 				"Enlisting the might of the nearby garrison of Northern Command, " +
-				"the council lead its citizens on a journey to re-commission its fatefully dormant nuclear facility.  \n"+
+				"the council lead its citizens on a journey to re-commission its fatefully dormant nuclear facility.  \n\n"+
 				"Months passed, and the decision to mobilise Northern Command proved to be a crucial one. " +
 				"The first signs of mutation arose in the form of rodents emerging from the irradiated ground. Whilst of little danger to humans, " +
-				"these rodents would herald the coming of a much greater threat to humanity. \n"+
+				"these rodents would herald the coming of a much greater threat to humanity. \n\n"+
 				"With dwindling supplies, and rumours of larger mutating creatures converging towards the sounds of construction, " +
 				"the military remnants began a fevered fortification of the power plant. Enmeshed within electric fences and weapons systems, " +
 				"humanity's final revival would likely be carried out against the shadow of constant siege. " +
-				"And to some, lingering memories of the destructive potential of nuclear power outweighed the protection that it afforded... \n"+
+				"And to some, lingering memories of the destructive potential of nuclear power outweighed the protection that it afforded... \n\n"+
 				"Six months have passed since the blanket of fire descended and the newly established outpost of Town has been born. " +
 				"The nuclear facility for which the town was created has been successfully commissioned by a team of surviving engineers lead by Professor Richard Paige, " +
 				"and in which you were involved. " +
 				"Following the untimely digestion of a senior operator by a stray mutated goose, " +
 				"you have been assigned a more prominent role in the functioning of the plant. " +
-				"Your presence in the control room has been requested by the Professor to explain your new responsibilities... \n"+
-				"\n"+
-				"*knocks*\n"+
-				"Richard: Come in! Hey, I recognise you from SEPR. Your name is...?\n"+
+				"Your presence in the control room has been requested by the Professor to explain your new responsibilities... \n\n"+
+				"\n\n"+
+				"*knocks*\n\n"+
+				"Richard: Come in! Hey, I recognise you from SEPR. Your name is...?\n\n"+
 				userName +"\n" +
 				"Richard: " + userName + ". That's right; I thought it was something like that. " +
 						"So I've heard that you've been promoted to replace our previous senior operator.  " +
 						"Terrible thing that happened to him, I can't help wonder how a mutated goose made it past our defences. " +
-						"Well never mind, the job's yours now anyway, congratulations.\n"+
-				userName +": So what are my new responsibilities?\n"+
+						"Well never mind, the job's yours now anyway, congratulations.\n\n"+
+				userName +": So what are my new responsibilities?\n\n"+
 				"Richard: Well, you have to manage the power plant's operation." +
 				" All of the more experienced engineers have been asked to help design additional infrastructure for the town, " +
 				"so you're the most qualified person left to make decisions about the facility's operation. " +
-				"That said you'll have a team of people who will implement the changes you request in the command terminal and someone else to distribute the power that you generate to the city. \n"+
+				"That said you'll have a team of people who will implement the changes you request in the command terminal and someone else to distribute the power that you generate to the city. \n\n"+
 				"Richard: As you know, Town's population and industry is growing at quite a substantial rate so you're going to have your work cut out keeping up with demand. " +
-				"Additionally, the military will require prioritised use of the power to ensure that the city's defences remain operable.\n"+
-				userName + ": I see.\n"+
-				"Richard: The Lieutenant here will explain Town's structure and defensive capabilities in more detail.\n"+
+				"Additionally, the military will require prioritised use of the power to ensure that the city's defences remain operable.\n\n"+
+				userName + ": I see.\n\n"+
+				"Richard: The Lieutenant here will explain Town's structure and defensive capabilities in more detail.\n\n"+
 				"Lieutenant:	Yes. The power generated by this facility is directed into three different zones. " +
 				"The first, and from a survival perspective the least important, is that of the city itself. Should you be unable to generate enough power, " +
 				"we'll cut off civilian homes and factories first. Next is the electric fence around the perimeter of the city, " +
 				"this is our first line of defence against the mutants. As more mutants gather, the fence will require more energy to repel them." +
 				" If the fence falls, then the city will be invariably overrun. Finally, and our highest priority is this facility's own defence systems. " +
-				"Over the last half year, we've built and supplied a fortified garrison around the power plant and this will be our final line of defence. If power goes out here, then we'll lose our Helicopters, SUVs, Weapons Systems, Emergency Power Grid and ultimately our lives.\n"+
-				"*Gulp*\n"+
-				userName + ": No pressure then...\n"+
+				"Over the last half year, we've built and supplied a fortified garrison around the power plant and this will be our final line of defence. If power goes out here, then we'll lose our Helicopters, SUVs, Weapons Systems, Emergency Power Grid and ultimately our lives.\n\n"+
+				"*Gulp*\n\n"+
+				userName + ": No pressure then...\n\n"+
 				"Richard: As I said, distribution of power will managed for you, but it's worthwhile considering the potential consequences of not outputting enough power from the system. " +
-				"Of course, if you try to generate too much power, the plant could overheat and we'll end up just as evaporated as every other region in the country.\n"+
-				userName + ": ...\n"+
+				"Of course, if you try to generate too much power, the plant could overheat and we'll end up just as evaporated as every other region in the country.\n\n"+
+				userName + ": ...\n\n"+
 				"Richard: So, the power plant is in your hands! We don't have time to train you, but you can refer to your instruction manual if you forget the terminal's commands. " +
-				"Try not to blow everything up!\n"+
+				"Try not to blow everything up!\n\n"+
 				"*Richard and the Lieutenant leave the control room leaving you stood alone. " +
 				"Walking up to the facility's command system, you hope to redeem your past nuclear failings, " +
 				"and swear never to copy strange code from the internet again*\n";
