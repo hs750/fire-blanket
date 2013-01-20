@@ -25,7 +25,7 @@ public class Pair<T> {
 		falT("FailuerTime"),
 		OPFL("Output flow rate"),
 		oPto("Outputs to"),
-		rcIF("Recieves input from"),
+		rcIF("Receives input from"),
 		elec("Electrisity Generated"),
 		cmpnum("Component number"),
 		MxIn("Maximum Allowed Input"), // for valves and pumps and stuff
