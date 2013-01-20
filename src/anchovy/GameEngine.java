@@ -18,7 +18,7 @@ public class GameEngine {
 	public ArrayList<Component> powrPlntComponents = null;
 	// Parser parser;
 	// UI ui = null; Commented out for now
-	MainWindow window;
+	public MainWindow window;
 	String fileName; 
 
 	/**
@@ -665,90 +665,103 @@ public class GameEngine {
 		}
 
 	}
+	
+	public ArrayList<Component> componentFailed(){
+		Iterator<Component> comIt = powrPlntComponents.iterator();
+		Component com = null;
+		
+		ArrayList<Component> failedComps = new ArrayList<Component>();
+		while(comIt.hasNext()){
+			com = comIt.next();
+			if(com.isFailed())
+				failedComps.add(com);
+		}
+		return failedComps;
+	}
 
 	public static void main(String[] args) {
 		GameEngine gameEngine = new GameEngine();
-		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
-
-		InfoPacket info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 2"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 1"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 3"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 3"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 1"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 2"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 4"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 4"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 2"));
-		infoList.add(info);
-
-		// ///////////
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Condenser"));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<Double>(Label.temp, 10.00));
-		info.namedValues.add(new Pair<Double>(Label.pres, 10.00));
-		info.namedValues.add(new Pair<Double>(Label.wLvl, 10.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
-		// info.namedValues.add(new Pair<String>(Label.rcIF, "Turbine"));
-		// //doesn't exist yet
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
-		infoList.add(info);
-
-		info = new InfoPacket();
-		info.namedValues.add(new Pair<String>(Label.cNme, "Coolant Pump"));
-		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
-		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
-		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
-		infoList.add(info);
-		// ///////////
+//		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
+//
+//		InfoPacket info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 2"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 2"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 1"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 1"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 1"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 3"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 3"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 1"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 2"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Valve 4"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Condenser"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Valve 4"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Pump 2"));
+//		infoList.add(info);
+//
+//		// ///////////
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Condenser"));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<Double>(Label.temp, 10.00));
+//		info.namedValues.add(new Pair<Double>(Label.pres, 10.00));
+//		info.namedValues.add(new Pair<Double>(Label.wLvl, 10.00));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 1"));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Pump 2"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
+//		// info.namedValues.add(new Pair<String>(Label.rcIF, "Turbine"));
+//		// //doesn't exist yet
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Valve 2"));
+//		infoList.add(info);
+//
+//		info = new InfoPacket();
+//		info.namedValues.add(new Pair<String>(Label.cNme, "Coolant Pump"));
+//		info.namedValues.add(new Pair<Boolean>(Label.psit, true));
+//		info.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
+//		info.namedValues.add(new Pair<Double>(Label.RPMs, 5.00));
+//		info.namedValues.add(new Pair<String>(Label.oPto, "Condenser"));
+//		info.namedValues.add(new Pair<String>(Label.rcIF, "Coolant Pump"));
+//		infoList.add(info);
+//		// ///////////
 		 
 		gameEngine.clearPowerPlant();
 		assert (gameEngine.getAllComponentInfo().isEmpty());
 
-		gameEngine.setupPowerPlantConfiguration(infoList);
+		//gameEngine.setupPowerPlantConfiguration(infoList);
 		gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());
 
 		System.out.println("HellO");
@@ -758,17 +771,26 @@ public class GameEngine {
 		while(true){
 			autosaveTime++;
 			
-			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the Screen with the current Values after the wait.
-			gameEngine.calculateAllComponents();									//Calculate new Values.
-			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());	//Update the screen with the new values.
+			gameEngine.calculateAllComponents(); 										//Calculate new Values.
+			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());		//Update the Screen with the current Values calculate
 			
+			
+			String failedComps = "These components have currently failed: ";			//Gather a list of failed components.
+			ArrayList failedC = gameEngine.componentFailed();
+			if(failedC.size() > 0){
+				Iterator<Component> cIt = failedC.iterator();
+				while(cIt.hasNext()){
+					failedComps += cIt.next().getName() + ", ";
+				}
+				gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
+			}
 			if(autosaveTime == 10){
 				gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
 				autosaveTime = 0;
 			}
 			
 			try {
-				Thread.sleep(700);
+				Thread.sleep(700);														//Wait until next iteration.
 			} catch(InterruptedException ex) {
 				Thread.currentThread().interrupt();
 			}
