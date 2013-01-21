@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import controller.*;
 import model.*;
 import util.*;
@@ -231,7 +233,38 @@ public class RequirementsTests {
 		assertTrue("" + p1 + " " + p2, p1 < p2);
 		
 	}
+	/**
+	 * The condenser pressure being displayed for the user will always be the same as the current result of the condenser pressure calculation.
+	 * Creates an instance of a game engine and a Condenser. The pressure of the condenser is retrieved and sent to the user interface for display. 
+	 * The contents of the display are checked to contain the same pressure as that that was retrieved from the condenser.
+	 */
+	@Test
+	public void TU37_SF21(){
+		GameEngine ge = new GameEngine();
+		Condenser condenser = new Condenser("Condenser");
 	
+		condenser.setAmount(50);
+		condenser.setTemperature(50);
+		condenser.setOuputFlowRate(50);
+		condenser.connectToInput(condenser);
+		condenser.connectToOutput(condenser);
+		
+		condenser.calculate();
+		
+		Double conPressure = condenser.getPressure();
+		ArrayList<InfoPacket> infos = new ArrayList<InfoPacket>();
+		InfoPacket condenserInfo = condenser.getInfo();
+		infos.add(condenserInfo);
+		
+		ge.updateInterfaceComponents(infos);
+		
+		String outputString = ge.window.getRightPannelContence();
+		
+		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
+		
+		
+		
+	}
 	
 	
 }

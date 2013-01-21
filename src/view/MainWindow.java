@@ -213,5 +213,12 @@ public class MainWindow
 		//Hooking up all the events to action listeners.
 		Commandline.addActionListener(console);
 	}
+	
+	public String getRightPannelContence(){
+		return Nonmodifiable.getText();
+	}
+	public String getLeftPannelContence(){
+		return Modifiable.getText();
+	}
 
 }
