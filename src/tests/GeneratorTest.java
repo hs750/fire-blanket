@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import model.Generator;
 import model.Turbine;
+import model.Valve;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -88,24 +89,33 @@ public class GeneratorTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		Valve v1 = new Valve("Valve");
 		Turbine t1 = new Turbine("T1");
-		InfoPacket tInfo = new InfoPacket();
-		tInfo.namedValues.add(new Pair<String>(Label.cNme, "T1"));
-		tInfo.namedValues.add(new Pair<Double>(Label.OPFL, 45.0));
 		
-		t1.setRPM(1234.5);
+		t1.connectToInput(v1);
+		t1.connectToOutput(v1);
+		v1.connectToInput(t1);
+		v1.connectToOutput(t1);
+		v1.setOuputFlowRate(50);
 		
-		try {
-			t1.takeInfo(tInfo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 		
 		generator1.connectToInput(t1);
-				
+		t1.connectToOutput(generator1);
+		t1.calculate();
+		generator1.calculate();
+
+		Double elecGened = generator1.getElectrisityGenerated();
+		Double gOPFL = generator1.getOutputFlowRate();
+		
+		v1.setOuputFlowRate(60);
+		t1.calculate();
 		generator1.calculate();
 		
-		assertTrue(generator1.getElectrisityGenerated() == 1000 + t1.getRPM() * 1.5);
+		Double gOPFL2 = generator1.getOutputFlowRate();
+		Double elecGened2 = generator1.getElectrisityGenerated();
+		
+		assertTrue(gOPFL < gOPFL2);
+		assertTrue(elecGened < elecGened2);
 	}
 }

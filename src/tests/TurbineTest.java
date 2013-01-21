@@ -36,7 +36,6 @@ public class TurbineTest {
 		try {
 			turbine1.takeInfo(info);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -47,8 +46,8 @@ public class TurbineTest {
 	 * Test whether a turbine correctly returns its info.
 	 */
 	@Test
-	public void testGetInfo(){
-		turbine1.setRPM(200.0);
+	public void testGetInfo(){ //TODO make this work
+		//turbine1.setRPM(200.0);
 		
 		InfoPacket t1I = turbine1.getInfo();
 		assertTrue(t1I.namedValues.contains(new Pair<Double>(Label.RPMs, 200.0)));
