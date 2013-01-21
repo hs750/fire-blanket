@@ -293,5 +293,71 @@ public class RequirementsTests {
 		
 		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
 	}
+	/**
+	 * The temperature inside the condenser will be proportional to the pressure in the condenser and the amount of cold water is being pumped round the condenser. The more pressure the hotter the condenser will be, and the more cold water is being pumped round the more the temperature will reduce.
+	 * Creates a simple power plant, with a condenser valve and coolant pump. Tests whether raising the temperature of the condenser increases the pressure and whether increasing the coolant pump RPM reduces the temperature of the power plant.
+	 */
+	@Test
+	public void TU39_SF23(){
+		Condenser condenser = new Condenser("Condenser");
+		Valve valve = new Valve("Valve");
+		Pump coolentPump = new Pump("Coolant Pump");
+		
+		condenser.connectToInput(coolentPump);
+		condenser.connectToInput(valve);
+		condenser.connectToOutput(valve);
+		valve.connectToInput(condenser);
+		valve.connectToOutput(condenser);
+		coolentPump.connectToInput(coolentPump);
+		coolentPump.connectToOutput(coolentPump);
+		coolentPump.connectToOutput(condenser);
+		
+		condenser.setAmount(50);
+		condenser.setTemperature(120);
+		condenser.setOuputFlowRate(50);
+		coolentPump.setAmount(50);
+		coolentPump.setRPM(100);
+		coolentPump.setOuputFlowRate(50);
+		valve.setAmount(50);
+		valve.setOuputFlowRate(50);
+		valve.setTemperature(120);
+		valve.calculate();
+		
+		condenser.calculate();
+		Double cp1 = condenser.getPressure();
+		
+		condenser.setAmount(50);
+		condenser.setTemperature(150);
+		condenser.setOuputFlowRate(50);
+		coolentPump.setAmount(50);
+		coolentPump.setRPM(100);
+		coolentPump.setOuputFlowRate(50);
+		valve.setAmount(50);
+		valve.setOuputFlowRate(50);
+		valve.setTemperature(150);
+		valve.calculate();
+		
+		condenser.calculate();
+		Double cp2 = condenser.getPressure();
+		
+		assertTrue("" + cp1 + " " + cp2, cp1 < cp2);
+		
+		condenser.setAmount(50);
+		condenser.setTemperature(150);
+		condenser.setOuputFlowRate(50);
+		coolentPump.setAmount(50);
+		coolentPump.setRPM(200);
+		coolentPump.setOuputFlowRate(100);
+		valve.setAmount(50);
+		valve.setOuputFlowRate(50);
+		valve.setTemperature(150);
+		valve.calculate();		
+		
+		condenser.calculate();
+		Double cp3 = condenser.getPressure();
+		
+		assertTrue("" + cp2 + " " + cp3, cp2 > cp3);
+	}
+	
 	
 }
