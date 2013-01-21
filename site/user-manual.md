@@ -23,29 +23,90 @@
 <a name="um-2"/>
 ## 2. Quick start guide
 
-1. Run `fireblanket.jar`
-2. Type in `new game GAME_NAME` to start from scratch. To load a previously saved plant, type `load GAME_NAME`. Saved files have the extension `.fg` and an be found in the `saves/` folder.
+ Run `fireblanket.jar`
 
-3. 
-4. 
+Type in `new game GAME_NAME` to start from scratch. To load a previously saved plant, type `load GAME_NAME`. Saved files have the extension `.fg` and an be found in the `saves/` folder.
+`>>> TODO screenshot of typing new game SuperPlant`
+
+Have a look at the commands list `>>> TODO add link to final file`
+
+
 
 <a name="um-3"/>
 ## 3. Background story
 
+On the 8th April 2013, students at the University of York prepared to demonstrate their second year software projects. A challenging task, several teams had prepared video game simulations of nuclear power plants for their professor’s approval. Some projects were simple stand-alone affairs powered only by the department’s computers. Others utilised the internet to provide automatic updates. One such system would change the world forever. 
+
+Precisely one week from the initial deployment of the SEPR solutions, disaster shook the world. Propagating from one server to the next using obscure net technologies, an unidentified program began initiating the update protocols of the world’s major nuclear power plants. Inexplicably replacing SCADA systems with the student’s simulations, the world’s power plants began melting down in quick succession.
+The ensuing blanket of fire engulfed the world, reducing civilisation to smouldering ash.
+But the human race proved more resilient than could have been hoped, and pockets of life survived. One such region, spared of destruction by the recent decommission of its own power plant was none other than the city that spawned its downfall. York had survived, and with it, it’s university.
+In the weeks that followed, urgent discussion took place across what was left of the city. Unified by an impromptu council of community leaders and prominent academics, the course was set for humanity’s fate. The survivors would require food, shelter, infrastructure and means of self-protection, and for this they would require electricity.
+
+Enlisting the might of the nearby garrison of Northern Command, the council lead its citizens on a journey to re-commission its fatefully dormant nuclear facility. 
+Months passed, and the decision to mobilise Northern Command proved to be a crucial one. The first signs of mutation arose in the form of rodents emerging from the irradiated ground. Whilst of little danger to humans, these rodents would herald the coming of a much greater threat to humanity.
+With dwindling supplies, and rumours of larger mutating creatures converging towards the sounds of construction, the military remnants began a fevered fortification of the power plant. Enmeshed within electric fences and weapons systems, humanity’s final revival would likely be carried out against the shadow of constant siege. And to some, lingering memories of the destructive potential of nuclear power outweighed the protection that it afforded...
+
+Six months have passed since the blanket of fire descended and the newly established outpost of Town has been born. The nuclear facility for which the town was created has been successfully commissioned by a team of surviving engineers lead by Professor Richard Paige, and in which you were involved. Following the untimely digestion of a senior operator by a stray mutated goose, you have been assigned a more prominent role in the functioning of the plant. Your presence in the control room has been requested by the Professor to explain your new responsibilities...
+
 <a name="um-4"/>
 ## 4. Functionalities
-
 ### Autosave
 The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
 
+### Item
+Item description
+
+### Item
+Item description
+
+### Item
+Item description
+
+### Item
+Item description
+
 <a name="um-5"/>
-## 5. Commands index + description
+## 5. Game commands
 
-<a name="um-new-game"/>`new game`
+`>> <VALVE_NAME> close`
 
-Starts a new game. If this is typed while playing, it will end the current game. Uses the data from `save/newgame.fg`.
+* Closes the valve `VALVE_NAME`
 
-<a name="um-save-file"/>`save <filename>.fg`
+`>> load <FILENAME>.fg`
+
+* Will load from `FILENAME` and start a new game
+* The previous game will end
+
+`>> new game <NAME>`
+
+* Starts a new game (the previous game will end, be careful)
+* Uses the data from `save/newgame.fg`
+* `NAME` will be the name of the plant operator
+* The previous game will end
+
+`>> <VALVE_NAME> open`
+
+* Opens the valve `VALVE_NAME`
+
+`>> <REACTOR_NAME> rods set <INT_VALUE>`
+
+* This is used to control the rods - the higher this value is, the more power the reactor will produce
+* Example: `Reactor rods set 80`
+* `INT_VALUE` must be in [0,100]
+
+`>> <PUMP_NAME> rpm <INT_VALUE>`
+
+* This assigns a new RPM to a pump
+* Example: `Pump 1 rpm 25` or `Coolant Pump rpm 250`
+
+`>> save`
+
+* Saves to the current save file.
+
+`>> save as <FILENAME>.fg`
+
+* Saves using the FILENAME provided.
+
 
 Saves the current state of the plant to a file. Doesn't interrupt the game (check the [autosave](#um-autosave) feature).
 
