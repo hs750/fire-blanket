@@ -788,7 +788,8 @@ public class GameEngine {
 		
 		//The Game control loop
 		int autosaveTime = 0;
-		while(true){
+		boolean notFailed = true;
+		while(true && notFailed){
 			autosaveTime++;
 			
 			gameEngine.calculateAllComponents(); 										//Calculate new Values.
@@ -796,13 +797,21 @@ public class GameEngine {
 			
 			
 			String failedComps = "These components have currently failed: ";			//Gather a list of failed components.
+			String failedComp = "";
 			ArrayList<Component> failedC = gameEngine.componentFailed();
 			if(failedC.size() > 0){
 				Iterator<Component> cIt = failedC.iterator();
 				while(cIt.hasNext()){
-					failedComps += cIt.next().getName() + ", ";
+					failedComp = cIt.next().getName();
+					if(failedComp.contains("Reactor")){
+						notFailed = false;
+					}
+					failedComps += failedComp + ", ";
 				}
 				gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
+				if(!notFailed){
+					gameEngine.window.console.writeToConsole("GAME OVER");
+				}
 			}
 			if(autosaveTime == 10){
 					gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
