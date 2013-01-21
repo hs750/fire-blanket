@@ -1,7 +1,8 @@
 # User manual
 
-## meta/Resources
+## meta
 
+###Resources
 * [Tips to create a useful user manual /stackoverflow](http://stackoverflow.com/questions/241422/tips-to-create-a-useful-user-manual)
 * [Slides](http://www.cdf.utoronto.ca/~csc207h/summer/lectures/UserGuide.pdf)
 
@@ -21,9 +22,23 @@
 ## 1. Introduction
 
 <a name="um-2"/>
-## 2. Quick start guide
+## 2. How to play
 
- Run `fireblanket.jar`
+_This is a short guide to start playing immediately. To understand and maybe master the game, have a look at the [background story](#um-3) and at [functionalities](#um-4) sections._
+
+**Step 1.** Run `fireblanket.jar`
+
+**Step 2.** Enter `new game <NAME>`. Replace `<NAME>` with your name.
+
+**Step 3.** Type in [commands](#um-5) to control the nuclear power plant.
+
+Produce sufficient energy to sustain the infrastructure. Fail and you lose the game. You also lose if you overheat the reactor, so be careful.
+
+### What you can do
+
+* Lower or raise the control rods: `>> <REACTOR_NAME> rods set <INT_VALUE>`
+  The rods level is proportional to how much steam the reactor is generating.
+  Lowering the rods is a good way to try to avoid meltdown.
 
 Type in `new game GAME_NAME` to start from scratch. To load a previously saved plant, type `load GAME_NAME`. Saved files have the extension `.fg` and an be found in the `saves/` folder.
 `>>> TODO screenshot of typing new game SuperPlant`
