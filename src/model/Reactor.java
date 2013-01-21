@@ -67,6 +67,7 @@ public class Reactor extends WaterComponent {
 	@Override
 	public void calculate() {
 		transmitOutputWater();
+		calculateTemperature();
 //		if(!super.isFailed()){
 //			super.setFailed(calculateFailed());
 //			double oldTemp = getTemperature();
@@ -102,16 +103,10 @@ public class Reactor extends WaterComponent {
 	 * When the are lowered, the reactor gradually cools, when they are raised the Reactor get hotter and hotter.
 	 * @return The new Temperature of the reactor.
 	 */
-	protected double calculateTemperature(){
-		//The temperature is affected by the level of the control rods, current temperature.
-		//Higher control rod level the hotter it gets.
-		double t = getTemperature();
-		if(t > 100){
-			t = t + t * ((controlRodLevel-50)/20); //If boiling lowering control rod level past 50% decreases temp otherwise it increases.
-		}else{
-			t = t + t * ((controlRodLevel-5)/20); //If not boiling then control rod increases temp unless fully down
-		}
-		return t;
+	protected void calculateTemperature(){
+		double heatgenerated = 1000*(1 + getControlRodLevel());
+		double tempIncrease = heatgenerated/getAmount();
+		setTemperature(getTemperature() + tempIncrease);
 	}
 	/**
 	 * Calculate the water level in the reactor.

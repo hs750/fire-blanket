@@ -20,7 +20,7 @@ import util.Pair.Label;
 public abstract class WaterComponent extends Component {
 	private Double temperature = 50.0;
 	private Double amount = 500.0;
-	private Double volume = 9000.0;
+	private Double volume = 500.0;
 	private ArrayList<WaterComponent> outputsWaterTo = new ArrayList<WaterComponent>();
 
 	/** 
