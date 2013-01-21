@@ -30,23 +30,28 @@ public class RequirementsTests {
 		Generator generator = new Generator("Generator");
 		Valve valve = new Valve("Valve");
 		
+		valve.connectToInput(turbine);
 		valve.connectToOutput(turbine);
 		turbine.connectToInput(valve);
 		turbine.connectToOutput(generator);
 		turbine.connectToOutput(valve);
 		generator.connectToInput(turbine);
 		
-		valve.setOuputFlowRate(100);
+		valve.setOuputFlowRate(50);
+		turbine.setOuputFlowRate(50);
+		valve.calculate();
 		
 		turbine.calculate();
 		generator.calculate();
+		
 		
 		Double outputOfGenerator = generator.getOutputFlowRate();
 		
 		valve.setOuputFlowRate(200);
-		
+		turbine.setOuputFlowRate(200);
 		turbine.calculate();
 		generator.calculate();
+		
 		
 		assertTrue("Original: " + outputOfGenerator + ". New: " + generator.getOutputFlowRate(), outputOfGenerator < generator.getOutputFlowRate());
 	}
@@ -64,9 +69,10 @@ public class RequirementsTests {
 		valve.connectToInput(reactor);
 		valve.setOuputFlowRate(50);
 		
+		
 		reactor.setControlRodLevel(50);
 		reactor.setAmount(50);
-		reactor.setTemperature(125);
+		reactor.setTemperature(150);
 		reactor.setWaterLevel(50);
 		reactor.calculate();
 	
@@ -80,7 +86,7 @@ public class RequirementsTests {
 	
 		reactorOutputFlow[1] = reactor.getOutputFlowRate();
 		
-		reactor.setTemperature(125);
+		reactor.setTemperature(50);
 		reactor.setControlRodLevel(50);
 		reactor.setWaterLevel(50);
 		reactor.setAmount(50);
@@ -88,7 +94,7 @@ public class RequirementsTests {
 	
 		reactorOutputFlow[2] = reactor.getOutputFlowRate();
 		
-		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] < reactorOutputFlow[1] && reactorOutputFlow[2] == 0);
+		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] > reactorOutputFlow[1] && reactorOutputFlow[2] == 0);
 		
 	}
 
@@ -104,7 +110,6 @@ public class RequirementsTests {
 		
 		valve.setOuputFlowRate(50);
 		
-		reactor.setTemperature(125);
 		reactor.setControlRodLevel(50);
 		reactor.setWaterLevel(50);
 		reactor.setAmount(50);
@@ -112,16 +117,15 @@ public class RequirementsTests {
 		
 		Double temp = reactor.getTemperature();
 		
-		reactor.setTemperature(125);
 		reactor.setControlRodLevel(70);
-		reactor.setWaterLevel(50);
-		reactor.setAmount(50);
+		
 		reactor.calculate();
 		
 		Double temp1 = reactor.getTemperature();
 		
 		assertTrue("" + temp + " " + temp1, temp < temp1);
 		
-		fail("no imp");
 	}
+	
+	
 }
