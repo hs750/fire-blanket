@@ -814,6 +814,7 @@ public class GameEngine {
 				}
 			}
 			if(autosaveTime == 10){
+				if(gameEngine.powrPlntComponents.size() > 0)
 					gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
 				autosaveTime = 0;
 			}
