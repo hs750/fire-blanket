@@ -127,5 +127,36 @@ public class RequirementsTests {
 		
 	}
 	
+	@Test
+	public void TU04_SF19(){
+		Reactor reactor = new Reactor("Reactor");
+		Valve valve = new Valve("Valve");
+		
+
+		reactor.connectToInput(valve);
+		reactor.connectToOutput(valve);
+		valve.connectToInput(reactor);
+		valve.connectToInput(reactor);
+		valve.setOuputFlowRate(50);
+		
+		reactor.setControlRodLevel(50);
+		reactor.setAmount(50);
+		reactor.setTemperature(120);
+		reactor.setWaterLevel(50);
+		reactor.calculate();
+		
+		Double pres1 = reactor.getPressure();
+		
+		reactor.setControlRodLevel(50);
+		reactor.setAmount(50);
+		reactor.setTemperature(150);
+		reactor.setWaterLevel(50);
+		reactor.calculate();
+		
+		Double pres2 = reactor.getPressure();
+		
+		assertTrue("" + pres1 + " " + pres2, pres1 < pres2);
+		
+	}
 	
 }
