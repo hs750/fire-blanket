@@ -4,14 +4,16 @@
 package tests;
 
 import static org.junit.Assert.*;
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.Generator;
-import anchovy.Components.Infrastructure;
-import anchovy.Pair.Label;
+
+import model.Generator;
+import model.Infrastructure;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
 
 /**
  * @author kw701

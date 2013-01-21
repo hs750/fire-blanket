@@ -2,16 +2,18 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import model.Pump;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.Pump;
-import anchovy.Pair.Label;
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class PumpTest {
 	private Pump pump1;

@@ -1,13 +1,16 @@
-package anchovy.io;
+package view;
 
 import java.io.FileNotFoundException;
 import java.util.StringTokenizer;
 
-import anchovy.GameEngine;
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.*;
-import anchovy.Pair.Label;
+import controller.GameEngine;
+
+import model.*;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 /**
  * This class is responsible for parsing text commands supplied by the user and then executing a fitting gameEngine method
  * or interacting with a certain component

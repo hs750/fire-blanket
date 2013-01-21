@@ -8,12 +8,17 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import model.Valve;
+
 import org.junit.*;
 
-import anchovy.*;
-import anchovy.Components.Valve;
-import anchovy.Pair.Label;
-import anchovy.io.*;
+import controller.*;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+import view.*;
+
 
 /**
  * 
@@ -43,7 +48,7 @@ public class ParserTest {
 	}
 	
 	/**
-	 * Test method for {@link anchovy.io.Parser#parseCommand(java.lang.String, java.lang.String)}.
+	 * Test method for {@link view.Parser#parseCommand(java.lang.String, java.lang.String)}.
 	 * @throws Exception 
 	 */
 	@Test
@@ -59,7 +64,7 @@ public class ParserTest {
 	}
 
 	/**
-	 * Test method for {@link anchovy.io.Parser#parse(java.lang.String)}.
+	 * Test method for {@link view.Parser#parse(java.lang.String)}.
 	 * @throws Exception 
 	 * @throws FileNotFoundException 
 	 */

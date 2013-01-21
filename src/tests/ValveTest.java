@@ -2,13 +2,18 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import model.Valve;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import anchovy.*;
-import anchovy.Components.Valve;
-import anchovy.Pair.Label;
+import controller.*;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class ValveTest {
 	Valve v1 = null;

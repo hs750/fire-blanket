@@ -1,14 +1,16 @@
 package tests;
 
 import static org.junit.Assert.*;
+import model.Pump;
+import model.Turbine;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.Pump;
-import anchovy.Components.Turbine;
-import anchovy.Pair.Label;
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class TurbineTest {
 	private Turbine turbine1;

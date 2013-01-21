@@ -4,8 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import anchovy.Pair;
-import anchovy.Pair.Label;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class PairTest {
 	private Label testFirst = Label.temp;

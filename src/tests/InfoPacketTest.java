@@ -7,9 +7,10 @@ import java.util.Iterator;
 import org.junit.Before;
 import org.junit.Test;
 
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Pair.Label;
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class InfoPacketTest {
 	InfoPacket info = new InfoPacket();

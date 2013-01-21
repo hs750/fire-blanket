@@ -1,11 +1,15 @@
-package anchovy;
+package controller;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.*;
-import anchovy.Components.*;
-import anchovy.Pair.Label;
-import anchovy.io.*;
+
+import model.*;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+import view.*;
 
 /**
  * Game Engine for the 'Nuclear Power Plant Simulation Game' Links all the

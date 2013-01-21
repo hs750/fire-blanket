@@ -7,13 +7,18 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import model.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import anchovy.*;
-import anchovy.Components.*;
-import anchovy.Pair.Label;
+import controller.*;
+
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class GameEngineTest {
 	GameEngine gameEngine = null;

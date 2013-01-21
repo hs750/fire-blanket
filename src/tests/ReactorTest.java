@@ -2,17 +2,19 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import model.Reactor;
+import model.Valve;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.Reactor;
-import anchovy.Components.Valve;
-import anchovy.Pair.Label;
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class ReactorTest {
 	private Reactor reactor1;

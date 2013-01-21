@@ -2,17 +2,19 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import model.Generator;
+import model.Turbine;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import anchovy.InfoPacket;
-import anchovy.Pair;
-import anchovy.Components.Generator;
-import anchovy.Components.Turbine;
-import anchovy.Pair.Label;
+import util.InfoPacket;
+import util.Pair;
+import util.Pair.Label;
+
 
 public class GeneratorTest {
 	private Generator generator1;
