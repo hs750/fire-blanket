@@ -59,7 +59,7 @@ public class Generator extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.OPFL, getElectrisityGenerated()));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, getOutputFlowRate()));
 		info.namedValues.add(new Pair<Double>(Label.elec, getElectrisityGenerated()));
 		return info;
 	}
@@ -69,9 +69,8 @@ public class Generator extends Component {
 	 */
 	@Override
 	public void calculate() {
-
 		super.setOuputFlowRate(calculateOutputFlowRate());
-		electrisityGenerated += super.getOutputFlowRate();
+		electrisityGenerated += getOutputFlowRate();
 	}
 	/**
 	 * {@inheritDoc}
@@ -96,7 +95,6 @@ public class Generator extends Component {
 		Iterator<Component> it = inputComponents.iterator();
 		Component comp = null;
 		Turbine turbineIn = null;
-
 		while(it.hasNext()){
 			comp = it.next();
 			if(comp instanceof Turbine){
