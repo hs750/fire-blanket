@@ -24,7 +24,8 @@
 ## 2. Quick start guide
 
 1. Run `fireblanket.jar`
-2. Type in `new game` to start from scratch. To load a previously saved plant, type `load <filename>.fg`. Saved files have the extension `.fg` and an be found in `<crt-dir>/saves/`.
+2. Type in `new game GAME_NAME` to start from scratch. To load a previously saved plant, type `load GAME_NAME`. Saved files have the extension `.fg` and an be found in the `saves/` folder.
+
 3. 
 4. 
 
