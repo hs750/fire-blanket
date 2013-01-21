@@ -25,7 +25,7 @@
 ### 2. Quick start guide
 
 1. Run `fireblanket.jar`
-2. Type in `new game` to start from scratch. To load a previously saved plant, type `TODO look up save syntax`. Remember, saved files have the extension `.fg` and an be found in the `saves/` folder.
+2. Type in `new game GAME_NAME` to start from scratch where the operator's name is GAME_NAME. To load a previously saved plant, type `TODO look up save syntax`. Remember, saved files have the extension `.fg` and an be found in the `saves/` folder.
 3. 
 4. 
 
