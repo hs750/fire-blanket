@@ -60,6 +60,8 @@ public class RequirementsTests {
 		
 		reactor.connectToInput(valve);
 		reactor.connectToOutput(valve);
+		valve.connectToInput(reactor);
+		valve.connectToInput(reactor);
 		valve.setOuputFlowRate(50);
 		
 		reactor.setControlRodLevel(50);
@@ -90,4 +92,36 @@ public class RequirementsTests {
 		
 	}
 
+	@Test
+	public void TU03_SF10(){
+		Reactor reactor = new Reactor("Reactor");
+		Valve valve = new Valve("Valve");
+		
+		reactor.connectToInput(valve);
+		reactor.connectToOutput(valve);
+		valve.connectToInput(reactor);
+		valve.connectToOutput(reactor);
+		
+		valve.setOuputFlowRate(50);
+		
+		reactor.setTemperature(125);
+		reactor.setControlRodLevel(50);
+		reactor.setWaterLevel(50);
+		reactor.setAmount(50);
+		reactor.calculate();
+		
+		Double temp = reactor.getTemperature();
+		
+		reactor.setTemperature(125);
+		reactor.setControlRodLevel(70);
+		reactor.setWaterLevel(50);
+		reactor.setAmount(50);
+		reactor.calculate();
+		
+		Double temp1 = reactor.getTemperature();
+		
+		assertTrue("" + temp + " " + temp1, temp < temp1);
+		
+		fail("no imp");
+	}
 }
