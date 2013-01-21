@@ -25,7 +25,7 @@ public class RequirementsTests {
 	 * 
 	 */
 	@Test
-	public void TU01_SF08() {
+	public void TU32_SF08() {
 		Turbine turbine = new Turbine("Turbine");
 		Generator generator = new Generator("Generator");
 		Valve valve = new Valve("Valve");
@@ -63,7 +63,7 @@ public class RequirementsTests {
 	 * Then the output flows are compared to make sure that higher temperature makes higher output rate and that the temperature being below 100 means no output.
 	 */
 	@Test
-	public void TU02_SF09(){
+	public void TU33_SF09(){
 		Reactor reactor = new Reactor("Reactor");
 		Valve valve = new Valve("Valve");
 		
@@ -110,7 +110,7 @@ public class RequirementsTests {
 	 * These values are compared to assert than the higher the control rod level the higher the temperature.
 	 */
 	@Test
-	public void TU03_SF10(){
+	public void TU34_SF10(){
 		Reactor reactor = new Reactor("Reactor");
 		Valve valve = new Valve("Valve");
 		
@@ -144,7 +144,7 @@ public class RequirementsTests {
 	 * These pressures are compared to assert that lower temperature means lower pressure. This is due to higher temperatures producing more steam, which intern increases the pressure.
 	 */
 	@Test
-	public void TU04_SF19(){
+	public void TU35_SF19(){
 		Reactor reactor = new Reactor("Reactor");
 		Valve valve = new Valve("Valve");
 		
@@ -181,7 +181,7 @@ public class RequirementsTests {
 	 * These are compared to assert that less steam input means the condenser has less pressure.
 	 */
 	@Test
-	public void TU05_SF20(){
+	public void TU036_SF20(){
 		Condenser condenser = new Condenser("Condenser");
 		Valve valve = new Valve("Valve");
 		Valve valve1 = new Valve("Valve 2");
