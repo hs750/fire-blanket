@@ -63,7 +63,7 @@ public class RequirementsTests {
 	 * Then the output flows are compared to make sure that higher temperature makes higher output rate and that the temperature being below 100 means no output.
 	 */
 	@Test
-	public void TU01_SF09(){
+	public void TU02_SF09(){
 		Reactor reactor = new Reactor("Reactor");
 		Valve valve = new Valve("Valve");
 		
@@ -172,6 +172,63 @@ public class RequirementsTests {
 		Double pres2 = reactor.getPressure();
 		
 		assertTrue("" + pres1 + " " + pres2, pres1 < pres2);
+		
+	}
+	/**
+	 * The pressure in the condenser is directly proportional to the amount of steam in the condenser. The more steam the higher the pressure.
+	 * Creates a simple power plant with a consenser in.
+	 * Calculates the pressure in the condenser after setting the input flow of steam to two different values.
+	 * These are compared to assert that less steam input means the condenser has less pressure.
+	 */
+	@Test
+	public void TU05_SF20(){
+		Condenser condenser = new Condenser("Condenser");
+		Valve valve = new Valve("Valve");
+		Valve valve1 = new Valve("Valve 2");
+		
+		valve.connectToOutput(condenser);
+		valve.connectToInput(valve1);
+		condenser.connectToInput(valve);
+		condenser.connectToOutput(valve1);
+		valve1.connectToInput(condenser);
+		valve1.connectToOutput(valve);
+		
+		valve.setOuputFlowRate(50);
+		valve.setAmount(50);
+		valve.setOuputFlowRate(0);
+		valve.setAmount(50);
+		
+		condenser.setAmount(50);
+		condenser.setTemperature(150);
+		condenser.setOuputFlowRate(0);
+		valve.calculate();
+		condenser.calculate();
+		
+		Double p1 = condenser.getPressure();
+		
+		condenser = new Condenser("Condenser");
+		
+		valve.connectToOutput(condenser);
+		valve.connectToInput(valve1);
+		condenser.connectToInput(valve);
+		condenser.connectToOutput(valve1);
+		valve1.connectToInput(condenser);
+		valve1.connectToOutput(valve);
+		
+		valve.setOuputFlowRate(50);
+		valve.setAmount(50);
+		valve.setOuputFlowRate(0);
+		valve.setAmount(50);
+		
+		condenser.setAmount(50);
+		condenser.setTemperature(150);
+		condenser.setOuputFlowRate(0);
+		valve.calculate();
+		condenser.calculate();
+		
+		Double p2 = condenser.getPressure();
+		
+		assertTrue("" + p1 + " " + p2, p1 < p2);
 		
 	}
 	
