@@ -40,11 +40,7 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
   The rods level is proportional to how much steam the reactor is generating.
   Lowering the rods is a good way to try to avoid meltdown.
 
-Type in `new game GAME_NAME` to start from scratch. To load a previously saved plant, type `load GAME_NAME`. Saved files have the extension `.fg` and an be found in the `saves/` folder.
-`>>> TODO screenshot of typing new game SuperPlant`
-
-Have a look at the commands list `>>> TODO add link to final file`
-
+* TODO add more commands
 
 
 <a name="um-3"/>
