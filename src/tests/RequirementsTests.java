@@ -235,7 +235,7 @@ public class RequirementsTests {
 	}
 	/**
 	 * The condenser pressure being displayed for the user will always be the same as the current result of the condenser pressure calculation.
-	 * Creates an instance of a game engine and a Condenser. The pressure of the condenser is retrieved and sent to the user interface for display. 
+	 * Creates an instance of a GameEngine and a Condenser. The pressure of the condenser is retrieved and sent to the user interface for display. 
 	 * The contents of the display are checked to contain the same pressure as that that was retrieved from the condenser.
 	 */
 	@Test
@@ -262,9 +262,36 @@ public class RequirementsTests {
 		
 		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
 		
-		
-		
 	}
+	/**
+	 * The reactor pressure being displayed for the user will always be the same as the current result of the reactor pressure calculation.
+	 * Creates an instance of a GameEngine and a Reactor. The pressure of the Reactor is retrieved and sent to the user interface for display. 
+	 * The contents of the display are checked to contain the same pressure as that that was retrieved from the Reactor.
+	 */
+	@Test
+	public void TU38_SF22(){
+		GameEngine ge = new GameEngine();
+		Reactor reactor= new Reactor("Reactor");
 	
+		reactor.setAmount(50);
+		reactor.setTemperature(50);
+		reactor.setControlRodLevel(50);
+		reactor.setOuputFlowRate(50);
+		reactor.connectToInput(reactor);
+		reactor.connectToOutput(reactor);
+		
+		reactor.calculate();
+		
+		Double conPressure = reactor.getPressure();
+		ArrayList<InfoPacket> infos = new ArrayList<InfoPacket>();
+		InfoPacket condenserInfo = reactor.getInfo();
+		infos.add(condenserInfo);
+		
+		ge.updateInterfaceComponents(infos);
+		
+		String outputString = ge.window.getRightPannelContence();
+		
+		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
+	}
 	
 }
