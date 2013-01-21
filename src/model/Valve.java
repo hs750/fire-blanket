@@ -82,30 +82,6 @@ public class Valve extends WaterComponent {
 		return false;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * Output flow rate of valve is directly based of of the input flow rate.
-	 * If valve is open, output flow  = input flow
-	 * otherwise the output flow = 0.
-	 *  ---DEPRECATED---
-	 */
-	@Override
-	protected double calculateOutputFlowRate() {
-		if(position){
-			ArrayList<Component> recievesInputFrom = super.getRecievesInputFrom();
-			Iterator<Component> it = recievesInputFrom. iterator();
-			Double inFlowRate = 0.0;
-			Component comp = null;
-			while (it.hasNext()){
-				comp = it.next();
-				inFlowRate += comp.getOutputFlowRate();
-			}
-			return inFlowRate;
-		}else{
-			return 0;
-		}
-
-	}
 
 	/**
 	 * @return The boolean representation of the position of the valve, false = closed, true = open

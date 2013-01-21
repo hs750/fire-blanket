@@ -64,7 +64,7 @@ public abstract class WaterComponent extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket wcompinfo = super.getInfo();
-		wcompinfo.namedValues.add(new Pair<Double>(Label.OPFL, getAmount()));
+		wcompinfo.namedValues.add(new Pair<Double>(Label.OPFL, getOutputFlowRate()));
 		wcompinfo.namedValues.add(new Pair<Double>(Label.Vlme, getVolume()));
 		wcompinfo.namedValues.add(new Pair<Double>(Label.Amnt, getAmount()));
 		wcompinfo.namedValues.add(new Pair<Double>(Label.temp, getTemperature()));
@@ -86,11 +86,7 @@ public abstract class WaterComponent extends Component {
 		return false;
 	}
 
-	/** 
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected abstract double calculateOutputFlowRate();
+
 
 	/** 
 	 * {@inheritDoc}
@@ -238,6 +234,7 @@ public abstract class WaterComponent extends Component {
 				break;
 			}
 		}
+		double leftToOutput = totalOutput;
 		int count = outputsWaterTo.size();
 		double outputPerComponent;
 		WaterComponent comp;
@@ -245,15 +242,15 @@ public abstract class WaterComponent extends Component {
 		Iterator<WaterComponent> cIt = outputsWaterTo.iterator();
 		while(cIt.hasNext()){
 			comp = cIt.next();
-			outputPerComponent = (totalOutput / count);
+			outputPerComponent = (leftToOutput / count);
 			if (outputPerComponent > comp.maxInput()){
-				totalOutput = totalOutput - comp.maxInput();// this is the bit where water is transferred
+				leftToOutput = leftToOutput - comp.maxInput();// this is the bit where water is transferred
 				InfoPacket waterpack = new InfoPacket();
 				waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, comp.maxInput()));
 				waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, watertemperature));
 				comp.recieveWater(waterpack);
 			}else{
-				totalOutput = totalOutput - outputPerComponent;// this is the bit where water is transferred
+				leftToOutput = leftToOutput - outputPerComponent;// this is the bit where water is transferred
 				InfoPacket waterpack = new InfoPacket();
 				waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, outputPerComponent));
 				waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, watertemperature));
@@ -261,8 +258,9 @@ public abstract class WaterComponent extends Component {
 			}
 			count = count - 1;
 		}
+		setOuputFlowRate(totalOutput - leftToOutput);
 		InfoPacket waterpack = new InfoPacket();
-		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, totalOutput));
+		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, leftToOutput));
 		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, watertemperature));
 		this.recieveWater(waterpack);
 	}

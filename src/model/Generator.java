@@ -90,7 +90,6 @@ public class Generator extends Component {
 	 * 
 	 * @return amount of electricity generated in current cycle.
 	 */
-	@Override
 	protected double calculateOutputFlowRate() {
 		ArrayList<Component> inputComponents = super.getRecievesInputFrom();
 		double totalInputRPM = 0;

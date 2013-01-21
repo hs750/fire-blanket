@@ -87,16 +87,6 @@ public class Pump extends WaterComponent {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * The output flow rate of the pump is directly proportional to the RPM of the pump.
-	 *  ---DEPRECATED---
-	 */
-	@Override
-	protected double calculateOutputFlowRate() {
-		//The output flow rate of the pump is directly proportional to the RPM of the pump.
-		return RPM * getPumpFlowRatio(); 
-	}
 
 	/** 
 	 * {@inheritDoc}

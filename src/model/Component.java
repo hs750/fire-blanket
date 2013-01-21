@@ -19,7 +19,7 @@ public abstract class Component {
 	private String name;
 	private int meanTimeBetweenFailure; //MTBF
 	private Double failureTime;
-	private Double outputFlowRate = 0.0;	//---DEPRECATED---
+	private Double outputFlowRate = 0.0;
 	private ArrayList<Component> outputsTo = new ArrayList<Component>();
 	private ArrayList<Component> receivesInputFrom = new ArrayList<Component>();
 	private boolean failed = false; //TODO make it so that this will work with infoPackets
@@ -202,14 +202,6 @@ public abstract class Component {
 	 * @return The failure state of the component.
 	 */
 	protected abstract boolean calculateFailed();
-
-	/**
-	 * The only specific calculation that all components must do as every component has an output flow.
-	 * Abstract because every type of component will calculate this in a different way.
-	 * @return The new output flow rate
-	 * ---DEPRECATED---
-	 */
-	protected abstract double calculateOutputFlowRate();
 
 	/**
 	 * Sets all attributes of a component using the given info packet.

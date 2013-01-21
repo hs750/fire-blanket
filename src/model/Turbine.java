@@ -13,7 +13,6 @@ import util.Pair.Label;
  * @author Harrison
  */
 public class Turbine extends WaterComponent {
-	private double RPM = 0.0;
 	/**
 	 * Ratio governing how much of the steam flow transfers to RPM of the turbine.
 	 */
@@ -36,9 +35,6 @@ public class Turbine extends WaterComponent {
 			currentpair = pi.next();
 			currentlabel = currentpair.getLabel();
 			switch (currentlabel){
-			case RPMs:
-				RPM = (Double) currentpair.second();
-				break;
 			default:
 				break;
 			}
@@ -81,15 +77,6 @@ public class Turbine extends WaterComponent {
 		}
 		return false;
 	}
-	/**
-	 * Calculate the RPM of the turbine
-	 * RPM is based on the flow rate of steam in to the turbine / the ratio which energy is lost in pushing the turbine. 
-	 * @return The RPM of the turbine from the current cycle
-	 */
-	protected double calculateRPM(){
-		//RPM is proportional to the input flow rate of steam into the turbine.
-		return getTotalInputFlowRate() / RPMRatio;
-	}
 
 	/**
 	 * Get the total flow rate from components that is being input into this component.
@@ -108,16 +95,6 @@ public class Turbine extends WaterComponent {
 		}
 		return totalIPFL;
 	}
-	/**
-	 * {@inheritDoc}
-	 * Output flow rate of turbine is equal to the input flow rate.
-	 *  ---DEPRECATED---
-	 */
-	@Override
-	protected double calculateOutputFlowRate() {
-		//OutputFlowRate = input flow rate
-		return getTotalInputFlowRate();
-	}
 
 	/** 
 	 * {@inheritDoc}
@@ -132,8 +109,6 @@ public class Turbine extends WaterComponent {
 			pair = it.next();
 			label = pair.getLabel();
 			switch(label){
-			case RPMs:
-				RPM = (Double) pair.second();
 			default:
 				break;
 			}
@@ -144,14 +119,9 @@ public class Turbine extends WaterComponent {
 	 * @return The revolutions per minute of the turbine
 	 */
 	public double getRPM() {
-		return RPM;
+		return getOutputFlowRate() * getRPMRatio();
 	}
-	/**
-	 * @param RPM The revolutions per minute that the turbine will spin at.
-	 */
-	public void setRPM(double RPM) {
-		this.RPM = RPM;
-	}
+
 	/**
 	 * @return The ratio that steam flow round the turbine is converted to RPM
 	 */

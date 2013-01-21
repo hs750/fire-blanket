@@ -134,16 +134,6 @@ public class Reactor extends WaterComponent {
 
 	/**
 	 * {@inheritDoc}
-	 * The output flow rate of the Reactor is proportional to the pressure within the reactor.
-	 *  ---DEPRECATED---
-	 */
-	@Override
-	protected double calculateOutputFlowRate(){
-		// OPFL is proportional to the pressure. 
-		return pressure / 2;
-	}
-	/**
-	 * {@inheritDoc}
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {

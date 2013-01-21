@@ -61,11 +61,9 @@ public class Infrastructure extends Component {
 		super.setOuputFlowRate(calculateOutputFlowRate());
 	}
 	
-	/** 
-	 * {@inheritDoc}
+	/**
 	 * The output flow rate of an infrastructure component is the total amount of electricity flowing into the component, minus the electricity that it itself needs to function.
 	 */
-	@Override
 	protected double calculateOutputFlowRate() {
 		double electrisityGenerated = 0;
 		ArrayList<Component> inputComponents = super.getRecievesInputFrom();

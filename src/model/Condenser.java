@@ -148,27 +148,7 @@ public class Condenser extends WaterComponent {
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 * The output flow rate of a Condenser is equel to that of the pumps that it is outputing to.
-	 *  ---DEPRECATED---
-	 */
-	@Override
-	protected double calculateOutputFlowRate() {
-		// Must distinguish between a pump that pumps steam in with a pump that pumps coolent round (possibly by name of pump having collent or alike in)
-		ArrayList<Component> outputs = super.getOutputsTo();
-		Iterator<Component> it = outputs.iterator();
-		Component c = null;
-		double totalOPFL = 0;
-		while(it.hasNext()){
-			c = it.next();
-			if(!c.getName().contains("Coolant")){
-				totalOPFL += c.getOutputFlowRate();
-			}
-		}
 
-		return totalOPFL;
-	}
 	/**
 	 * {@inheritDoc}
 	 */
