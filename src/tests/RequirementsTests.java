@@ -55,7 +55,13 @@ public class RequirementsTests {
 		
 		assertTrue("Original: " + outputOfGenerator + ". New: " + generator.getOutputFlowRate(), outputOfGenerator < generator.getOutputFlowRate());
 	}
-	
+	/**
+	 * The hotter the reactor tank is, the higher the rate of steam production. No steam will be produced while the reactor temperature is below 100 degrees Celsius.
+	 * Creates a basic power plant containing just a valve and a reactor. 
+	 * The valves output flow rate is set to 50 so that the Reactor has something to use to calculate with. And other reactor values are initiallised.
+	 * The the output flow rate of the reactor is calculated after three settings of the temperature (two over 100 and one below).
+	 * Then the output flows are compared to make sure that higher temperature makes higher output rate and that the temperature being below 100 means no output.
+	 */
 	@Test
 	public void TU01_SF09(){
 		Reactor reactor = new Reactor("Reactor");
@@ -97,7 +103,12 @@ public class RequirementsTests {
 		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] > reactorOutputFlow[1] && reactorOutputFlow[2] == 0);
 		
 	}
-
+	/**
+	 * The higher the control rods are raised the higher the rate of increase of temperature in the reactor will be.
+	 * A simple power plant is created with two components; a reactor and a valve.
+	 * The values of these components are initialised, then the temperature of the reactor is read after a calculation is preformed after setting the control rods at various positions.
+	 * These values are compared to assert than the higher the control rod level the higher the temperature.
+	 */
 	@Test
 	public void TU03_SF10(){
 		Reactor reactor = new Reactor("Reactor");
@@ -127,6 +138,11 @@ public class RequirementsTests {
 		
 	}
 	
+	/**
+	 * The pressure generated in the reactor tank is directly proportional to the amount of steam generated in the reactor, so the pressure should always increase with amount of steam in the reactor. 
+	 * Creates a basic power plant with two components, a reactor and a valve. These two components are initialised then by changing the temperature the pressure is changed. After the temperature is changed, the reactor calculates and its pressure read.
+	 * These pressures are compared to assert that lower temperature means lower pressure. This is due to higher temperatures producing more steam, which intern increases the pressure.
+	 */
 	@Test
 	public void TU04_SF19(){
 		Reactor reactor = new Reactor("Reactor");
@@ -158,5 +174,7 @@ public class RequirementsTests {
 		assertTrue("" + pres1 + " " + pres2, pres1 < pres2);
 		
 	}
+	
+	
 	
 }
