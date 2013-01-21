@@ -67,8 +67,8 @@ public class Valve extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
-		super.setFailed(calculateFailed());
-		super.setOuputFlowRate(calculateOutputFlowRate());
+//		super.setFailed(calculateFailed());
+//		super.setOuputFlowRate(calculateOutputFlowRate());
 
 
 	}
@@ -152,34 +152,7 @@ public class Valve extends WaterComponent {
 			}
 		}
 	}
-	/**
-	 * ---DEPRECATED---
-	 */
-	public static void main(String[] args){
-		InfoPacket in = new InfoPacket();
-		in.namedValues.add(new Pair<String>(Label.cNme, "Valve 1"));
-		in.namedValues.add(new Pair<Double>(Label.falT, 1.23));
-		in.namedValues.add(new Pair<Double>(Label.OPFL, 12.34));
-		in.namedValues.add(new Pair<Boolean>(Label.psit, true));
-		Valve v = new Valve("Valve 1");
-		try {
-			v.takeInfo(in);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Valve v2 = new Valve("V2");
-		v2.setOuputFlowRate(1234.567);
-		v2.connectToInput(v);
-		v.connectToOutput(v2);
-		System.out.println("Flow from v2: " + v2.getOutputFlowRate());
-		System.out.println("Flow out from v: " + v.getOutputFlowRate());
-		v.setPosition(false);
-		System.out.println("Valve is now closed");
-		v.calculate();
-		System.out.println("Flow out from v: " + v.getOutputFlowRate());
-
-	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */

@@ -65,15 +65,15 @@ public class Pump extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
-		super.setFailed(calculateFailed());
-		if(!super.isFailed()){
-			super.setOuputFlowRate(calculateOutputFlowRate());
-		}else{
-			super.setOuputFlowRate(0);
-			RPM = 0;
-		}
+		//		super.setFailed(calculateFailed());
+		//		if(!super.isFailed()){
+		//			super.setOuputFlowRate(calculateOutputFlowRate());
+		//		}else{
+		//			super.setOuputFlowRate(0);
+		//			RPM = 0;
+		//		}
 	}
-	
+
 	/** 
 	 * {@inheritDoc}
 	 * Pumps only fail when they reach there randomly calculated failure time.
@@ -86,7 +86,7 @@ public class Pump extends WaterComponent {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 * The output flow rate of the pump is directly proportional to the RPM of the pump.
@@ -145,14 +145,20 @@ public class Pump extends WaterComponent {
 	public void setRPM(double RPM) {
 		this.RPM = RPM;
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public InfoPacket outputWater() {
 		InfoPacket waterpack = new InfoPacket();
-		double packAmount = getRPM();
+		double packAmount;
+		double pumpspeed = (getRPM() * getPumpFlowRatio());
+		if (getAmount() > pumpspeed){
+			packAmount = getRPM();
+		}else{
+			packAmount = getAmount();
+		}
 		waterpack.namedValues.add(new Pair<Double>(Pair.Label.Amnt, packAmount));
 		setAmount(getAmount() - packAmount);
 		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));

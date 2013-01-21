@@ -59,7 +59,8 @@ public class Generator extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.elec, electrisityGenerated));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, getElectrisityGenerated()));
+		info.namedValues.add(new Pair<Double>(Label.elec, getElectrisityGenerated()));
 		return info;
 	}
 

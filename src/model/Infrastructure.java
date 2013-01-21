@@ -49,7 +49,8 @@ public class Infrastructure extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.elec, electrisityneeded ));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, getElectrisityneeded()));
+		info.namedValues.add(new Pair<Double>(Label.elec, getElectrisityneeded()));
 		return info;
 	}
 	/** 

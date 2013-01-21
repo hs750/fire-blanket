@@ -64,9 +64,10 @@ public abstract class WaterComponent extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket wcompinfo = super.getInfo();
-		wcompinfo.namedValues.add(new Pair<Double>(Label.Vlme, volume));
-		wcompinfo.namedValues.add(new Pair<Double>(Label.Amnt, amount));
-		wcompinfo.namedValues.add(new Pair<Double>(Label.temp, temperature));
+		wcompinfo.namedValues.add(new Pair<Double>(Label.OPFL, getAmount()));
+		wcompinfo.namedValues.add(new Pair<Double>(Label.Vlme, getVolume()));
+		wcompinfo.namedValues.add(new Pair<Double>(Label.Amnt, getAmount()));
+		wcompinfo.namedValues.add(new Pair<Double>(Label.temp, getTemperature()));
 		return wcompinfo;
 	}
 	

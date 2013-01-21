@@ -59,14 +59,14 @@ public class Condenser extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
-		super.setFailed(calculateFailed());
-		if(!super.isFailed()){
+//		super.setFailed(calculateFailed());
+//		if(!super.isFailed()){
 			// double oldPressure = pressure;
 			//pressure = calculatePressure();
 			//setTemperature(calculateTemp(oldPressure));
-			waterLevel = calculateWaterLevel();
-			super.setOuputFlowRate(calculateOutputFlowRate());
-		}
+//			waterLevel = calculateWaterLevel();
+//			super.setOuputFlowRate(calculateOutputFlowRate());
+//		}
 	}
 
 	/**

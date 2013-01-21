@@ -60,14 +60,14 @@ public class Turbine extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
-		super.setFailed(calculateFailed());
-		if(!super.isFailed()){
-			RPM = calculateRPM();
-			super.setOuputFlowRate(calculateOutputFlowRate());
-		}else{
-			RPM = 0;
-			super.setOuputFlowRate(0);
-		}
+//		super.setFailed(calculateFailed());
+//		if(!super.isFailed()){
+//			RPM = calculateRPM();
+//			super.setOuputFlowRate(calculateOutputFlowRate());
+//		}else{
+//			RPM = 0;
+//			super.setOuputFlowRate(0);
+//		}
 
 	}
 	/**
