@@ -10,17 +10,30 @@ import util.MaxInputComparator;
 import util.Pair;
 import util.Pair.Label;
 
-
+/**
+ * A general component that has water flowing through, all components within the power plant that
+ * have water flowing through them are children of this class.
+ * Contains all common attributes and methods of components that relate to the flow of water.
+ * 
+ * @author Harrison
+ */
 public abstract class WaterComponent extends Component {
 	private Double temperature = 50.0;
 	private Double amount = 500.0;
 	private Double volume = 9000.0;
 	private ArrayList<WaterComponent> outputsWaterTo = new ArrayList<WaterComponent>();
 
+	/** 
+	 * {@inheritDoc}
+	 */
 	public WaterComponent(String name) {
 		super(name);	
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 * sets attributes: temperature, volume and amount.
+	 */
 	public WaterComponent(String name, InfoPacket info) {
 		super(name, info);
 		Pair<?> currentpair = null;
@@ -44,7 +57,10 @@ public abstract class WaterComponent extends Component {
 			}
 		}
 	}
-
+	/** 
+	 * {@inheritDoc}
+	 * returns volume, amount and temperature
+	 */
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket wcompinfo = super.getInfo();
@@ -53,25 +69,31 @@ public abstract class WaterComponent extends Component {
 		wcompinfo.namedValues.add(new Pair<Double>(Label.temp, temperature));
 		return wcompinfo;
 	}
-
+	
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void calculate() {
-		// TODO Auto-generated method stub
-
-	}
-
+	public abstract void calculate();
+	
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	protected boolean calculateFailed() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
-	protected double calculateOutputFlowRate() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	protected abstract double calculateOutputFlowRate();
 
+	/** 
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
 		super.takeInfo(info);
@@ -106,7 +128,10 @@ public abstract class WaterComponent extends Component {
 		amount = amnt;
 	}
 	
-
+	/** 
+	 * {@inheritDoc}
+	 * also adds component to the list of components that this object outputs water to
+	 */
 	public void connectToOutput(Component component){
 		super.connectToOutput(component);
 		if (component instanceof WaterComponent){
@@ -147,6 +172,7 @@ public abstract class WaterComponent extends Component {
 	public double getPressure() {
 		return (getAmount()*getTemperature())/getVolume();
 	}
+	
 	/**
 	 * Recieves an amount/temp waterpacket
 	 * @param info: InfoPacket containing a Temp and an Amnt
@@ -179,11 +205,17 @@ public abstract class WaterComponent extends Component {
 		}
 		setAmount(totalWaterAmount);
 	}	
-
+	
+	/** 
+	 * sorts the list of components that this outputs water to by the maximum input they accept
+	 */
 	public void sortOutputs(){
 		Collections.sort( (List<WaterComponent>) outputsWaterTo, new MaxInputComparator() );
 	}
 
+	/** 
+	 * method to work out how much water should go to each component that this component outputs to
+	 */
 	public void transmitOutputWater(){
 		InfoPacket info = outputWater();
 		Double watertemperature = 0.0;
@@ -234,8 +266,13 @@ public abstract class WaterComponent extends Component {
 		this.recieveWater(waterpack);
 	}
 
-
+	/** 
+	 * @return The maximum amount of water this component can accept
+	 */
 	public abstract double maxInput();
 
+	/** 
+	 *  @return the amount of water the component is trying to get rid of this gametick
+	 */
 	public abstract InfoPacket outputWater();
 }

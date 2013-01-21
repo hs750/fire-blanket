@@ -38,7 +38,7 @@ public abstract class Component {
 	}
 	/**
 	 * Setup the component ready for use, including taking info to set attributes of component.
-	 * Alos set its name and initialise the lists of components it is connected to.
+	 * Also set its name and initialise the lists of components it is connected to.
 	 * @param name The name of the component 
 	 * @param info The infoPacket to use to initialise the component
 	 */
@@ -168,7 +168,7 @@ public abstract class Component {
 	}
 
 	/**
-	 * Create an info packet containing data about all attributes for the component - should call super.getSuperInfo()
+	 * Create an info packet containing data about all attributes for the component
 	 * @return info An info packet containing all attributes for the component
 	 */
 	public InfoPacket getInfo(){
