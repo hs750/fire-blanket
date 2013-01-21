@@ -388,5 +388,34 @@ public class RequirementsTests {
 		
 		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conTemp.toString()));
 	}
+	/**
+	 * The condenser temperature being displayed for the user will always be the same as the current result of the condenser temperature calculation.
+	 * Creates an instance of a GameEngine and a Condenser. The temperature of the condenser is retrieved and sent to the user interface for display. 
+	 * The contents of the display are checked to contain the same Temperature as that that was retrieved from the condenser.
+	 */
+	@Test
+	public void TU41_SF21(){
+		GameEngine ge = new GameEngine();
+		Condenser condenser = new Condenser("Condenser");
 	
+		condenser.setAmount(50);
+		condenser.setTemperature(50);
+		condenser.setOuputFlowRate(50);
+		condenser.connectToInput(condenser);
+		condenser.connectToOutput(condenser);
+		
+		condenser.calculate();
+		
+		Double conTemp = condenser.getTemperature();
+		ArrayList<InfoPacket> infos = new ArrayList<InfoPacket>();
+		InfoPacket condenserInfo = condenser.getInfo();
+		infos.add(condenserInfo);
+		
+		ge.updateInterfaceComponents(infos);
+		
+		String outputString = ge.window.getRightPannelContence();
+		
+		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conTemp.toString()));
+		
+	}
 }
