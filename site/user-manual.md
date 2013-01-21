@@ -36,7 +36,7 @@
 ## 4. Functionalities
 
 ### Autosave
-The game is autosaved every <b>TODO how often is the game saved?</b> seconds. The autosave file can be found in `saves/autosave.fg`.
+The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
 
 <a name="um-5"/>
 ## 5. Commands index + description
