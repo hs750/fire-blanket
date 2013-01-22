@@ -37,7 +37,6 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
   the user can open and close the valves to stop the flow of water.
 
 
-
 <a name="um-3"/>
 ## 3. Background story
 
@@ -57,6 +56,9 @@ Six months have passed since the blanket of fire descended and the newly establi
 
 <a name="um-4"/>
 ## 4. Functionalities
+
+* **TODO** add plant pic from the design document
+
 ### Autosave
 The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
 
