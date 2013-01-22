@@ -39,8 +39,9 @@ public class RequirementsTests {
 		turbine.connectToOutput(valve);
 		generator.connectToInput(turbine);
 		
-		valve.setOuputFlowRate(50);
-		turbine.setOuputFlowRate(50);
+		valve.setAmount(20);
+		turbine.setAmount(50);
+		
 		valve.calculate();
 		
 		turbine.calculate();
@@ -49,8 +50,8 @@ public class RequirementsTests {
 		
 		Double outputOfGenerator = generator.getOutputFlowRate();
 		
-		valve.setOuputFlowRate(200);
-		turbine.setOuputFlowRate(200);
+		valve.setAmount(40);
+		turbine.setAmount(100);
 		turbine.calculate();
 		generator.calculate();
 		
@@ -75,8 +76,8 @@ public class RequirementsTests {
 		reactor.connectToOutput(valve);
 		valve.connectToInput(reactor);
 		valve.connectToInput(reactor);
-		valve.setOuputFlowRate(50);
-		
+		valve.setAmount(30);
+		valve.calculate();
 		
 		reactor.setControlRodLevel(50);
 		reactor.setAmount(50);
@@ -84,7 +85,7 @@ public class RequirementsTests {
 		reactor.setWaterLevel(50);
 		reactor.calculate();
 	
-		reactorOutputFlow[0] = reactor.getOutputFlowRate();
+		reactorOutputFlow[0] = reactor.getAmount();
 		
 		reactor.setTemperature(125);
 		reactor.setControlRodLevel(50);
@@ -92,7 +93,7 @@ public class RequirementsTests {
 		reactor.setAmount(50);
 		reactor.calculate();
 	
-		reactorOutputFlow[1] = reactor.getOutputFlowRate();
+		reactorOutputFlow[1] = reactor.getAmount();
 		
 		reactor.setTemperature(50);
 		reactor.setControlRodLevel(50);
@@ -100,7 +101,7 @@ public class RequirementsTests {
 		reactor.setAmount(50);
 		reactor.calculate();
 	
-		reactorOutputFlow[2] = reactor.getOutputFlowRate();
+		reactorOutputFlow[2] = reactor.getAmount();
 		
 		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] > reactorOutputFlow[1] && reactorOutputFlow[2] == 0);
 		
@@ -183,7 +184,7 @@ public class RequirementsTests {
 	 * These are compared to assert that less steam input means the condenser has less pressure.
 	 */
 	@Test
-	public void TU036_SF20(){
+	public void TU36_SF20(){
 		Condenser condenser = new Condenser("Condenser");
 		Valve valve = new Valve("Valve");
 		Valve valve1 = new Valve("Valve 2");
@@ -195,38 +196,31 @@ public class RequirementsTests {
 		valve1.connectToInput(condenser);
 		valve1.connectToOutput(valve);
 		
-		valve.setOuputFlowRate(50);
-		valve.setAmount(50);
-		valve.setOuputFlowRate(0);
-		valve.setAmount(50);
+		valve.setAmount(30);
+		valve1.setAmount(30);
+		valve.setTemperature(50);
+		valve1.setTemperature(30);
 		
 		condenser.setAmount(50);
-		condenser.setTemperature(150);
-		condenser.setOuputFlowRate(0);
+		condenser.setTemperature(50);
+		
 		valve.calculate();
 		condenser.calculate();
+		valve1.calculate();
 		
 		Double p1 = condenser.getPressure();
 		
-		condenser = new Condenser("Condenser");
-		
-		valve.connectToOutput(condenser);
-		valve.connectToInput(valve1);
-		condenser.connectToInput(valve);
-		condenser.connectToOutput(valve1);
-		valve1.connectToInput(condenser);
-		valve1.connectToOutput(valve);
-		
-		valve.setOuputFlowRate(50);
-		valve.setAmount(50);
-		valve.setOuputFlowRate(0);
-		valve.setAmount(50);
+		valve.setAmount(60);
+		valve1.setAmount(30);
+		valve.setTemperature(50);
+		valve1.setTemperature(30);
 		
 		condenser.setAmount(50);
-		condenser.setTemperature(150);
-		condenser.setOuputFlowRate(0);
+		condenser.setTemperature(50);
+		
 		valve.calculate();
 		condenser.calculate();
+		valve1.calculate();
 		
 		Double p2 = condenser.getPressure();
 		
@@ -394,7 +388,7 @@ public class RequirementsTests {
 	 * The contents of the display are checked to contain the same Temperature as that that was retrieved from the condenser.
 	 */
 	@Test
-	public void TU41_SF21(){
+	public void TU41_SF25(){
 		GameEngine ge = new GameEngine();
 		Condenser condenser = new Condenser("Condenser");
 	
@@ -416,6 +410,64 @@ public class RequirementsTests {
 		String outputString = ge.window.getRightPannelContence();
 		
 		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conTemp.toString()));
+		
+	}
+	
+	@Test
+	public void TU42_SF26(){
+		Reactor r = new Reactor("Reactor");
+		Pump p = new Pump("Pump");
+		Valve v = new Valve("Valve");
+		
+		r.connectToInput(p);
+		r.connectToOutput(v);
+		p.connectToInput(v);
+		p.connectToOutput(r);
+		v.connectToInput(r);
+		v.connectToOutput(p);
+		
+		r.setAmount(50);
+		r.setControlRodLevel(100);
+		r.setTemperature(50);
+		r.setOuputFlowRate(50);
+		p.setAmount(50);
+		p.setRPM(100);
+		p.setOuputFlowRate(50);
+		v.setAmount(50);
+		v.setOuputFlowRate(50);
+		
+		p.calculate();
+		v.calculate();
+		r.calculate();
+		Double a1 = r.getWaterLevel();
+		
+		r.calculate();
+		Double a2 = r.getWaterLevel();
+		
+		
+		
+		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		
+		r.setAmount(50);
+		r.setControlRodLevel(0);
+		r.setTemperature(50);
+		r.setOuputFlowRate(50);
+		p.setAmount(50);
+		p.setRPM(100);
+		p.setOuputFlowRate(50);
+		v.setAmount(50);
+		v.setOuputFlowRate(50);
+		
+		p.calculate();
+		v.calculate();
+		r.calculate();
+		Double a3 = r.getWaterLevel();
+		
+		r.calculate();
+		Double a4 = r.getWaterLevel();
+		
+		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		
 		
 	}
 }
