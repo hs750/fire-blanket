@@ -483,6 +483,50 @@ public class RequirementsTests {
 		assertTrue("" + a1 + " " + a2, a1 < a2); //Test increase pump rate increases water level
 		
 	}
+	
+	@Test
+	public void TU43_SF27(){ //TODO implement this once condenser is ready.
+		Condenser c = new Condenser("Condenser");
+		Valve v = new Valve("Valve");
+		
+	}
+	
+	@Test
+	public void TU44_SF28(){ // TODO impoement when condenser is ready.
+		
+	}
+	/**
+	 * The current water level of the reactor readout being displayed to the user will always be the same as the value of the reactor water level calculation.
+	 */
+	@Test
+	public void TU45_SF29(){
+		GameEngine ge = new GameEngine();
+		Reactor r = new Reactor("Reactor");
+		
+		r.connectToInput(r);
+		r.connectToOutput(r);
+		
+		r.setAmount(50);
+		r.setWaterLevel(50);
+		r.setControlRodLevel(50);
+		
+		r.calculate();
+		
+		ArrayList<InfoPacket> infos = new ArrayList<InfoPacket>();
+		infos.add(r.getInfo());
+		
+		ge.updateInterfaceComponents(infos);
+		
+		String rWL = "" + r.getWaterLevel();
+		
+		String outputString = ge.window.getRightPannelContence();
+		
+		assertTrue(rWL + " " + outputString, outputString.contains("Water level: "+ rWL));
+		
+		
+	}
+	
+	
 	/**
 	 * All components apart from Valves and Generators will eventually fail. 
 	 * Test proves that the Turbine component inevitably fails. 
