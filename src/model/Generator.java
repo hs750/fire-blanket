@@ -23,7 +23,7 @@ public class Generator extends Component {
 	 * The generation ratio is the ratio at which the generator converts the the input from a turbine in to electricity.
 	 * Better generators would have higher values.
 	 */
-	private double generationRatio = 1.5; // should this have some sort of infopacket equivalent?
+	private double generationRatio = 150; // should this have some sort of infopacket equivalent?
 
 	/**
 	 * @see model.Component#Component(String)

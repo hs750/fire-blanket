@@ -104,7 +104,7 @@ public class Reactor extends WaterComponent {
 	 */
 	protected void calculateTemperature(){
 		double heatgenerated = 1000*(1 + getControlRodLevel());
-		double tempIncrease = heatgenerated/getAmount();
+		double tempIncrease = heatgenerated/(getAmount()*100);
 		setTemperature(getTemperature() + tempIncrease);
 	}
 	/**
