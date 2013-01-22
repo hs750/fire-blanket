@@ -22,17 +22,15 @@
 ## 1. Introduction
 
 <a name="um-2"/>
-## 2. How to play
+## 2. Quick start guide
 
 _This is a short guide to start playing immediately. To understand and maybe master the game, have a look at the [background story](#um-3) and at [functionalities](#um-4) sections._
 
 **Step 1.** Run `fireblanket.jar`
 
-**Step 2.** Enter `new game <NAME>`. Replace `<NAME>` with your name.
+**Step 2.** Enter `new game <your name goes in here>`
 
-**Step 3.** Enter `load <NAME of saved file>`. 
-
-**Step 4.** Type in [commands](#um-5) to control the nuclear power plant.
+**Step 3.** Type in [commands](#um-5) to control the nuclear power plant.
 
 Produce sufficient energy to sustain the infrastructure. Fail and you lose the game. You also lose if you overheat the reactor, so be careful.
 
