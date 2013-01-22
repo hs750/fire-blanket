@@ -44,22 +44,6 @@ public class MainWindow
 	private JTextField Commandline;
 
 	public Console console;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//MainWindow window = new MainWindow(this, "");
-					
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -97,7 +81,6 @@ public class MainWindow
 		int textPaneHorizontal = 400;
 		frmFireBlanket = new JFrame();
 		frmFireBlanket.setResizable(false);
-		//frmFireBlanket.setMinimumSize(new Dimension(460, 500));
 		frmFireBlanket.setTitle("Fire Blanket");
 		frmFireBlanket.setBounds(100, 100, 769, 532);
 		frmFireBlanket.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,7 +141,6 @@ public class MainWindow
 		CommandlineOutput.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		CommandlineOutput.setLineWrap(true);
 		CommandlineOutput.setWrapStyleWord(true);
-		//TODO get this sorted out
 		DefaultCaret caret = (DefaultCaret)CommandlineOutput.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
@@ -190,25 +172,7 @@ public class MainWindow
 		Component verticalStrut_1 = Box.createVerticalStrut(5);
 		verticalBox.add(verticalStrut_1);
 
-/*
-		JMenuBar menuBar = new JMenuBar();
-		frmFireBlanket.setJMenuBar(menuBar);
 
-		JMenu mnOptions = new JMenu("Options");
-		menuBar.add(mnOptions);
-
-		JMenuItem mntmNewGame_1 = new JMenuItem("New game");
-		mnOptions.add(mntmNewGame_1);
-
-		JMenuItem mntmNewGame = new JMenuItem("Save game");
-		mnOptions.add(mntmNewGame);
-
-		JMenuItem mntmLoadGame = new JMenuItem("Load game");
-		mnOptions.add(mntmLoadGame);
-
-		JMenuItem mntmHighScores = new JMenuItem("High scores");
-		mnOptions.add(mntmHighScores);
-		*/
 		console = new Console(Commandline, CommandlineOutput, new Parser(engine));
 		//Hooking up all the events to action listeners.
 		Commandline.addActionListener(console);

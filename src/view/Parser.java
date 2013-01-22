@@ -14,7 +14,7 @@ import util.Pair.Label;
 /**
  * This class is responsible for parsing text commands supplied by the user and then executing a fitting gameEngine method
  * or interacting with a certain component
- * Valid commands are: save; save as; show saves; load; new game; exit; quit
+ * Valid commands are: save; save as; show saves; load; new game userName; exit; quit
  * valveName open/close
  * pumpName RPM/rpm number;
  * CondeserName RPM/rpm number;
@@ -106,8 +106,6 @@ public class Parser {
 				
 				if (component.getName().contains("Valve")) 
 				{
-					// i.namedValues.add(new Pair<String>(Pair.Label.cNme,
-					// component.getName()));
 					if (command.equals("open")) {
 						i.namedValues.add(new Pair<Boolean>(Pair.Label.psit, true));
 					} else if (command.equals("close")) 
@@ -158,7 +156,6 @@ public class Parser {
 			
 			Pattern pattern = Pattern.compile("\\s+");
 		    Matcher matcher = pattern.matcher(lowerCase);
-		    //boolean check = matcher.find();
 		    lowerCase = matcher.replaceAll(" ");
 		    
 			

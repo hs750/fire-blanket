@@ -22,8 +22,7 @@ import view.*;
  */
 public class GameEngine {
 	public ArrayList<Component> powrPlntComponents = null;
-	// Parser parser;
-	// UI ui = null; Commented out for now
+
 	public MainWindow window;
 	String fileName; 
 	public boolean notFailed = true;	
@@ -34,22 +33,9 @@ public class GameEngine {
 	 */
 	public GameEngine() {
 		powrPlntComponents = new ArrayList<Component>();
-		// ui = new UI(this); Commented out for now
-		// parser = new Parser(this);
-		
-		
+
 		window = new MainWindow(this, "Welcome to Fire Blanket, Post Apocalyptic Nuclear power plant simulator. Type new game and you operator name into the console to start playing.");
 
-		/*
-		 * final Timer gameLoop = new Timer(); gameLoop.scheduleAtFixedRate(new
-		 * TimerTask(){ boolean stop = false; long timesRoundLoop = 0;
-		 * 
-		 * public void run(){ timesRoundLoop++; if(timesRoundLoop > 10){ stop =
-		 * true; } if(!stop){ System.out.println("Hello"); runSimulation();
-		 * }else{ gameLoop.cancel(); }
-		 * 
-		 * } }, 0, 1000);
-		 */
 	}
 	
 
@@ -152,14 +138,7 @@ public class GameEngine {
 				currentNewComponent = new Infrastructure(currentCompName, currentInfo);
 			}
 			addComponent(currentNewComponent); // add the component to the power plant
-			
-			/*
-			try {
-				assignInfoToComponent(currentInfo); // send the just added
-													// component its info.
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
+
 		}
 
 		// Connect components together
@@ -394,8 +373,7 @@ public class GameEngine {
 	 * @throws FileNotFoundException
 	 */
 	public void readfile(String file) throws FileNotFoundException {
-		// FileReader fr=new FileReader(path);
-		// BufferedReader br=new BufferedReader(fr);
+		
 		String path = new java.io.File("").getAbsolutePath() + "/saves/";
 		FileInputStream fstream = new FileInputStream(path + file + ".fg");
 		// Get the object of DataInputStream
@@ -440,13 +418,13 @@ public class GameEngine {
 						info = new InfoPacket();
 					}
 					info.namedValues.add(new Pair<String>(Label.cNme, d));
-					//System.out.println(ch + "=" + c1);
+					
 				}
 
 				else if (ch.equals(Label.falT.toString())) {
 					Double i1 = Double.parseDouble(d);
 					info.namedValues.add(new Pair<Double>(Label.falT, i1));
-					//System.out.println(ch + "=" + i1);
+
 				} 
 				else if (ch.equals(Label.OPFL.toString()))
 				{
@@ -457,63 +435,63 @@ public class GameEngine {
 				{
 					boolean ok = Boolean.parseBoolean(d);
 					info.namedValues.add(new Pair<Boolean>(Label.psit, ok));
-					//System.out.println(ch + "=" + ok);
+
 				}
 				else if (ch.equals(Label.oPto.toString()))
 				{
 					info.namedValues.add(new Pair<String>(Label.oPto, d));
-					//System.out.println(ch + "=" + d);
+
 				}
 				else if (ch.equals(Label.rcIF.toString()))
 				{
 					info.namedValues.add(new Pair<String>(Label.rcIF, d));
-					//System.out.println(ch + "=" + d);
+	
 				}
 				else if (ch.equals(Label.pres.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.Vlme.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.Vlme, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.pres.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.pres, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.RPMs.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.RPMs, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.temp.toString()))
 				{
 					info.namedValues.add(new Pair<Double>(Label.temp, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.wLvl.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.wLvl, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				else if (ch.equals(Label.Amnt.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.Amnt, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}
 				
 				else if (ch.equals(Label.coRL.toString()))
 				{
 
 					info.namedValues.add(new Pair<Double>(Label.coRL, Double.parseDouble(d)));
-					//System.out.println(ch + "=" + d);
+					
 				}else if(ch.equals(Label.elec.toString())){
 					info.namedValues.add(new Pair<Double>(Label.elec, Double.parseDouble(d)));
 				}
@@ -615,14 +593,7 @@ public class GameEngine {
 				case cNme:
 					componentName = (String) pair.second() + '\n';
 					break;
-					/*case rcIF:
-					componentDescriptionNon += "Gets inputs from: "
-							+ pair.second().toString() + '\n';
-					break;
-				case oPto:
-					componentDescriptionNon += "Outputs to: "
-							+ pair.second().toString() + '\n';
-					break;*/
+					
 				case temp:
 					componentDescriptionNon += "Temperature: "
 							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
