@@ -56,6 +56,7 @@ public class Turbine extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
+		checkFailed();
 //		super.setFailed(calculateFailed());
 //		if(!super.isFailed()){
 //			RPM = calculateRPM();
@@ -72,10 +73,10 @@ public class Turbine extends WaterComponent {
 	 */
 	@Override
 	protected boolean checkFailed(){
-		if(super.getFailureTime() == 0){
-			return true;
+		if(getFailureTime() == 0){
+			setFailed(true);
 		}
-		return false;
+		return getFailed();
 	}
 
 	/**

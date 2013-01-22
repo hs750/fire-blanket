@@ -65,6 +65,7 @@ public class Pump extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
+		checkFailed();
 		//		super.setFailed(calculateFailed());
 		//		if(!super.isFailed()){
 		//			super.setOuputFlowRate(calculateOutputFlowRate());
@@ -80,11 +81,10 @@ public class Pump extends WaterComponent {
 	 */
 	@Override
 	protected boolean checkFailed() {
-		if(super.getFailureTime() == 0){
-			return true;
-		}else{
-			return false;
+		if(getFailureTime() == 0){
+				setFailed(true);
 		}
+		return getFailed();
 	}
 
 

@@ -71,6 +71,7 @@ public class Generator extends Component {
 	public void calculate() {
 		super.setOuputFlowRate(calculateOutputFlowRate());
 		electrisityGenerated += getOutputFlowRate();
+		checkFailed();
 	}
 	/**
 	 * {@inheritDoc}

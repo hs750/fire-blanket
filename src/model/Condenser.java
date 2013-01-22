@@ -57,8 +57,9 @@ public class Condenser extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-
+		
 		transmitOutputWater();
+		checkFailed();
 //		super.setFailed(calculateFailed());
 //		if(!super.isFailed()){
 			// double oldPressure = pressure;
@@ -76,10 +77,11 @@ public class Condenser extends WaterComponent {
 	@Override
 	protected boolean checkFailed(){
 		if(super.getFailureTime() == 0){
-			return true;
-		}else{
-			return false;
+			setFailed(true);
+		}else if(getPressure() > 1000){
+			setFailed(true);
 		}
+		return getFailed();
 	}
 
 	/**

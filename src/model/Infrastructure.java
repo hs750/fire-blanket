@@ -20,7 +20,7 @@ public class Infrastructure extends Component {
 	/**
 	 * The electricity that is needed to power this piece of infrastructure.
 	 */
-	double electrisityneeded = 0;
+	double electrisityneeded = 1;
 	
 	boolean failed = false;
 	
@@ -59,6 +59,7 @@ public class Infrastructure extends Component {
 	@Override
 	public void calculate() {
 		super.setOuputFlowRate(calculateOutputFlowRate());
+		checkFailed();
 	}
 	
 	/**
@@ -106,10 +107,9 @@ public class Infrastructure extends Component {
 	@Override
 	protected boolean checkFailed() {
 		if (electrisityneeded > this.getOutputFlowRate()){
-			return true;
-		}else{
-			return false;
+			setFailed(true);
 		}
+		return getFailed();
 
 	}
 	/**

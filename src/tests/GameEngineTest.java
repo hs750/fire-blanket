@@ -153,10 +153,10 @@ public class GameEngineTest {
 	public void testRepair() throws Exception{
 		Component v1 = gameEngine.getPowerPlantComponent("Valve 1");
 		v1.setFailed(true);
-		assertTrue(v1.isFailed());
+		assertTrue(v1.getFailed());
 		
 		gameEngine.repair(v1);
-		assertTrue(!v1.isFailed());
+		assertTrue(!v1.getFailed());
 	}
 	
 	/**

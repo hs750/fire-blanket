@@ -67,6 +67,7 @@ public class Valve extends WaterComponent {
 	public void calculate() {
 
 		transmitOutputWater();
+		checkFailed();
 //		super.setFailed(calculateFailed());
 //		super.setOuputFlowRate(calculateOutputFlowRate());
 
@@ -79,7 +80,7 @@ public class Valve extends WaterComponent {
 	 */
 	@Override
 	protected boolean checkFailed() {
-		return false;
+		return getFailed();
 	}
 
 
