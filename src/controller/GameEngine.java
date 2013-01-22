@@ -35,7 +35,7 @@ public class GameEngine {
 		// ui = new UI(this); Commented out for now
 		// parser = new Parser(this);
 
-		window = new MainWindow(this);
+		window = new MainWindow(this, "Welcome to Apocalypse. Type new game into the console to start playing.");
 
 		/*
 		 * final Timer gameLoop = new Timer(); gameLoop.scheduleAtFixedRate(new
