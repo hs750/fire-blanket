@@ -12,7 +12,7 @@ Outputs to&Condenser
 
 Name of component&Reactor
 Controll rod level&30.0
-Water level&50.0
+Amount&500.0
 Temperature&50.0
 Pressure&50.0
 Output flow rate&200.0
@@ -69,18 +69,18 @@ Receives input from&Turbine
 Outputs to&Final Defence Infrastructure
 
 Name of component&Final Defence Infrastructure
-Electrisity Generated&20.0
+Electrisity Generated&100.0
 Output flow rate&480.0
 Outputs to&Housing Infrastructure
 Receives input from&Generator
 
 Name of component&Housing Infrastructure
-Electrisity Generated&15.0
+Electrisity Generated&70.0
 Output flow rate&465.0
 Outputs to&Fence Infrastructure
 Receives input from&Final Defence Infrastructure
 
 Name of component&Fence Infrastructure
-Electrisity Generated&5.0
+Electrisity Generated&50.0
 Output flow rate&460.0
 Receives input from&Housing Infrastructure

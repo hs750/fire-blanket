@@ -145,7 +145,7 @@ public class Valve extends WaterComponent {
 
 	@Override
 	public double maxInput() {
-		if (position = true){
+		if (position == true){
 			return getVolume() - getAmount();
 		}
 		else{

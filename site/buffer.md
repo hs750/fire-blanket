@@ -12,6 +12,9 @@
 
 * system requirements diagram
 
+* design doc (Google Drive)
+
+* add "Javadoc" to Code documentation
 
 ## DONE but needs UPDATE after the code is finalised
 

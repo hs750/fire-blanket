@@ -619,7 +619,7 @@ public class GameEngine {
 							+ pair.second().toString() + '\n';
 					break;
 				case elec:
-					componentDescriptionNon += "Electricity generated: "
+					componentDescriptionNon += "Electricity: "
 							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case OPFL:
