@@ -15,8 +15,7 @@
   1. How the plant works, what each component does etc. + diagrams
   2. How to win (game mechanics detailed)
 5. [Commands index](#um-5) + description
-6. [Reference listing](#um-6) (general index)
-7. [Error messages](#um-7)
+6. [Error messages](#um-6)
 
 <a name="um-1"/>
 ## 1. Introduction
@@ -40,10 +39,11 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
   The rods level is proportional to how much steam the reactor is generating.
   Lowering the rods is a good way to try to avoid meltdown.
 
-* Turn on and off the pumps: The user can use the pumps to regulate the water accordning to the energy needs of the plant.
-* OPen and close the valves: the user can open and close the valves to stop the flow of water.
+* Turn on and off the pumps: [cmd goes in here]
+  The user can use the pumps to regulate the water accordning to the energy needs of the plant.
+* Open and close the valves: [cmd goes in here]
+  the user can open and close the valves to stop the flow of water.
 
-* TODO add more commands
 
 
 <a name="um-3"/>
@@ -138,10 +138,7 @@ Saves the current state of the plant to a file. Doesn't interrupt the game (chec
 
 
 <a name="um-6"/>
-## 6. Reference listing
-
-<a name="um-7"/>
-## 7. Error messages
+## 6. Error messages
 
 * Wrong Command Entered: This error is displayed when the user enters a wrong command or enters a command in the wrong format.
 * NO such file: when user is trying to a load a game file that does not exist.
