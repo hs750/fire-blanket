@@ -67,10 +67,10 @@ The user can load a saved game.
 The user can repair the failed components. 
 
 ### Add Components
-the user can at anytime add a new component to the game and use it in anyway desired.
+The user can at anytime add a new component to the game and use it in anyway desired.
 
 ### Connect Components
-The gamer can connect two components that he is using.
+The gamer can connect two components that he is using currently in the game.
 
 <a name="um-5"/>
 ## 5. Game commands
