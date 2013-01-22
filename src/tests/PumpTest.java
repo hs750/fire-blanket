@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import model.Pump;
+import model.Valve;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -64,10 +65,24 @@ public class PumpTest {
 	 */
 	@Test
 	public void testCalculate(){
+		Valve v = new Valve("Valve");
+		pump1.connectToInput(v);
+		pump1.connectToOutput(v);
+		
+		v.connectToInput(pump1);
+		v.connectToOutput(pump1);
+		v.setAmount(50);
+		v.setTemperature(50);
+		
+		
+		pump1.setAmount(50);
 		pump1.setRPM(50.0);
+		pump1.setAmount(50);
+		
+		v.calculate();
 		pump1.calculate();
 		
-		assertTrue(pump1.getOutputFlowRate() == 50/2);
+		assertTrue("" + pump1.getOutputFlowRate(), pump1.getOutputFlowRate() > 0);
 		
 		
 	}
