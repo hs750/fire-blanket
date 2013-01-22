@@ -497,6 +497,7 @@ public class RequirementsTests {
 	}
 	/**
 	 * The current water level of the reactor readout being displayed to the user will always be the same as the value of the reactor water level calculation.
+	 * Creates a game engine and reactor. The reactors water level is retrieved and sent to the user interface. The text in the user interface is then checked to see whether it contains the same value as that retrieved from the generator.
 	 */
 	@Test
 	public void TU45_SF29(){
