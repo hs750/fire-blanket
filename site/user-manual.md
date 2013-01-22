@@ -41,6 +41,7 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
 <a name="um-3"/>
 ## 3. Background story
 
+
 On the 8th April 2013, students at the University of York prepared to demonstrate their second year software projects. A challenging task, several teams had prepared video game simulations of nuclear power plants for their professor’s approval. Some projects were simple stand-alone affairs powered only by the department’s computers. Others utilised the internet to provide automatic updates. One such system would change the world forever. 
 
 Precisely one week from the initial deployment of the SEPR solutions, disaster shook the world. Propagating from one server to the next using obscure net technologies, an unidentified program began initiating the update protocols of the world’s major nuclear power plants. Inexplicably replacing SCADA systems with the student’s simulations, the world’s power plants began melting down in quick succession.
@@ -132,7 +133,9 @@ Saves the current state of the plant to a file. Doesn't interrupt the game (chec
 <a name="um-6"/>
 ## 6. Error messages
 
-* Wrong Command Entered: This error is displayed when the user enters a wrong command or enters a command in the wrong format.
-* NO such file: when user is trying to a load a game file that does not exist.
+* File not found or Cannot load file: when user is trying to a load a game file that does not exist.
+* Component "componentName" does not exist: If the component name entered by the user in a command is incorrect.
+* Invalid Command: If the command entered by the user is entered in a wrong format.
+* Saving failed: the game is not able to save the current state.
 
 &copy; 2013 Team Anchovy
