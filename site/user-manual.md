@@ -6,7 +6,7 @@
 2. [Quick start guide](#um-2)
 3. [Background story](#um-3)
 4. [Functionality](#um-4)
-5. [Commands index](#um-5) + description
+5. [List of commands](#um-5)
 6. [Error messages](#um-6)
 
 <a name="um-1"/>
