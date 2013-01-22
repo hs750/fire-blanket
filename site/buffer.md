@@ -1,26 +1,29 @@
 # Stuff to add on the website
 
-Add what we should put on the website in this document (but don't paste the whole 20-page documentation here, for example. A link/filename is enough)
- [Example link](www.google.com)
+## TODO
 
-* Excecutables for Mac/Windows/Linux
+* Excecutables for Mac/Windows/Linux **TODO**
 
-* Source Code for future deveopers 
+* Source Code for future deveopers **TODO** Add link in the page (phones don't show header links)
 
-* Javadoc documentation
+* Javadoc documentation **TODO**
 
-* user-manual.md
+* Assassment 3 developers guide **TODO**
 
-* Assassment 3 developers guide
+* Design Overview (including picture of powerplant) **TODO** add in user manual
 
-* Design Overview (including picture of powerplant)
+* Download links to full Design Documentation **TODO** ("Docs")
 
-* Download links to full Design Documentation
+* Homepage with overview of anchovy's amazing defining factors **TODO** What?! I don't get this
+
+## DONE
+
+* Open Source Lisence Agreement Page
 
 * Background Story (copy pasta from google docs)
 
-* Homepage with overview of anchovy's amazing defining factors
+* user-manual.md
 
-* Open Source Lisence Agreement Page
+## Random stuff
 
 ![Screenshot of Fire Blanket in action!](http://i.imgur.com/cUlIdFG.png)
