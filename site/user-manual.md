@@ -145,6 +145,7 @@ Saves the current state of the plant to a file. Doesn't interrupt the game (chec
 <a name="um-7"/>
 ## 7. Error messages
 
-
+* Wrong Command Entered: This error is displayed when the user enters a wrong command or enters a command in the wrong format.
+* NO such file: when user is trying to a load a game file that does not exist.
 
 &copy; 2013 Team Anchovy
