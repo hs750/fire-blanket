@@ -5,7 +5,7 @@ This guide is a good place to start for developers wishing to use and expand Fir
 ## Contents
 
 1. [Getting started](#dg-1)
-3. [Adding a "view"](#dg-2)
+3. [Changing the UI](#dg-2)
 4. [Adding a Component](#dg-3)
 
 <a href="#dg-1"/>
@@ -59,3 +59,12 @@ To change the interface:
 
 <a href="#dg-3"/>
 ## Adding a `Component`
+
+To add a hardware component:
+
+1. Create the desired component class in the model package that extends the `WaterComponent` class
+2. Add the component information to the InfoPacke
+3. Add any necessary labels used in the new component class to the Pair class in the package util.
+4. Set the maximum input and output limits for the component, and perform the function.
+5. Add the functions to calculate and read the values of the component(like getInfo, takeInfo, calculate).
+6. Make sure that the new component is connected to the right components passing the correct info.To add a hardware component:
