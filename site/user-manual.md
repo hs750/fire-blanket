@@ -19,7 +19,7 @@ Presented by Team Anchovy, Fire Blanket is a nuclear power plant simulator... wi
 
 _This is a short guide to start playing immediately. To understand and maybe master the game, have a look at the [background story](#um-3) and at [functionalities](#um-4) sections._
 
-**Step 1.** Run `fireblanket.jar` (you might need to do this first `chmod +x fireblanket.jar`)
+**Step 1.** Extract `fireblanket.zip` and run `fireblanket.jar` (you might need to do this first `chmod +x fireblanket.jar`)
 
 **Step 2.** Enter `new game <your name goes in here> or load <name of saved file>`
 
