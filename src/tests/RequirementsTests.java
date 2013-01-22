@@ -518,11 +518,11 @@ public class RequirementsTests {
 		assertTrue("" + a1 + " " + a2, a1 > a2); //Comparison of pump pumping lots of water out and not much steam being condensed.
 		
 		c.setAmount(50);
-		c.setCoolantpumpRPM(100);
+		c.setCoolantpumpRPM(1000);
 		c.setTemperature(50);
 		
 		p.setAmount(50);
-		p.setRPM(0);
+		p.setRPM(10);
 		p.setTemperature(50);
 		
 		v.setAmount(50);
