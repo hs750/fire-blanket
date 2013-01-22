@@ -10,12 +10,12 @@
 6. [Error messages](#um-6)
 
 <a name="um-1"/>
-## 1. Introduction
+## Introduction
 
 Presented by Team Anchovy, Fire Blanket is a nuclear power plant simulator... with a post-apocalyptic twist. Near the city of York, in the emerging shanty town of Town, the remnants of humanity fight for survival against a mutating horde of zombies, geese and the occasional St John's student. As the Power Plant operator, the responsibility falls to you to keep your people safe. Generate too much power and Town might explode, too little, and Town's defences may shut down.
 
 <a name="um-2"/>
-## 2. Quick start guide
+## Quick start guide
 
 _This is a short guide to start playing immediately. To understand and maybe master the game, have a look at the [background story](#um-3) and at [functionalities](#um-4) sections._
 
@@ -40,7 +40,7 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
 
 
 <a name="um-3"/>
-## 3. Background story
+## Background story
 
 
 On the 8th April 2013, students at the University of York prepared to demonstrate their second year software projects. A challenging task, several teams had prepared video game simulations of nuclear power plants for their professor’s approval. Some projects were simple stand-alone affairs powered only by the department’s computers. Others utilised the internet to provide automatic updates. One such system would change the world forever. 
@@ -57,7 +57,7 @@ With dwindling supplies, and rumours of larger mutating creatures converging tow
 Six months have passed since the blanket of fire descended and the newly established outpost of Town has been born. The nuclear facility for which the town was created has been successfully commissioned by a team of surviving engineers lead by Professor Richard Paige, and in which you were involved. Following the untimely digestion of a senior operator by a stray mutated goose, you have been assigned a more prominent role in the functioning of the plant. Your presence in the control room has been requested by the Professor to explain your new responsibilities...
 
 <a name="um-4"/>
-## 4. Functionalities
+## Functionalities
 
 ### Diagram of the nuclear power plant's components
 
@@ -80,8 +80,7 @@ The user can at anytime add a new component to the game and use it in anyway des
 The gamer can connect two components that he is using currently in the game.
 
 <a name="um-5"/>
-## 5. Game commands
-
+## Game commands
 
 `>> load <FILENAME>.fg`
 
@@ -136,7 +135,7 @@ Saves the current state of the plant to a file. Doesn't interrupt the game (chec
 
 
 <a name="um-6"/>
-## 6. Error messages
+## Error messages
 
 * File not found or Cannot load file: when user is trying to a load a game file that does not exist.
 * Component "componentName" does not exist: If the component name entered by the user in a command is incorrect.
