@@ -78,7 +78,7 @@ public class Valve extends WaterComponent {
 	 * Valves cannot fail so, calculating whether it has failed will always return false.
 	 */
 	@Override
-	protected boolean calculateFailed() {
+	protected boolean checkFailed() {
 		return false;
 	}
 

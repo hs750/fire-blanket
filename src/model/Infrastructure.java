@@ -104,7 +104,7 @@ public class Infrastructure extends Component {
 	 * Infrastructure components fail when they are receiving less electricity than they need.
 	 */
 	@Override
-	protected boolean calculateFailed() {
+	protected boolean checkFailed() {
 		if (electrisityneeded > this.getOutputFlowRate()){
 			return true;
 		}else{

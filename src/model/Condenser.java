@@ -74,7 +74,7 @@ public class Condenser extends WaterComponent {
 	 * Condenser only fails when it reaches it's fail time
 	 */
 	@Override
-	protected boolean calculateFailed(){
+	protected boolean checkFailed(){
 		if(super.getFailureTime() == 0){
 			return true;
 		}else{

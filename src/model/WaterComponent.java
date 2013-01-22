@@ -81,10 +81,7 @@ public abstract class WaterComponent extends Component {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected boolean calculateFailed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	protected abstract boolean checkFailed();
 
 
 

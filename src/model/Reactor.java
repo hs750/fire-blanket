@@ -66,8 +66,9 @@ public class Reactor extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-		transmitOutputWater();
 		calculateTemperature();
+		transmitOutputWater();
+		checkFailed();
 //		if(!super.isFailed()){
 //			super.setFailed(calculateFailed());
 //			double oldTemp = getTemperature();
@@ -84,17 +85,15 @@ public class Reactor extends WaterComponent {
 	 * They also fail when they reach their randomly calculated fail time.
 	 */
 	@Override
-	protected boolean calculateFailed() {
-		if(super.getFailureTime() == 0){
-			return true;
-		}else if(getTemperature() > 300){
-			return true;
-		}else if(pressure > 200){
-			return true;
-		}else if(waterLevel <= 0){
-			return true;
+	protected boolean checkFailed() {
+		if(getTemperature() > 300){
+			setFailed(true);
+		}else if(getPressure() > 1000){
+			setFailed(true);
+		}else if(getAmount() <= 0){
+			setFailed(true);
 		}
-		return false;
+		return getFailed();
 	}
 
 	/**

@@ -693,7 +693,7 @@ public class GameEngine {
 		ArrayList<Component> failedComps = new ArrayList<Component>();
 		while(comIt.hasNext()){
 			com = comIt.next();
-			if(com.isFailed())
+			if(com.getFailed())
 				failedComps.add(com);
 		}
 		return failedComps;

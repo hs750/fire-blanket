@@ -76,8 +76,8 @@ public class Generator extends Component {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected boolean calculateFailed() {
-		return false;
+	protected boolean checkFailed() {
+		return getFailed();
 	}
 
 	/**

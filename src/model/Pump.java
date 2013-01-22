@@ -79,7 +79,7 @@ public class Pump extends WaterComponent {
 	 * Pumps only fail when they reach there randomly calculated failure time.
 	 */
 	@Override
-	protected boolean calculateFailed() {
+	protected boolean checkFailed() {
 		if(super.getFailureTime() == 0){
 			return true;
 		}else{

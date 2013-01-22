@@ -71,7 +71,7 @@ public class Turbine extends WaterComponent {
 	 * Turbines only fail when they reach the randomly generated fail time.
 	 */
 	@Override
-	protected boolean calculateFailed(){
+	protected boolean checkFailed(){
 		if(super.getFailureTime() == 0){
 			return true;
 		}

@@ -197,11 +197,12 @@ public abstract class Component {
 	 * such as calculateTemperature()
 	 */
 	public abstract void calculate();
+	
 	/**
 	 * Calculate whether the component has failed or not.
 	 * @return The failure state of the component.
 	 */
-	protected abstract boolean calculateFailed();
+	protected abstract boolean checkFailed();
 
 	/**
 	 * Sets all attributes of a component using the given info packet.
@@ -293,7 +294,7 @@ public abstract class Component {
 	/**
 	 * @return Whether the component is currently failed or not. 
 	 */
-	public boolean isFailed() {
+	public boolean getFailed() {
 		return failed;
 	}
 	/**
