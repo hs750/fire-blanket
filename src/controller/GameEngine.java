@@ -701,6 +701,7 @@ public class GameEngine {
 				ArrayList<Component> failedC = gameEngine.componentFailed();
 				if(failedC.size() > 0){
 					Iterator<Component> cIt = failedC.iterator();
+					failedComps = "These components have currently failed: ";
 					while(cIt.hasNext()){
 						failedComp = cIt.next().getName();
 						if(failedComp.contains("Reactor")){
