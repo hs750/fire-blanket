@@ -5,7 +5,7 @@
 1. [Introduction](#um-1)
 2. [Quick start guide](#um-2)
 3. [Background story](#um-3)
-4. [Functionalities](#um-4)
+4. [Functionality](#um-4)
 5. [Commands index](#um-5) + description
 6. [Error messages](#um-6)
 
@@ -57,7 +57,7 @@ With dwindling supplies, and rumours of larger mutating creatures converging tow
 Six months have passed since the blanket of fire descended and the newly established outpost of Town has been born. The nuclear facility for which the town was created has been successfully commissioned by a team of surviving engineers lead by Professor Richard Paige, and in which you were involved. Following the untimely digestion of a senior operator by a stray mutated goose, you have been assigned a more prominent role in the functioning of the plant. Your presence in the control room has been requested by the Professor to explain your new responsibilities...
 
 <a name="um-4"/>
-## Functionalities
+## Functionality
 
 ### Diagram of the nuclear power plant's components
 
