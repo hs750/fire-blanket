@@ -704,14 +704,20 @@ public class GameEngine {
 					failedComps = "These components have currently failed: ";
 					while(cIt.hasNext()){
 						failedComp = cIt.next().getName();
-						if(failedComp.contains("Reactor")){
+						if(failedComp.contains("Reactor") || failedComp.contains("Final Defence Infrastructure")){
 							gameEngine.notFailed = false;
 						}
 						failedComps += failedComp + ", ";
 					}
 					gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
 					if(!gameEngine.notFailed){
-						gameEngine.window.console.writeToConsole("GAME OVER");
+						Generator gen = new Generator("Generator");
+						try {
+							gen = (Generator) gameEngine.getPowerPlantComponent("Generator");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						gameEngine.window.console.writeToConsole("GAME OVER! Your score is: " + gen.getElectrisityGenerated());
 					}
 				}
 				if(autosaveTime == 10){
