@@ -64,11 +64,12 @@ To change the interface:
 
 Creating new components is simple and integrating them into the system is even simpler still. The power plant is built at runtime so any changes are easily accommodated. To add a hardware component:
 
-1. Create the desired component class in the model package that extends the Component class or the water Component class if water or steam is supposed to flow the component.
-2. Add any necessary labels used in the new component class to the Pair class in the package util, this will allow the UI to pass InfoPackets for your new component to the GameEngine.
-3. The Methods getInfo() and takeInfo(), are used to communicate with the UI getInfo() allows you to extract Information in the form of an InfoPacket to display it to the UI, takeInfo() allows the UI to easily communicate with the components.
-4. Set the maximum input and output limits for the component, and perform the function.
-5. The GameEngine automatically calls the calculate class of each component each gametick, add code you want to execute every gametick here, if your component is a WaterComponent make sure calculate calls the outputwater function.
+1. Create the desired component class in the model package that extends the `Component` class or the `WaterComponent` class if water or steam is supposed to flow the component.
+2. Add any necessary labels used in the new component class to `util.Pair.Label`, this will allow the UI to pass `InfoPacket` objects for your new component to `GameEngine`.
+3. The methods `getInfo` and `takeInfo` are used to communicate with the UI
+  `getInfo` allows you to extract information in the form of an `InfoPacket` to display it to the UI
+  `takeInfo` allows the UI to easily communicate with the components
+4. Every gametick, `GameEngine` calls the `calculate` method of each component. Add code you want to execute every gametick here. If your component is a `WaterComponent`, make sure `calculate` calls the `outputwater` function.
 
 <a name="#dg-4"/>
 ## How to Create a Software Component
