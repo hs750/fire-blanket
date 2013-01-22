@@ -67,8 +67,8 @@ Creating new components is simple and integrating them into the system is even s
 1. Create the desired component class in the model package that extends the `Component` class or the `WaterComponent` class if water or steam is supposed to flow the component.
 2. Add any necessary labels used in the new component class to `util.Pair.Label`, this will allow the UI to pass `InfoPacket` objects for your new component to `GameEngine`.
 3. The methods `getInfo` and `takeInfo` are used to communicate with the UI
-  `getInfo` allows you to extract information in the form of an `InfoPacket` to display it to the UI
-  `takeInfo` allows the UI to easily communicate with the components
+  * `getInfo` allows you to extract information in the form of an `InfoPacket` to display it to the UI
+  * `takeInfo` allows the UI to easily communicate with the components
 4. Every gametick, `GameEngine` calls the `calculate` method of each component. Add code you want to execute every gametick here. If your component is a `WaterComponent`, make sure `calculate` calls the `outputwater` function.
 
 <a name="#dg-4"/>
