@@ -62,7 +62,7 @@ Six months have passed since the blanket of fire descended and the newly establi
 ### Diagram of the nuclear power plant's components
 
 ![Plant diagram NOLABELS](http://i.imgur.com/SBLKwR2.png)
-![Plant diagram](http://i.imgur.com/QTtCGBO.png)
+![Plant diagram](http://i.imgur.com/jW00sqR.jpg)
 
 ### Autosave
 The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
