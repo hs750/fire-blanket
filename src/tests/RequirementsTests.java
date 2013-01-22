@@ -475,13 +475,19 @@ public class RequirementsTests {
 		r.calculate();
 		Double a4 = r.getWaterLevel();
 		
-		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		assertTrue("" + a1 + " " + a2, a1 > a2); //Opposite way round to what you would expect as water level goes down when steam increases.
 		
 	}
 	/**
 	 * All components apart from Valves and Generators will eventually fail. 
 	 * Test proves that the Turbine component inevitably fails. 
 	 */
+	@Test 
+	public void TU48_SF34()
+	{
+		
+	}
+	
 	@Test
 	public void TU52_SN11()
 	{

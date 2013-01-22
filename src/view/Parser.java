@@ -77,7 +77,7 @@ public class Parser {
 			Component component = null;
 			
 			//Used for components that also need a numerical parameter (pumps and control rods for now)
-			if (componentName.contains("Pump")) 
+			if (componentName.contains("Pump") || componentName.contains("Condenser")) 
 			{
 				String alterName = componentName.substring(0, componentName.lastIndexOf(' '));
 				component = engine.getPowerPlantComponent(alterName);
