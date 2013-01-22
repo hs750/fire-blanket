@@ -122,6 +122,9 @@ Item description
 `>> <VALVE_NAME> close`
 * Closes the valve
 
+`>> show saves`
+* Shows a list of all the saved games
+
 `>> save`
 
 * Saves to the current save file.
