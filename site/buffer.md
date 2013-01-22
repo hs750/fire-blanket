@@ -22,3 +22,5 @@ Add what we should put on the website in this document (but don't paste the whol
 * Homepage with overview of anchovy's amazing defining factors
 
 * Open Source Lisence Agreement Page
+
+![Screenshot of Fire Blanket in action!](http://i.imgur.com/cUlIdFG.png)
