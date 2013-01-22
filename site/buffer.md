@@ -4,11 +4,9 @@
 
 * Excecutables for Mac/Windows/Linux **TODO**
 
-* Source Code for future deveopers **TODO** Add link in the page (phones don't show header links)
-
 * Javadoc documentation **TODO**
 
-* Assassment 3 developers guide **TODO**
+* Developers guide **TODO** (vg555 is working on it)
 
 * Design Overview (including picture of powerplant) **TODO** add in user manual
 
@@ -23,6 +21,8 @@
 * Background Story (copy pasta from google docs)
 
 * user-manual.md
+
+* Source Code for deveopers
 
 ## Random stuff
 
