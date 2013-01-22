@@ -62,14 +62,13 @@ To change the interface:
 <a name="#dg-3"/>
 ## Adding a Component
 
-To add a hardware component:
+Creating new components is simple and integrating them into the system is even simpler still. The power plant is built at runtime so any changes are easily accommodated. To add a hardware component:
 
-1. Create the desired component class in the model package that extends the `WaterComponent` class
-2. Add the component information to the InfoPacke
-3. Add any necessary labels used in the new component class to the Pair class in the package util.
+1. Create the desired component class in the model package that extends the Component class or the water Component class if water or steam is supposed to flow the component.
+2. Add any necessary labels used in the new component class to the Pair class in the package util, this will allow the UI to pass InfoPackets for your new component to the GameEngine.
+3. The Methods getInfo() and takeInfo(), are used to communicate with the UI getInfo() allows you to extract Information in the form of an InfoPacket to display it to the UI, takeInfo() allows the UI to easily communicate with the components.
 4. Set the maximum input and output limits for the component, and perform the function.
-5. Add the functions to calculate and read the values of the component(like getInfo, takeInfo, calculate).
-6. Make sure that the new component is connected to the right components passing the correct info.To add a hardware component:
+5. The GameEngine automatically calls the calculate class of each component each gametick, add code you want to execute every gametick here, if your component is a WaterComponent make sure calculate calls the outputwater function.
 
 <a name="#dg-4"/>
 ## How to Create a Software Component
