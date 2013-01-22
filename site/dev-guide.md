@@ -60,7 +60,7 @@ To change the interface:
 6. The display should updates with every command entered by the game
 
 <a name="#dg-3"/>
-## Adding a `Component`
+## Adding a Component
 
 To add a hardware component:
 
