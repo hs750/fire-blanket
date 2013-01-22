@@ -63,9 +63,9 @@ public class Pump extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-
 		transmitOutputWater();
 		checkFailed();
+
 		//		super.setFailed(calculateFailed());
 		//		if(!super.isFailed()){
 		//			super.setOuputFlowRate(calculateOutputFlowRate());
@@ -82,7 +82,7 @@ public class Pump extends WaterComponent {
 	@Override
 	protected boolean checkFailed() {
 		if(getFailureTime() == 0){
-				setFailed(true);
+			setFailed(true);
 		}
 		return getFailed();
 	}
@@ -133,9 +133,13 @@ public class Pump extends WaterComponent {
 	 * @param RPM The revolutions per minute that the pump with spin at.
 	 */
 	public void setRPM(double RPM) {
-		this.RPM = RPM;
-	}
+		if (getFailed()){
+			RPM = 0.02;
+		}else{
 
+			this.RPM = RPM;
+		}
+	}
 	/**
 	 * {@inheritDoc}
 	 */
@@ -157,7 +161,11 @@ public class Pump extends WaterComponent {
 
 	@Override
 	public double maxInput() {
-		return RPM;
+		if (getRPM() < (getVolume()-getAmount())){
+			return getRPM();
+		}else{
+			return (getVolume() - getAmount());
+		}
 	}
 
 
