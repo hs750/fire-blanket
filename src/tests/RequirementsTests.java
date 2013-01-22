@@ -256,8 +256,8 @@ public class RequirementsTests {
 		ge.updateInterfaceComponents(infos);
 		
 		String outputString = ge.window.getRightPannelContence();
-		
-		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
+		Float conP = conPressure.floatValue();
+		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conP.toString()));
 		
 	}
 	/**
@@ -287,8 +287,9 @@ public class RequirementsTests {
 		ge.updateInterfaceComponents(infos);
 		
 		String outputString = ge.window.getRightPannelContence();
+		Short conP = conPressure.shortValue();
 		
-		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conPressure.toString()));
+		assertTrue(conPressure.toString() + " Output: " + outputString, outputString.contains("Pressure: " + conP.toString()));
 	}
 	/**
 	 * The temperature inside the condenser will be proportional to the pressure in the condenser and the amount of cold water is being pumped round the condenser. The more pressure the hotter the condenser will be, and the more cold water is being pumped round the more the temperature will reduce.
@@ -376,8 +377,9 @@ public class RequirementsTests {
 		ge.updateInterfaceComponents(infos);
 		
 		String outputString = ge.window.getRightPannelContence();
+		Float conT = conTemp.floatValue();
 		
-		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conTemp.toString()));
+		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conT.toString()));
 	}
 	/**
 	 * The condenser temperature being displayed for the user will always be the same as the current result of the condenser temperature calculation.
@@ -518,7 +520,7 @@ public class RequirementsTests {
 		assertTrue("" + a1 + " " + a2, a1 > a2); //Comparison of pump pumping lots of water out and not much steam being condensed.
 		
 		c.setAmount(50);
-		c.setCoolantpumpRPM(1000);
+		c.setCoolantpumpRPM(10);
 		c.setTemperature(50);
 		
 		p.setAmount(50);
@@ -532,15 +534,15 @@ public class RequirementsTests {
 		c.calculate();
 		p.calculate();
 		
-		a1 = c.getAmount();
+		a1 = c.getTemperature();
 		
 		v.calculate();
 		c.calculate();
 		p.calculate();
 		
-		a2 = c.getAmount();
+		a2 = c.getTemperature();
 		
-		assertTrue("" + a1 + " " + a2, a1 < a2); //Comparison of pump pumping low amount of water out and alot of steam being condensed.
+		assertTrue("" + a1 + " " + a2, a1 > a2); //When coolent pump is pumping more, the temperature of the Condenser should decrease.
 		
 		
 	}
