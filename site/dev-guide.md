@@ -4,12 +4,13 @@ This guide is a good place to start for developers wishing to use and expand Fir
 
 ## Contents
 
-1. [Getting started](#dg-1)
-3. [Changing the UI](#dg-2)
-4. [Adding a Component](#dg-3)
+1. [Getting Started](#dg-1)
+2. [Changing the UI](#dg-2)
+3. [Adding a Component](#dg-3)
+4. [How to Create a Software Component](#dg-4)
 
 <a href="#dg-1"/>
-## Getting started
+## Getting Started
 
 ### Getting the code
 
@@ -45,16 +46,17 @@ Fire Blanket follows the [MVC pattern](http://www.codinghorror.com/blog/2008/05/
 To learn more about the underlying mechanics of our nuclear plant, check out the <a href="https://github.com/cjd515/fire-blanket/blob/master/site/user-manual.md" target="_blank">User Manual</a>.
 
 <a href="#dg-2"/>
-## Adding a "view"
+## Adding a User Interface
 
 Assessment 3 requires development teams to change the basic textual user interface to a GUI. All of the game’s parsing and operation passing is taken care of in the game engine - so the interface is plug and play.
 
 To change the interface:
+
 1. Remove the UI class MainWindow from the source code
 2. Create a new Java Class with your prefered design
-3. Pass the GameEngine through the main function of the class to start the game.
-4. The function should also take a command from the gamer thus performing the actions the gamer wants it to.
-5. the class should pass the entered commands to the parser.
+3. Pass the GameEngine through the main function of the class to start the game
+4. The function should also take a command from the gamer thus performing the actions the gamer wants it to
+5. The class should pass the entered commands to the parser
 6. The display should updates with every command entered by the game
 
 <a href="#dg-3"/>
@@ -68,3 +70,19 @@ To add a hardware component:
 4. Set the maximum input and output limits for the component, and perform the function.
 5. Add the functions to calculate and read the values of the component(like getInfo, takeInfo, calculate).
 6. Make sure that the new component is connected to the right components passing the correct info.To add a hardware component:
+
+<a href="#dg-4"/>
+## How to Create a Software Component
+
+This section describes the specifics of creating a new Software Component to the Power Plant as described in Assessment 3. For information on how to create a hardware component or how to add a newly created component to the power plant please see the following two sections.
+
+To add a Software Component: there are many ways to change the software component of the game.
+
+1. The user can add new functions:
+  New methods performing different functions(totally dependent on the programmer) can be added to the GameEngine class.
+  Make sure to update the infopackets after performing the necessary action using the `updateInterfaceComponents` function.
+
+2. The parser can be amended
+  Commands can rephrased, changed or be given different meanings.
+  Also any new functions added in the gameEngine need to called and added in the parser.
+
