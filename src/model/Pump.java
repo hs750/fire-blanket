@@ -135,10 +135,15 @@ public class Pump extends WaterComponent {
 	 */
 	public void setRPM(double RPM) {
 		if (getFailed()){
-			RPM = 0.02;
+			this.RPM = 0.02;
 		}else{
-
-			this.RPM = RPM;
+			if (RPM < 0){
+				this.RPM = 0;
+			}else if(RPM > 9001){
+				this.RPM = 9000;
+			}else{
+				this.RPM = RPM;
+			}
 		}
 	}
 	/**
