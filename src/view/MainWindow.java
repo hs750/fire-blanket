@@ -51,8 +51,8 @@ public class MainWindow
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//MainWindow window = new MainWindow(null);
-					//window.frmFireBlanket.setVisible(true);
+					//MainWindow window = new MainWindow(this, "");
+					
 
 				} catch (Exception e) {
 					e.printStackTrace();

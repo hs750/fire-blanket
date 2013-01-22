@@ -3,6 +3,7 @@ package controller;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.EventQueue;
 import java.io.*;
 
 import model.*;
@@ -25,7 +26,7 @@ public class GameEngine {
 	// UI ui = null; Commented out for now
 	public MainWindow window;
 	String fileName; 
-
+	public boolean notFailed = true;	
 	/**
 	 * Constructor for the game engine. On creation it creates a list to store
 	 * the components of the power plant and links to a user interface (what
@@ -35,7 +36,8 @@ public class GameEngine {
 		powrPlntComponents = new ArrayList<Component>();
 		// ui = new UI(this); Commented out for now
 		// parser = new Parser(this);
-
+		
+		
 		window = new MainWindow(this, "Welcome to Apocalypse. Type new game into the console to start playing.");
 
 		/*
@@ -49,7 +51,9 @@ public class GameEngine {
 		 * } }, 0, 1000);
 		 */
 	}
+	
 
+	
 	/**
 	 * Repairs the given component by calling the repair method of said component.
 	 * Then subtracts the repair cost of the repair from the total amount of electricity generated.
@@ -124,6 +128,7 @@ public class GameEngine {
 		String currentCompName = null;
 		Component currentNewComponent = null;
 
+		
 		// Create component list.
 		while (infoIt.hasNext()) 
 		{
@@ -232,6 +237,7 @@ public class GameEngine {
 			inputComponents.clear();
 			outputComponents.clear();
 		}
+		notFailed = true;
 	}
 
 
@@ -700,7 +706,13 @@ public class GameEngine {
 		}
 		return failedComps;
 	}
+	
 
+		int autosaveTime = 0;
+		
+		
+
+	
 	public static void main(String[] args) {
 		GameEngine gameEngine = new GameEngine();
 //		ArrayList<InfoPacket> infoList = new ArrayList<InfoPacket>();
@@ -782,49 +794,46 @@ public class GameEngine {
 		 
 		gameEngine.clearPowerPlant();
 		assert (gameEngine.getAllComponentInfo().isEmpty());
-
-		//gameEngine.setupPowerPlantConfiguration(infoList);
-		gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());
-
-		System.out.println("HellO");
-		
-		//The Game control loop
-		int autosaveTime = 0;
 		boolean notFailed = true;
-		while(true && notFailed){
-			autosaveTime++;
-			
-			gameEngine.calculateAllComponents(); 										//Calculate new Values.
-			gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());		//Update the Screen with the current Values calculate
-			
-			
+		int autosaveTime = 0;
+		while(true)
+		{
 			String failedComps = "These components have currently failed: ";			//Gather a list of failed components.
 			String failedComp = "";
-			ArrayList<Component> failedC = gameEngine.componentFailed();
-			if(failedC.size() > 0){
-				Iterator<Component> cIt = failedC.iterator();
-				while(cIt.hasNext()){
-					failedComp = cIt.next().getName();
-					if(failedComp.contains("Reactor")){
-						notFailed = false;
+
+			while(gameEngine.notFailed){
+				autosaveTime++;
+				
+				gameEngine.calculateAllComponents(); 										//Calculate new Values.
+				gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());		//Update the Screen with the current Values calculate
+				
+				
+				ArrayList<Component> failedC = gameEngine.componentFailed();
+				if(failedC.size() > 0){
+					Iterator<Component> cIt = failedC.iterator();
+					while(cIt.hasNext()){
+						failedComp = cIt.next().getName();
+						if(failedComp.contains("Reactor")){
+							gameEngine.notFailed = false;
+						}
+						failedComps += failedComp + ", ";
 					}
-					failedComps += failedComp + ", ";
+					gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
+					if(!notFailed){
+						gameEngine.window.console.writeToConsole("GAME OVER");
+					}
 				}
-				gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
-				if(!notFailed){
-					gameEngine.window.console.writeToConsole("GAME OVER");
+				if(autosaveTime == 10){
+					if(gameEngine.powrPlntComponents.size() > 0)
+						gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
+					autosaveTime = 0;
 				}
-			}
-			if(autosaveTime == 10){
-				if(gameEngine.powrPlntComponents.size() > 0)
-					gameEngine.saveGameState(gameEngine.getAllComponentInfo(), "autosave");	//Save the game state to autosave file
-				autosaveTime = 0;
-			}
-			
-			try {
-				Thread.sleep(700);														//Wait until next iteration.
-			} catch(InterruptedException ex) {
-				Thread.currentThread().interrupt();
+				
+				try {
+					Thread.sleep(700);														//Wait until next iteration.
+				} catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
 			}
 		}
 	}
