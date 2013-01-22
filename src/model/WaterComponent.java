@@ -153,7 +153,11 @@ public abstract class WaterComponent extends Component {
 	 * @param temp Change temperature of component to this.
 	 */
 	public void setTemperature(double temp){
-		temperature = temp;
+		if (temp <0){
+			temperature = 0.0;
+		}else{
+			temperature = temp;
+		}
 	}
 	/**
 	 * @return The temperature of the component

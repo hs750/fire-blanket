@@ -85,7 +85,7 @@ public class Condenser extends WaterComponent {
 	}
 
 	private void calculateTemperature() {
-		double heatRemoved = 1000*(1 + getCoolantpumpRPM());
+		double heatRemoved = 10*(1 + getCoolantpumpRPM());
 		double tempDecrease = heatRemoved/getAmount();
 		setTemperature(getTemperature() - tempDecrease);
 		
