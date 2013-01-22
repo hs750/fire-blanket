@@ -19,7 +19,7 @@ _This is a short guide to start playing immediately. To understand and maybe mas
 
 **Step 1.** Run `fireblanket.jar`
 
-**Step 2.** Enter `new game <your name goes in here>`
+**Step 2.** Enter `new game <your name goes in here> or load <name of saved file>`
 
 **Step 3.** Type in [commands](#um-5) to control the nuclear power plant.
 
@@ -40,6 +40,7 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
 
 <a name="um-3"/>
 ## 3. Background story
+
 
 On the 8th April 2013, students at the University of York prepared to demonstrate their second year software projects. A challenging task, several teams had prepared video game simulations of nuclear power plants for their professor’s approval. Some projects were simple stand-alone affairs powered only by the department’s computers. Others utilised the internet to provide automatic updates. One such system would change the world forever. 
 
@@ -65,18 +66,15 @@ The user can load a saved game.
 ### Repair Failing Components
 The user can repair the failed components. 
 
-### Item
-Item description
+### Add Components
+The user can at anytime add a new component to the game and use it in anyway desired.
 
-### Item
-Item description
+### Connect Components
+The gamer can connect two components that he is using currently in the game.
 
 <a name="um-5"/>
 ## 5. Game commands
 
-`>> <VALVE_NAME> close`
-
-* Closes the valve `VALVE_NAME`
 
 `>> load <FILENAME>.fg`
 
@@ -89,6 +87,10 @@ Item description
 * Uses the data from `save/newgame.fg`
 * `NAME` will be the name of the plant operator
 * The previous game will end
+
+`>> <VALVE_NAME> close`
+
+* Closes the valve `VALVE_NAME`
 
 `>> <VALVE_NAME> open`
 
@@ -111,9 +113,6 @@ Item description
 `>> <PUMP_NAME> off`
 * Turns off the pump
 
-`>> <VALVE_NAME> close`
-* Closes the valve
-
 `>> show saves`
 * Shows a list of all the saved games
 
@@ -123,7 +122,7 @@ Item description
 
 `>> save as <FILENAME>.fg`
 
-* Saves using the FILENAME provided.
+* Saves using the FILENAME entered.
 
 
 Saves the current state of the plant to a file. Doesn't interrupt the game (check the [autosave](#um-4) feature).
@@ -132,7 +131,9 @@ Saves the current state of the plant to a file. Doesn't interrupt the game (chec
 <a name="um-6"/>
 ## 6. Error messages
 
-* Wrong Command Entered: This error is displayed when the user enters a wrong command or enters a command in the wrong format.
-* NO such file: when user is trying to a load a game file that does not exist.
+* File not found or Cannot load file: when user is trying to a load a game file that does not exist.
+* Component "componentName" does not exist: If the component name entered by the user in a command is incorrect.
+* Invalid Command: If the command entered by the user is entered in a wrong format.
+* Saving failed: the game is not able to save the current state.
 
 &copy; 2013 Team Anchovy

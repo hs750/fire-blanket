@@ -4,15 +4,16 @@
 
 * Excecutables for Mac/Windows/Linux **TODO**
 
-* Javadoc documentation **TODO**
-
 * Developers guide **TODO** (vg555 is working on it)
 
 * Design Overview (including picture of powerplant) **TODO** add in user manual
 
-* Download links to full Design Documentation **TODO** ("Docs")
-
 * Homepage with overview of anchovy's amazing defining factors **TODO** What?! I don't get this
+
+## DONE but needs UPDATE after the code is finalised
+
+* Javadoc documentation
+
 
 ## DONE
 

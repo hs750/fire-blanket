@@ -72,6 +72,7 @@ public class Condenser extends WaterComponent {
 	public void calculate() {
 		
 		transmitOutputWater();
+		calculateTemperature();
 		checkFailed();
 //		super.setFailed(calculateFailed());
 //		if(!super.isFailed()){
@@ -83,13 +84,20 @@ public class Condenser extends WaterComponent {
 //		}
 	}
 
+	private void calculateTemperature() {
+		double heatRemoved = 1000*(1 + getCoolantpumpRPM());
+		double tempDecrease = heatRemoved/getAmount();
+		setTemperature(getTemperature() - tempDecrease);
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 * Condenser only fails when it reaches it's fail time
 	 */
 	@Override
 	protected boolean checkFailed(){
-		if(super.getFailureTime() == 0){
+		setFailureTime(getFailureTime()-1);
+		if(super.getFailureTime() < 0){
 			setFailed(true);
 		}else if(getPressure() > 1000){
 			setFailed(true);
