@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import controller.*;
 import model.*;
 import util.*;
+import util.Pair.Label;
 import view.*;
 
 import org.junit.Before;
@@ -475,6 +476,22 @@ public class RequirementsTests {
 		Double a4 = r.getWaterLevel();
 		
 		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		
+	}
+	/**
+	 * All components apart from Valves and Generators will eventually fail. 
+	 * Test proves that the Turbine component inevitably fails. 
+	 */
+	@Test
+	public void TU52_SN11()
+	{
+		Turbine turbine1 = new Turbine("Turbine 1");
+		InfoPacket info = new InfoPacket();
+		info.namedValues.add(new Pair<String>(Label.cNme, "Turbine 1"));
+		info.namedValues.add(new Pair<Double>(Label.RPMs, 30.0));
+		while(!turbine1.getFailed())
+			turbine1.calculate();
+		assertTrue(turbine1.getFailed());
 		
 	}
 }
