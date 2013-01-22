@@ -51,8 +51,8 @@ public class MainWindow
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainWindow window = new MainWindow(null);
-					window.frmFireBlanket.setVisible(true);
+					//MainWindow window = new MainWindow(null);
+					//window.frmFireBlanket.setVisible(true);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,9 +64,9 @@ public class MainWindow
 	/**
 	 * Create the application.
 	 */
-	public MainWindow(GameEngine engine) 
+	public MainWindow(GameEngine engine, String newGameMessage) 
 	{
-		initializeInterface(engine);
+		initializeInterface(engine, newGameMessage);
 		frmFireBlanket.pack();
 		frmFireBlanket.setVisible(true);
 	}
@@ -91,9 +91,9 @@ public class MainWindow
 	/**
 	 * Initialize the look and contents of the frame. Big horrible function.
 	 */
-	private void initializeInterface(GameEngine engine) 
+	private void initializeInterface(GameEngine engine, String newGameMessage) 
 	{
-		int textPaneVertical = 450;
+		int textPaneVertical = 600;
 		int textPaneHorizontal = 400;
 		frmFireBlanket = new JFrame();
 		frmFireBlanket.setResizable(false);
@@ -154,7 +154,7 @@ public class MainWindow
 
 		CommandlineOutput = new JTextArea();
 		CommandlineOutput.setEditable(false);
-		CommandlineOutput.setText("Welcome to Fire Blanket");
+		CommandlineOutput.setText(newGameMessage);
 		CommandlineOutput.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		CommandlineOutput.setLineWrap(true);
 		CommandlineOutput.setWrapStyleWord(true);
