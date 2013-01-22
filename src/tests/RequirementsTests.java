@@ -664,7 +664,7 @@ public class RequirementsTests {
 	 * Test proves that the Turbine component inevitably fails. 
 	 */
 	@Test
-	public void TU52_SN11()
+	public void TU49_SN11()
 	{
 		Turbine turbine1 = new Turbine("Turbine 1");
 		InfoPacket info = new InfoPacket();
