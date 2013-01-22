@@ -67,11 +67,11 @@ Six months have passed since the blanket of fire descended and the newly establi
 ### Autosave
 The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
 
-### Item
-Item description
+### Load game
+The user can load a saved game.
 
-### Item
-Item description
+### Repair Failing Components
+The user can repair the failed components. 
 
 ### Item
 Item description
