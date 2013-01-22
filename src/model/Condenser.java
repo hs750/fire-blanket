@@ -96,7 +96,8 @@ public class Condenser extends WaterComponent {
 	 */
 	@Override
 	protected boolean checkFailed(){
-		if(super.getFailureTime() == 0){
+		setFailureTime(getFailureTime()-1);
+		if(super.getFailureTime() < 0){
 			setFailed(true);
 		}else if(getPressure() > 1000){
 			setFailed(true);

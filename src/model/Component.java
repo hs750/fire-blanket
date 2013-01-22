@@ -17,7 +17,7 @@ import util.Pair.Label;
  */
 public abstract class Component {
 	private String name;
-	private int meanTimeBetweenFailure; //MTBF
+	private int meanTimeBetweenFailure = 50; //MTBF
 	private Double failureTime;
 	private Double outputFlowRate = 0.0;
 	private ArrayList<Component> outputsTo = new ArrayList<Component>();

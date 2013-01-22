@@ -73,7 +73,8 @@ public class Turbine extends WaterComponent {
 	 */
 	@Override
 	protected boolean checkFailed(){
-		if(getFailureTime() == 0){
+		setFailureTime(getFailureTime()-1);
+		if(getFailureTime() < 0){
 			setFailed(true);
 		}
 		return getFailed();
