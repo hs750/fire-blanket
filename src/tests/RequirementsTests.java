@@ -97,7 +97,7 @@ public class RequirementsTests {
 		reactorOutputFlow[1] = reactor.getAmount();
 		
 		reactor.setTemperature(50);
-		reactor.setControlRodLevel(50);
+		reactor.setControlRodLevel(0);
 		reactor.setWaterLevel(50);
 		reactor.setAmount(50);
 		reactor.calculate();
@@ -421,7 +421,11 @@ public class RequirementsTests {
 		assertTrue(conTemp.toString() + " Output: " + outputString, outputString.contains("Temperature: " + conTemp.toString()));
 		
 	}
-	
+	/**
+	 * If the amount of steam being produced is greater than the amount of water being pumped into the reactor then the water level will decrease. Whereas if steam production is less than pump rate then water level will increase.. If both steam production and water pumping in rates are equal then water level will remain constant.
+	 * Creates a simple power plant with a reactor, pump and valve. The temperature of the reactor of the reactor is initially high meaning that the amount of water level decreases over time as more steam is being produced.
+	 * The temperature is then made very low, and it is tested that this makes the water level rise as no steam is bing prodiced, only water being pumped in.
+	 */
 	@Test
 	public void TU42_SF26(){
 		Reactor r = new Reactor("Reactor");
@@ -448,34 +452,35 @@ public class RequirementsTests {
 		p.calculate();
 		v.calculate();
 		r.calculate();
-		Double a1 = r.getWaterLevel();
+		Double a1 = r.getAmount();
 		
 		r.calculate();
-		Double a2 = r.getWaterLevel();
+		Double a2 = r.getAmount();
 		
 		
 		
-		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		assertTrue("" + a1 + " " + a2, a1 > a2); // Test increase temp = reduced water level
 		
 		r.setAmount(50);
 		r.setControlRodLevel(0);
 		r.setTemperature(50);
 		r.setOuputFlowRate(50);
-		p.setAmount(50);
+		p.setAmount(100);
 		p.setRPM(100);
-		p.setOuputFlowRate(50);
 		v.setAmount(50);
-		v.setOuputFlowRate(50);
 		
 		p.calculate();
 		v.calculate();
 		r.calculate();
-		Double a3 = r.getWaterLevel();
 		
+		a1 = r.getAmount();
+		
+		p.calculate();
+		v.calculate();
 		r.calculate();
-		Double a4 = r.getWaterLevel();
+		a2 = r.getAmount();
 		
-		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
+		assertTrue("" + a1 + " " + a2, a1 < a2); //Test increase pump rate increases water level
 		
 	}
 	/**
