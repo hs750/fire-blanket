@@ -54,14 +54,6 @@ Outputs to&Pump 1
 Outputs to&Pump 2
 Receives input from&Turbine
 Receives input from&Steam Valve 2
-Receives input from&Coolant Pump
-
-Name of component&Coolant Pump
-Revolutions per minute&500.0
-Output flow rate&250.0
-Outputs to&Condenser
-Outputs to&Coolant Pump
-Receives input from&Coolant Pump
 
 Name of component&Turbine
 Revolutions per minute&50.0
