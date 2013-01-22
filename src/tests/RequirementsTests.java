@@ -525,18 +525,69 @@ public class RequirementsTests {
 		
 		
 	}
+	/**
+	 * At some random time normally distributed around the mean time of a Turbine fail time the
+	 * pump will fail. Makes sure that the failure times are distributed around the mean.
+	 */
+	@Test 
+	public void TU46_SF32()
+	{
+		Turbine turn = new Turbine("Turbine 1");
+		
+		int i = turn.getMeanTimeBetweenFailure();
+		int sum = 0;
+		for(int n = 0; n != 100; ++n)
+		{
+			sum += turn.getFailureTime();
+			turn.calcRandomFailTime();
+		}
+		assertTrue(sum/100 - i <= 0.1 || i - sum/100 <=0.1);
+	}
+	/**
+	 * At some random time normally distributed around the mean time of a condenser failtime the
+	 * pump will fail. Makes sure that the failure times are distributed around the mean.
+	 */
+	@Test 
+	public void TU47_SF33()
+	{
+		Condenser con = new Condenser("Pump 1");
+		
+		int i = con.getMeanTimeBetweenFailure();
+		int sum = 0;
+		for(int n = 0; n != 100; ++n)
+		{
+			sum += con.getFailureTime();
+			con.calcRandomFailTime();
+		}
+		assertTrue(sum/100 - i <= 0.1 || i - sum/100 <=0.1);
+	}
 	
+	/**
+	 * At some random time normally distributed around the pump's mean time before failure the
+	 * pump will fail. Makes sure that the failure times are distributed around the mean.
+	 */
+	@Test 
+	public void TU48_SF34()
+	{
+		Pump pump1 = new Pump("Pump 1");
+		
+		InfoPacket info = new InfoPacket();
+		info.namedValues.add(new Pair<String>(Label.cNme, "Pump 1"));
+		info.namedValues.add(new Pair<Double>(Label.RPMs, 100.0));
+		int i = pump1.getMeanTimeBetweenFailure();
+		int sum = 0;
+		for(int n = 0; n != 100; ++n)
+		{
+			sum += pump1.getFailureTime();
+			pump1.calcRandomFailTime();
+		}
+		assertTrue(sum/100 - i <= 0.1 || i - sum/100 <=0.1);
+	}
 	
 	/**
 	 * All components apart from Valves and Generators will eventually fail. 
 	 * Test proves that the Turbine component inevitably fails. 
 	 */
-	@Test 
-	public void TU48_SF34()
-	{
-		
-	}
-	
 	@Test
 	public void TU52_SN11()
 	{

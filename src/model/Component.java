@@ -72,7 +72,7 @@ public abstract class Component {
 	/**
 	 * Calculates the failure time of the component normally distributed around the MTBF
 	 */
-	protected void calcRandomFailTime(){
+	public void calcRandomFailTime(){
 		Random rand = new Random();
 		failureTime = rand.nextGaussian()* 10 + meanTimeBetweenFailure;
 	}
