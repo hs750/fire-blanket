@@ -10,6 +10,9 @@
 
 * Homepage with overview of anchovy's amazing defining factors **TODO** What?! I don't get this
 
+* system requirements diagram
+
+
 ## DONE but needs UPDATE after the code is finalised
 
 * Javadoc documentation
