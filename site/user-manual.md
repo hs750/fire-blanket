@@ -59,7 +59,10 @@ Six months have passed since the blanket of fire descended and the newly establi
 <a name="um-4"/>
 ## 4. Functionalities
 
-* **TODO** add plant pic from the design document
+### Diagram of the nuclear power plant's components
+
+![Plant diagram NOLABELS](http://i.imgur.com/SBLKwR2.png)
+![Plant diagram](http://i.imgur.com/QTtCGBO.png)
 
 ### Autosave
 The game is autosaved every 7 seconds. The autosave file can be found in `saves/autosave.fg`.
@@ -82,7 +85,7 @@ The gamer can connect two components that he is using currently in the game.
 
 `>> load <FILENAME>.fg`
 
-* Will load from `FILENAME` and start a new game
+* Will load from `FILENAME` ahttp://i.imgur.com/SBLKwR2.pngnd start a new game
 * The previous game will end
 
 `>> new game <NAME>`
