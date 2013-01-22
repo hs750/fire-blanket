@@ -40,6 +40,9 @@ Produce sufficient energy to sustain the infrastructure. Fail and you lose the g
   The rods level is proportional to how much steam the reactor is generating.
   Lowering the rods is a good way to try to avoid meltdown.
 
+* Turn on and off the pumps: The user can use the pumps to regulate the water accordning to the energy needs of the plant.
+* OPen and close the valves: the user can open and close the valves to stop the flow of water.
+
 * TODO add more commands
 
 
@@ -109,6 +112,15 @@ Item description
 
 * This assigns a new RPM to a pump
 * Example: `Pump 1 rpm 25` or `Coolant Pump rpm 250`
+
+`>> <PUMP_NAME> on`
+* Turns on the pump
+
+`>> <PUMP_NAME> off`
+* Turns off the pump
+
+`>> <VALVE_NAME> close`
+* Closes the valve
 
 `>> save`
 
