@@ -477,7 +477,7 @@ public class RequirementsTests {
 	 * Power plant state is then reset, but with more condensing than water bing pumped out. The same two values are compared after calculation of condenser state. The first water level should be lower as the water level should be rising due to steam being condensed.
 	 */
 	@Test
-	public void TU43_SF27(){ //TODO implement this once condenser is ready.
+	public void TU43_SF27(){
 		Condenser c = new Condenser("Condenser");
 		Valve v = new Valve("Valve");
 		Pump p = new Pump("Pump");
@@ -542,10 +542,32 @@ public class RequirementsTests {
 		
 		
 	}
-	
+	/**
+	 * The current water level of the condenser readout displayed to the user will always be the same value as that of the current value of the condenser water level calculation.
+	 */
 	@Test
-	public void TU44_SF28(){ // TODO impoement when condenser is ready.
-		fail("not imped");
+	public void TU44_SF28(){
+		GameEngine ge = new GameEngine();
+		Condenser condenser = new Condenser("Condenser");
+	
+		condenser.setAmount(50);
+		condenser.setTemperature(50);
+		condenser.setOuputFlowRate(50);
+		condenser.connectToInput(condenser);
+		condenser.connectToOutput(condenser);
+		
+		condenser.calculate();
+		
+		Double conLevel = condenser.getAmount();
+		ArrayList<InfoPacket> infos = new ArrayList<InfoPacket>();
+		InfoPacket condenserInfo = condenser.getInfo();
+		infos.add(condenserInfo);
+		
+		ge.updateInterfaceComponents(infos);
+		
+		String outputString = ge.window.getRightPannelContence();
+		
+		assertTrue(conLevel.toString() + " Output: " + outputString, outputString.contains("Water level: " + conLevel.toString()));
 	}
 	/**
 	 * The current water level of the reactor readout being displayed to the user will always be the same as the value of the reactor water level calculation.
