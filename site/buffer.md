@@ -15,6 +15,7 @@
 * design doc (Google Drive)
 
 * add "Javadoc" to Code documentation
+* ZIP -> SOURCE CODE
 
 ## DONE but needs UPDATE after the code is finalised
 
