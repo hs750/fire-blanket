@@ -9,7 +9,7 @@ This guide is a good place to start for developers wishing to use and expand Fir
 3. [Adding a Component](#dg-3)
 4. [How to Create a Software Component](#dg-4)
 
-<a href="#dg-1"/>
+<a name="#dg-1"/>
 ## Getting Started
 
 ### Getting the code
@@ -45,7 +45,7 @@ Fire Blanket follows the [MVC pattern](http://www.codinghorror.com/blog/2008/05/
 
 To learn more about the underlying mechanics of our nuclear plant, check out the <a href="https://github.com/cjd515/fire-blanket/blob/master/site/user-manual.md" target="_blank">User Manual</a>.
 
-<a href="#dg-2"/>
+<a name="#dg-2"/>
 ## Adding a User Interface
 
 Assessment 3 requires development teams to change the basic textual user interface to a GUI. All of the game’s parsing and operation passing is taken care of in the game engine - so the interface is plug and play.
@@ -59,7 +59,7 @@ To change the interface:
 5. The class should pass the entered commands to the parser
 6. The display should updates with every command entered by the game
 
-<a href="#dg-3"/>
+<a name="#dg-3"/>
 ## Adding a `Component`
 
 To add a hardware component:
@@ -71,7 +71,7 @@ To add a hardware component:
 5. Add the functions to calculate and read the values of the component(like getInfo, takeInfo, calculate).
 6. Make sure that the new component is connected to the right components passing the correct info.To add a hardware component:
 
-<a href="#dg-4"/>
+<a name="#dg-4"/>
 ## How to Create a Software Component
 
 This section describes the specifics of creating a new Software Component to the Power Plant as described in Assessment 3. For information on how to create a hardware component or how to add a newly created component to the power plant please see the following two sections.
