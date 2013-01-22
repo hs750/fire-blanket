@@ -430,9 +430,8 @@ public class RequirementsTests {
 		r.setAmount(50);
 		r.setControlRodLevel(100);
 		r.setTemperature(50);
-		r.setOuputFlowRate(50);
 		p.setAmount(50);
-		p.setRPM(100);
+		p.setRPM(0);
 		p.setOuputFlowRate(50);
 		v.setAmount(50);
 		v.setOuputFlowRate(50);
@@ -442,6 +441,9 @@ public class RequirementsTests {
 		r.calculate();
 		Double a1 = r.getAmount();
 		
+		p.calculate();
+		v.calculate();
+		r.calculate();
 		r.calculate();
 		Double a2 = r.getAmount();
 		
