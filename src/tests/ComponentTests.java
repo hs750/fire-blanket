@@ -11,7 +11,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	PumpTest.class,
 	ReactorTest.class,
 	TurbineTest.class,
-	ValveTest.class
+	ValveTest.class,
+	CondenserTest.class
 	
 })
 public class ComponentTests {

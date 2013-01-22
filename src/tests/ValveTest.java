@@ -76,15 +76,18 @@ public class ValveTest {
 	@Test 
 	public void testCalculate(){
 		Valve v2 = new Valve("Valve 2");
-		v2.setOuputFlowRate(200);
+		
+		v2.connectToInput(v1);
+		v2.connectToOutput(v1);
 		v1.connectToInput(v2);
-		v1.setOuputFlowRate(100.0);
+		v1.connectToOutput(v2);
 		
-		assertTrue(v1.getOutputFlowRate() == 100.0);
-		
+		v1.setAmount(0);
+		v2.setAmount(50);
+		v2.calculate();
 		v1.calculate();
 		
-		assertTrue(v1.getOutputFlowRate() == 200.0);
+		assertTrue("" + v1.getOutputFlowRate(), v1.getOutputFlowRate() == 50);;
 		
 		v1.setPosition(false);
 		v1.calculate();

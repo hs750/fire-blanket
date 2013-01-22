@@ -25,7 +25,7 @@ public class TurbineTest {
 		turbine1 = new Turbine("Turbine 1");
 		info = new InfoPacket();
 		info.namedValues.add(new Pair<String>(Label.cNme, "Turbine 1"));
-		info.namedValues.add(new Pair<Double>(Label.RPMs, 30.0));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, 30.0));
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class TurbineTest {
 			e.printStackTrace();
 		}
 		
-		assertTrue(turbine1.getRPM() == 30.0);
+		assertTrue(turbine1.getRPM() == turbine1.getOutputFlowRate() * turbine1.getRPMRatio());
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class TurbineTest {
 		//turbine1.setRPM(200.0);
 		
 		InfoPacket t1I = turbine1.getInfo();
-		assertTrue(t1I.namedValues.contains(new Pair<Double>(Label.RPMs, 200.0)));
+		assertTrue(t1I.namedValues.contains(new Pair<Double>(Label.OPFL, turbine1.getOutputFlowRate())));
 		assertTrue(t1I.namedValues.contains(new Pair<String>(Label.cNme, "Turbine 1")));
 	}
 	
@@ -60,9 +60,16 @@ public class TurbineTest {
 	@Test
 	public void testCalculate(){
 		Pump p = new Pump("Pump 1");
-		p.setOuputFlowRate(100);
+		p.setAmount(50);
+		
+		p.connectToInput(p);
+		p.connectToOutput(turbine1);
 		
 		turbine1.connectToInput(p);
+		turbine1.connectToOutput(p);
+		turbine1.setAmount(50);
+		
+		p.calculate();
 		turbine1.calculate();
 		
 		assertTrue(turbine1.getRPM() == p.getOutputFlowRate()/turbine1.getRPMRatio());

@@ -27,4 +27,4 @@
 
 ## Random stuff
 
-![Screenshot of Fire Blanket in action!](http://i.imgur.com/cUlIdFG.png)
+![Screenshot of Fire Blanket in action!](http://i.imgur.com/IwfAWH5.png)
