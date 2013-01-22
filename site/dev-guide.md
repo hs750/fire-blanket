@@ -79,10 +79,10 @@ This section describes the specifics of creating a new Software Component to the
 To add a Software Component: there are many ways to change the software component of the game.
 
 1. The user can add new functions:
-  New methods performing different functions(totally dependent on the programmer) can be added to the GameEngine class.
-  Make sure to update the infopackets after performing the necessary action using the `updateInterfaceComponents` function.
+  * New methods performing different functions(totally dependent on the programmer) can be added to the GameEngine class.
+  * Make sure to update the infopackets after performing the necessary action using the `updateInterfaceComponents` function.
 
 2. The parser can be amended
-  Commands can rephrased, changed or be given different meanings.
-  Also any new functions added in the gameEngine need to called and added in the parser.
+  * Commands can rephrased, changed or be given different meanings.
+  * Also any new functions added in the gameEngine need to called and added in the parser.
 
