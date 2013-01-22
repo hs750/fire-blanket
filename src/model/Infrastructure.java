@@ -21,9 +21,9 @@ public class Infrastructure extends Component {
 	 * The electricity that is needed to power this piece of infrastructure.
 	 */
 	double electrisityneeded = 1;
-	
+
 	boolean failed = false;
-	
+
 	/**
 	 * @see model.Component#Component(String)
 	 */
@@ -49,7 +49,7 @@ public class Infrastructure extends Component {
 	@Override
 	public InfoPacket getInfo() {
 		InfoPacket info = super.getInfo();
-		info.namedValues.add(new Pair<Double>(Label.OPFL, getElectrisityneeded()));
+		info.namedValues.add(new Pair<Double>(Label.OPFL, getOutputFlowRate()));
 		info.namedValues.add(new Pair<Double>(Label.elec, getElectrisityneeded()));
 		return info;
 	}
@@ -58,26 +58,31 @@ public class Infrastructure extends Component {
 	 */
 	@Override
 	public void calculate() {
-		super.setOuputFlowRate(calculateOutputFlowRate());
+		calculateOutputFlowRate();
 		checkFailed();
 	}
-	
+
 	/**
 	 * The output flow rate of an infrastructure component is the total amount of electricity flowing into the component, minus the electricity that it itself needs to function.
 	 */
 	protected double calculateOutputFlowRate() {
-		double electrisityGenerated = 0;
-		ArrayList<Component> inputComponents = super.getRecievesInputFrom();
+		double electricityOverflow = 0.0;
+		ArrayList<Component> inputComponents = getRecievesInputFrom();
 		Iterator<Component> it = inputComponents.iterator();
 		Component comp = null;
 		while(it.hasNext()){
 			comp = it.next();
 			if((comp instanceof Generator) | (comp instanceof Infrastructure) ){
-				electrisityGenerated += comp.getOutputFlowRate();
+				electricityOverflow = electricityOverflow + comp.getOutputFlowRate();
 			}
-			electrisityGenerated = electrisityGenerated - electrisityneeded;
-			}
-		return electrisityGenerated;
+		}
+		if (electricityOverflow > getElectrisityneeded()){
+			electricityOverflow = electricityOverflow - getElectrisityneeded();
+		}else{
+			electricityOverflow = 0.0;
+		}
+		setOuputFlowRate(electricityOverflow);
+		return electricityOverflow;
 	}
 	/** 
 	 * {@inheritDoc}
@@ -124,5 +129,5 @@ public class Infrastructure extends Component {
 	public void setElectrisityneeded(double electrisityneeded) {
 		this.electrisityneeded = electrisityneeded;
 	}
-	
+
 }
