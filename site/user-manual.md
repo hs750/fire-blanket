@@ -1,19 +1,11 @@
 # User manual
 
-## meta
-
-###Resources
-* [Tips to create a useful user manual /stackoverflow](http://stackoverflow.com/questions/241422/tips-to-create-a-useful-user-manual)
-* [Slides](http://www.cdf.utoronto.ca/~csc207h/summer/lectures/UserGuide.pdf)
-
 ## Contents
 
-1. [Introduction](#um-1) details about the game, a bit of backstory, and how it works
-2. [Quick start guide](#um-2) this will go on the site's front page as well
-3. [Background story](#um-3) [optional] not totally sure this belongs in the user manual
-4. [Main section](#um-4)
-  1. How the plant works, what each component does etc. + diagrams
-  2. How to win (game mechanics detailed)
+1. [Introduction](#um-1)
+2. [Quick start guide](#um-2)
+3. [Background story](#um-3)
+4. [Functionalities](#um-4)
 5. [Commands index](#um-5) + description
 6. [Error messages](#um-6)
 
