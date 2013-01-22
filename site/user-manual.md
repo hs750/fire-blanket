@@ -66,18 +66,15 @@ The user can load a saved game.
 ### Repair Failing Components
 The user can repair the failed components. 
 
-### Item
-Item description
+### Add Components
+the user can at anytime add a new component to the game and use it in anyway desired.
 
-### Item
-Item description
+### Connect Components
+The gamer can connect two components that he is using.
 
 <a name="um-5"/>
 ## 5. Game commands
 
-`>> <VALVE_NAME> close`
-
-* Closes the valve `VALVE_NAME`
 
 `>> load <FILENAME>.fg`
 
@@ -90,6 +87,10 @@ Item description
 * Uses the data from `save/newgame.fg`
 * `NAME` will be the name of the plant operator
 * The previous game will end
+
+`>> <VALVE_NAME> close`
+
+* Closes the valve `VALVE_NAME`
 
 `>> <VALVE_NAME> open`
 
@@ -112,9 +113,6 @@ Item description
 `>> <PUMP_NAME> off`
 * Turns off the pump
 
-`>> <VALVE_NAME> close`
-* Closes the valve
-
 `>> show saves`
 * Shows a list of all the saved games
 
@@ -124,7 +122,7 @@ Item description
 
 `>> save as <FILENAME>.fg`
 
-* Saves using the FILENAME provided.
+* Saves using the FILENAME entered.
 
 
 Saves the current state of the plant to a file. Doesn't interrupt the game (check the [autosave](#um-4) feature).
