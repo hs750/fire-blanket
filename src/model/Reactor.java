@@ -12,6 +12,7 @@ import util.Pair.Label;
  * @author Harrison
  */
 public class Reactor extends WaterComponent {
+	@SuppressWarnings("unused")
 	private double pressure = 0.0; //---DEPRECATED--- pressure is now just a function of temp, Amnt, and Vlme
 	private double controlRodLevel = 50.0;
 	private double waterLevel = 50;// ---DEPRECATED---

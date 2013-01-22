@@ -8,7 +8,6 @@ import controller.*;
 import model.*;
 import util.*;
 import util.Pair.Label;
-import view.*;
 
 import org.junit.Before;
 import org.junit.Test;

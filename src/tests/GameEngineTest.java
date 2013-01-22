@@ -5,11 +5,9 @@ import static org.junit.Assert.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import model.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 

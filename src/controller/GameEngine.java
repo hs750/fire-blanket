@@ -3,7 +3,6 @@ package controller;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.EventQueue;
 import java.io.*;
 
 import model.*;

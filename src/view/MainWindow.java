@@ -1,12 +1,8 @@
 package view;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 //import javax.swing.JTextPane;
 import java.awt.Component;
 //import javax.swing.JSplitPane;

@@ -85,6 +85,7 @@ public class Turbine extends WaterComponent {
 	 * @return Total input flow rate.
 	 *  ---DEPRECATED---
 	 */
+	@SuppressWarnings("unused")
 	private double getTotalInputFlowRate() {
 		ArrayList<Component> inputs = super.getRecievesInputFrom();
 		Iterator<Component> it = inputs.iterator();

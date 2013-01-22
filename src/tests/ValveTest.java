@@ -3,12 +3,9 @@ package tests;
 import static org.junit.Assert.*;
 
 import model.Valve;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import controller.*;
 
 import util.InfoPacket;
 import util.Pair;

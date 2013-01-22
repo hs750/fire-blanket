@@ -6,7 +6,6 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 import model.Valve;
 
