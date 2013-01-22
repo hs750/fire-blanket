@@ -5,9 +5,8 @@ This guide is a good place to start for developers wishing to use and expand Fir
 ## Contents
 
 1. [Getting started](#dg-1)
-2. [Code oraganisation](#dg-2)
-3. [Adding a "view"](#dg-3)
-4. [Adding a Component](#dg-4)
+3. [Adding a "view"](#dg-2)
+4. [Adding a Component](#dg-3)
 
 <a href="#dg-1"/>
 ## Getting started
@@ -34,20 +33,29 @@ For Windows, consider installing something like [http://msysgit.github.com/](Git
 
 Having the `.classpath` and `.project` files means the project is already configured for Eclipse, where you can compile and run it. Eclipse's biggest advantages are being cross-platform, git support via [egit](http://www.eclipse.org/egit/), and powerful refactoring. There is also a `build.xml` file if you want to build using Ant.
 
-<a href="#dg=-2"/>
-## Code organisation
+### Code organisation
 
-Fire Blanket follows the MVC pattern. There are 5 packages used:
+Fire Blanket follows the [MVC pattern](http://www.codinghorror.com/blog/2008/05/understanding-model-view-controller.html). The code is structured in 5 packages:
 * `model`: the hardware components
 * `view`: the user interface (the text UI also has a command parser)
 * `controller`: the game engine, gets user commands, updates the user interface, has the main game loop
 * `util`: utilities such as InfoPacket
 * `tests`: unit testing
 
-To learn more about how the physics of the nuclear plant work, check out the <a href="https://github.com/cjd515/fire-blanket/blob/master/site/user-manual.md" target="_blank">User Manual</a>.
+To learn more about the underlying mechanics of our nuclear plant, check out the <a href="https://github.com/cjd515/fire-blanket/blob/master/site/user-manual.md" target="_blank">User Manual</a>.
 
-<a href="#dg-3"/>
+<a href="#dg-2"/>
 ## Adding a "view"
 
-<a href="#dg-4"/>
+Assessment 3 requires development teams to change the basic textual user interface to a GUI. All of the game’s parsing and operation passing is taken care of in the game engine - so the interface is plug and play.
+
+To change the interface:
+1. Remove the UI class MainWindow from the source code
+2. Create a new Java Class with your prefered design
+3. Pass the GameEngine through the main function of the class to start the game.
+4. The function should also take a command from the gamer thus performing the actions the gamer wants it to.
+5. the class should pass the entered commands to the parser.
+6. The display should updates with every command entered by the game
+
+<a href="#dg-3"/>
 ## Adding a `Component`
