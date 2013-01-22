@@ -473,7 +473,8 @@ public class RequirementsTests {
 	}
 	/**
 	 * If the amount steam being condensed is greater than the rate at which water is being pumped out of the condenser then the water level in the condenser will rise. If the steam condensation rate is less than the water pumping rate then the water level will decrease. If both the condensation rate and the water pumping rate are equal then the water level in the condenser will remain constant.
-	 * 
+	 * Creates a simple power plant. Firstly calculating the state of the condenser saves its water level then calculates again. The second water level should be less as water is being pumped out faster than it condensers.
+	 * Power plant state is then reset, but with more condensing than water bing pumped out. The same two values are compared after calculation of condenser state. The first water level should be lower as the water level should be rising due to steam being condensed.
 	 */
 	@Test
 	public void TU43_SF27(){ //TODO implement this once condenser is ready.
@@ -512,7 +513,7 @@ public class RequirementsTests {
 		
 		Double a2 = c.getAmount();
 		
-		assertTrue("" + a1 + " " + a2, a1 > a2); //Comparason of pump pumping lots of water out and not much steam being condensed.
+		assertTrue("" + a1 + " " + a2, a1 > a2); //Comparison of pump pumping lots of water out and not much steam being condensed.
 		
 		c.setAmount(50);
 		c.setCoolantpumpRPM(100);
