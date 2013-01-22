@@ -19,7 +19,7 @@ _This is a short guide to start playing immediately. To understand and maybe mas
 
 **Step 1.** Run `fireblanket.jar`
 
-**Step 2.** Enter `new game <your name goes in here>`
+**Step 2.** Enter `new game <your name goes in here> or load <name of saved file>`
 
 **Step 3.** Type in [commands](#um-5) to control the nuclear power plant.
 
