@@ -62,6 +62,9 @@ public class Parser {
 			return engine.findAvailableSaves();
 		} else if (componentName.equals("new game")){
 			try {
+				if(command.equals("new game"))
+					return "Please enter the operator name with this command.";
+				
 				engine.readfile("newgame");
 				engine.updateInterfaceComponents(engine.getAllComponentInfo());
 				return getGameIntroString(command);
