@@ -1,7 +1,7 @@
 package view;
 
 import java.io.FileNotFoundException;
-import java.util.StringTokenizer;
+import java.util.regex.*;
 
 import controller.GameEngine;
 
@@ -14,9 +14,11 @@ import util.Pair.Label;
 /**
  * This class is responsible for parsing text commands supplied by the user and then executing a fitting gameEngine method
  * or interacting with a certain component
- * Valid commands are: save; save as; show saves; load; valveName open/close
+ * Valid commands are: save; save as; show saves; load; new game; exit; quit
+ * valveName open/close
  * pumpName RPM/rpm number;
- * Control Rods name set/SET number;
+ * CondeserName RPM/rpm number;
+ * name  rods set/SET number; for example Reactor rods set 45
  * componentName repair
  * 
  */
@@ -77,7 +79,7 @@ public class Parser {
 			Component component = null;
 			
 			//Used for components that also need a numerical parameter (pumps and control rods for now)
-			if (componentName.contains("Pump") || componentName.contains("Condenser")) 
+			if (!command.contains("repair") && (componentName.contains("Pump") || componentName.contains("Condenser")) )
 			{
 				String alterName = componentName.substring(0, componentName.lastIndexOf(' '));
 				component = engine.getPowerPlantComponent(alterName);
@@ -85,6 +87,7 @@ public class Parser {
 				{
 					i.namedValues.add(new Pair<Double>(Label.RPMs, Double.parseDouble(command)));
 				}
+				
 			} else if(componentName.contains("rods")){
 				String alterName = componentName.substring(0, componentName.lastIndexOf(' '));
 				alterName = alterName.substring(0,alterName.lastIndexOf(" rods"));
@@ -111,12 +114,13 @@ public class Parser {
 					}
 				} 
 	
-				else if (command.equals("repair")) 
-				{
-					engine.repair(component);
-					engine.updateInterfaceComponents(engine.getAllComponentInfo());
-					return componentName + " has been repaired";
-				}
+				
+			}  
+			if (command.equals("repair") ) 
+			{
+				engine.repair(component);
+				engine.updateInterfaceComponents(engine.getAllComponentInfo());
+				return componentName + " has been repaired";
 			}
 			
 			try {
@@ -144,12 +148,22 @@ public class Parser {
 	{
 		if(text.length() != 0)
 		{
+			//String lowerCase = text.toLowerCase(); //Convert string to lower case to avoid case mismatches
 			String lowerCase= text;
+			//Trim trailing spaces and remove duplicate whitespaces
+			lowerCase = lowerCase.trim();
+			
+			Pattern pattern = Pattern.compile("\\s+");
+		    Matcher matcher = pattern.matcher(lowerCase);
+		    //boolean check = matcher.find();
+		    lowerCase = matcher.replaceAll(" ");
+		    
+			
 			if(lowerCase.equals("save") || lowerCase.equals("exit") || lowerCase.equals("quit"))
 			{
 				return parseCommand(lowerCase,lowerCase);
 			}
-			//String lowerCase = text.toLowerCase(); //Convert string to lower case to avoid case mismatches
+			
 			
 			if(lowerCase.contains(" "))
 			{
