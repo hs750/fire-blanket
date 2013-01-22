@@ -807,7 +807,6 @@ public class GameEngine {
 				gameEngine.calculateAllComponents(); 										//Calculate new Values.
 				gameEngine.updateInterfaceComponents(gameEngine.getAllComponentInfo());		//Update the Screen with the current Values calculate
 				
-				
 				ArrayList<Component> failedC = gameEngine.componentFailed();
 				if(failedC.size() > 0){
 					Iterator<Component> cIt = failedC.iterator();
@@ -819,7 +818,7 @@ public class GameEngine {
 						failedComps += failedComp + ", ";
 					}
 					gameEngine.window.console.writeToConsole(failedComps);						//Output the names of components that are currently failed.
-					if(!notFailed){
+					if(!gameEngine.notFailed){
 						gameEngine.window.console.writeToConsole("GAME OVER");
 					}
 				}
