@@ -89,6 +89,7 @@ public class Infrastructure extends Component {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
+		if(!getFailed()){
 		super.takeSuperInfo(info);
 		Iterator<Pair<?>> i = info.namedValues.iterator();
 		Pair<?> pair = null;
@@ -102,6 +103,7 @@ public class Infrastructure extends Component {
 			default:
 				break;
 			}
+		}
 		}
 
 	}

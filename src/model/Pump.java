@@ -94,18 +94,20 @@ public class Pump extends WaterComponent {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeSuperInfo(info);
-		Iterator<Pair<?>> i = info.namedValues.iterator();
-		Pair<?> pair = null;
-		Label label = null;
-		while(i.hasNext()){
-			pair = i.next();
-			label = pair.getLabel();
-			switch (label){
-			case RPMs:
-				RPM = (Double) pair.second();
-			default:
-				break;
+		if(!getFailed()){
+			super.takeSuperInfo(info);
+			Iterator<Pair<?>> i = info.namedValues.iterator();
+			Pair<?> pair = null;
+			Label label = null;
+			while(i.hasNext()){
+				pair = i.next();
+				label = pair.getLabel();
+				switch (label){
+				case RPMs:
+					RPM = (Double) pair.second();
+				default:
+					break;
+				}
 			}
 		}
 	}

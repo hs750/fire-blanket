@@ -57,14 +57,14 @@ public class Turbine extends WaterComponent {
 
 		transmitOutputWater();
 		checkFailed();
-//		super.setFailed(calculateFailed());
-//		if(!super.isFailed()){
-//			RPM = calculateRPM();
-//			super.setOuputFlowRate(calculateOutputFlowRate());
-//		}else{
-//			RPM = 0;
-//			super.setOuputFlowRate(0);
-//		}
+		//		super.setFailed(calculateFailed());
+		//		if(!super.isFailed()){
+		//			RPM = calculateRPM();
+		//			super.setOuputFlowRate(calculateOutputFlowRate());
+		//		}else{
+		//			RPM = 0;
+		//			super.setOuputFlowRate(0);
+		//		}
 
 	}
 	/**
@@ -103,16 +103,18 @@ public class Turbine extends WaterComponent {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeSuperInfo(info);
-		Iterator<Pair<?>> it = info.namedValues.iterator();
-		Pair<?> pair = null;
-		Label label = null;
-		while(it.hasNext()){
-			pair = it.next();
-			label = pair.getLabel();
-			switch(label){
-			default:
-				break;
+		if(!getFailed()){
+			super.takeSuperInfo(info);
+			Iterator<Pair<?>> it = info.namedValues.iterator();
+			Pair<?> pair = null;
+			Label label = null;
+			while(it.hasNext()){
+				pair = it.next();
+				label = pair.getLabel();
+				switch(label){
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -150,7 +152,7 @@ public class Turbine extends WaterComponent {
 		waterpack.namedValues.add(new Pair<Double>(Pair.Label.temp, getTemperature()));
 		return waterpack;
 	}
-	
+
 	@Override
 	public double maxInput() {
 		return getVolume() - getAmount();

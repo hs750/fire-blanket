@@ -68,8 +68,8 @@ public class Valve extends WaterComponent {
 
 		transmitOutputWater();
 		checkFailed();
-//		super.setFailed(calculateFailed());
-//		super.setOuputFlowRate(calculateOutputFlowRate());
+		//		super.setFailed(calculateFailed());
+		//		super.setOuputFlowRate(calculateOutputFlowRate());
 
 
 	}
@@ -114,22 +114,24 @@ public class Valve extends WaterComponent {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeInfo(info);
-		Iterator<Pair<?>> i = info.namedValues.iterator();
-		Pair<?> pair = null;
-		Label label = null;
-		while(i.hasNext()){
-			pair = i.next();
-			label = pair.getLabel();
-			switch (label){
-			case psit:
-				position = (Boolean) pair.second();
-			default:
-				break;
+		if(!getFailed()){
+			super.takeInfo(info);
+			Iterator<Pair<?>> i = info.namedValues.iterator();
+			Pair<?> pair = null;
+			Label label = null;
+			while(i.hasNext()){
+				pair = i.next();
+				label = pair.getLabel();
+				switch (label){
+				case psit:
+					position = (Boolean) pair.second();
+				default:
+					break;
+				}
 			}
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

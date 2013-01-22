@@ -57,11 +57,11 @@ public class Condenser extends WaterComponent {
 		info.namedValues.add(new Pair<Double>(Label.RPMs, getCoolantpumpRPM()));
 		return info;
 	}
-	
+
 	public double getCoolantpumpRPM() {
 		return coolantpumpRPM;
 	}
-	
+
 	public void setCoolantpumpRPM(double coolantpumpRPM) {
 		this.coolantpumpRPM = coolantpumpRPM;
 	}
@@ -70,25 +70,25 @@ public class Condenser extends WaterComponent {
 	 */
 	@Override
 	public void calculate() {
-		
+
 		transmitOutputWater();
 		calculateTemperature();
 		checkFailed();
-//		super.setFailed(calculateFailed());
-//		if(!super.isFailed()){
-			// double oldPressure = pressure;
-			//pressure = calculatePressure();
-			//setTemperature(calculateTemp(oldPressure));
-//			waterLevel = calculateWaterLevel();
-//			super.setOuputFlowRate(calculateOutputFlowRate());
-//		}
+		//		super.setFailed(calculateFailed());
+		//		if(!super.isFailed()){
+		// double oldPressure = pressure;
+		//pressure = calculatePressure();
+		//setTemperature(calculateTemp(oldPressure));
+		//			waterLevel = calculateWaterLevel();
+		//			super.setOuputFlowRate(calculateOutputFlowRate());
+		//		}
 	}
 
 	private void calculateTemperature() {
 		double heatRemoved = 10*(1 + getCoolantpumpRPM());
 		double tempDecrease = heatRemoved/getAmount();
 		setTemperature(getTemperature() - tempDecrease);
-		
+
 	}
 	/**
 	 * {@inheritDoc}
@@ -177,25 +177,26 @@ public class Condenser extends WaterComponent {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeSuperInfo(info);
-		Iterator<Pair<?>> it = info.namedValues.iterator();
-		Pair<?> pair = null;
-		Label label = null;
-		while(it.hasNext()){
-			pair = it.next();
-			label = pair.getLabel();
-			switch(label){
-			case wLvl:
-				waterLevel = (Double) pair.second();
-				break;
-			case RPMs:
-				setCoolantpumpRPM((Double) pair.second());
-				break;
-			default:
-				break;
+		if(!getFailed()){
+			super.takeSuperInfo(info);
+			Iterator<Pair<?>> it = info.namedValues.iterator();
+			Pair<?> pair = null;
+			Label label = null;
+			while(it.hasNext()){
+				pair = it.next();
+				label = pair.getLabel();
+				switch(label){
+				case wLvl:
+					waterLevel = (Double) pair.second();
+					break;
+				case RPMs:
+					setCoolantpumpRPM((Double) pair.second());
+					break;
+				default:
+					break;
+				}
 			}
 		}
-
 
 	}
 	@Override	

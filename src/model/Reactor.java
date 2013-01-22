@@ -69,13 +69,13 @@ public class Reactor extends WaterComponent {
 		calculateTemperature();
 		transmitOutputWater();
 		checkFailed();
-//		if(!super.isFailed()){
-//			super.setFailed(calculateFailed());
-//			double oldTemp = getTemperature();
-//			setTemperature(calculateTemperature());
-//			waterLevel = calculateWaterLevel();
-//			super.setOuputFlowRate(calculateOutputFlowRate());
-//		}
+		//		if(!super.isFailed()){
+		//			super.setFailed(calculateFailed());
+		//			double oldTemp = getTemperature();
+		//			setTemperature(calculateTemperature());
+		//			waterLevel = calculateWaterLevel();
+		//			super.setOuputFlowRate(calculateOutputFlowRate());
+		//		}
 	}
 
 	/** 
@@ -131,28 +131,30 @@ public class Reactor extends WaterComponent {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
-		super.takeSuperInfo(info);
-		Iterator<Pair<?>> i = info.namedValues.iterator();
-		Pair<?> pair = null;
-		Label label = null;
-		while(i.hasNext()){
-			pair = i.next();
-			label = pair.getLabel();
-			switch (label){
-			case temp:
-				setTemperature((Double) pair.second());
-				break;
-			case pres:
-				setPressure((Double) pair.second());
-				break;
-			case coRL:
-				setControlRodLevel((Double) pair.second());
-				break;
-			case wLvl:
-				setWaterLevel((Double) pair.second());
-				break;
-			default:
-				// should this do anything by default?
+		if(!getFailed()){
+			super.takeSuperInfo(info);
+			Iterator<Pair<?>> i = info.namedValues.iterator();
+			Pair<?> pair = null;
+			Label label = null;
+			while(i.hasNext()){
+				pair = i.next();
+				label = pair.getLabel();
+				switch (label){
+				case temp:
+					setTemperature((Double) pair.second());
+					break;
+				case pres:
+					setPressure((Double) pair.second());
+					break;
+				case coRL:
+					setControlRodLevel((Double) pair.second());
+					break;
+				case wLvl:
+					setWaterLevel((Double) pair.second());
+					break;
+				default:
+					// should this do anything by default?
+				}
 			}
 		}
 	}

@@ -112,6 +112,7 @@ public class Generator extends Component {
 	 */
 	@Override
 	public void takeInfo(InfoPacket info) throws Exception {
+		if(!getFailed()){
 		super.takeSuperInfo(info);
 		Iterator<Pair<?>> i = info.namedValues.iterator();
 		Pair<?> pair = null;
@@ -126,7 +127,7 @@ public class Generator extends Component {
 				break;
 			}
 		}
-
+		}
 	}
 
 	/**
