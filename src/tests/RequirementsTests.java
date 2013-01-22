@@ -298,45 +298,36 @@ public class RequirementsTests {
 	public void TU39_SF23(){
 		Condenser condenser = new Condenser("Condenser");
 		Valve valve = new Valve("Valve");
-		Pump coolentPump = new Pump("Coolant Pump");
 		
-		condenser.connectToInput(coolentPump);
+		
 		condenser.connectToInput(valve);
 		condenser.connectToOutput(valve);
 		valve.connectToInput(condenser);
 		valve.connectToOutput(condenser);
-		coolentPump.connectToInput(coolentPump);
-		coolentPump.connectToOutput(coolentPump);
-		coolentPump.connectToOutput(condenser);
+		
 		
 		condenser.setAmount(50);
 		condenser.setTemperature(120);
-		
-		coolentPump.setAmount(50);
-		coolentPump.setRPM(100);
-		coolentPump.setOuputFlowRate(50);
+		condenser.setCoolantpumpRPM(50);
 		
 		valve.setAmount(50);
 		valve.setTemperature(120);
 		
 		valve.calculate();
-		coolentPump.calculate();
+		
 		condenser.calculate();
 		
 		Double cp1 = condenser.getPressure(); // pressure 1
 		
 		condenser.setAmount(50);
+		condenser.setCoolantpumpRPM(50);
 		condenser.setTemperature(150);
-		
-		coolentPump.setAmount(50);
-		coolentPump.setRPM(100);
-		coolentPump.setOuputFlowRate(50);
 		
 		valve.setAmount(50);
 		valve.setTemperature(120);
 		
 		valve.calculate();
-		coolentPump.calculate();
+		
 		condenser.calculate();
 		
 		Double cp2 = condenser.getPressure(); // pressure 2 ( after temp change)
@@ -345,16 +336,13 @@ public class RequirementsTests {
 		
 		condenser.setAmount(50);
 		condenser.setTemperature(150);
-		
-		coolentPump.setAmount(100);
-		coolentPump.setRPM(200);
-		coolentPump.setOuputFlowRate(100);
+		condenser.setCoolantpumpRPM(200);
 		
 		valve.setAmount(50);
 		valve.setTemperature(120);
 		
 		valve.calculate();
-		coolentPump.calculate();
+		
 		condenser.calculate();
 		
 		Double cp3 = condenser.getPressure();
@@ -488,12 +476,12 @@ public class RequirementsTests {
 	public void TU43_SF27(){ //TODO implement this once condenser is ready.
 		Condenser c = new Condenser("Condenser");
 		Valve v = new Valve("Valve");
-		
+		fail("not imped");
 	}
 	
 	@Test
 	public void TU44_SF28(){ // TODO impoement when condenser is ready.
-		
+		fail("not imped");
 	}
 	/**
 	 * The current water level of the reactor readout being displayed to the user will always be the same as the value of the reactor water level calculation.
