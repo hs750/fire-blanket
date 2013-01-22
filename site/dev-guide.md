@@ -8,6 +8,7 @@ This guide is a good place to start for developers wishing to use and expand Fir
 2. [Changing the UI](#dg-2)
 3. [Adding a Component](#dg-3)
 4. [How to Create a Software Component](#dg-4)
+5. [Changing the Power Plant's Layout](#dg-5)
 
 <a name="#dg-1"/>
 ## Getting Started
@@ -86,3 +87,11 @@ To add a Software Component: there are many ways to change the software componen
   * Commands can rephrased, changed or be given different meanings.
   * Also any new functions added in the gameEngine need to called and added in the parser.
 
+<a name="#dg-5"/>
+## Changing the Power Plant's Layout
+
+To change the layout and to add more components to the game or to even the change the way the components are connected to each other the user can:
+
+1. The user can connect the components by simply calling the `connectComponentTo` function  with the 2 component names in the `GameEngine` class.
+2. A component can be added to the game by calling the `addComponent` function in the `GameEngine` class, thus adding all the information needed to connect the new component in the middle.
+3. The `Parser` class needs to be edited according to the new functionality added by the programmer and appropriate functions need to be called on the given commands.
