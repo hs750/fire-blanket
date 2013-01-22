@@ -87,7 +87,7 @@ public class RequirementsTests {
 	
 		reactorOutputFlow[0] = reactor.getAmount();
 		
-		reactor.setTemperature(125);
+		reactor.setTemperature(120);
 		reactor.setControlRodLevel(50);
 		reactor.setWaterLevel(50);
 		reactor.setAmount(50);
@@ -103,7 +103,9 @@ public class RequirementsTests {
 	
 		reactorOutputFlow[2] = reactor.getAmount();
 		
-		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] > reactorOutputFlow[1] && reactorOutputFlow[2] == 0);
+		assertTrue("" + reactorOutputFlow[0] + " " + reactorOutputFlow[1] + " " +reactorOutputFlow[2], reactorOutputFlow[0] < reactorOutputFlow[1]); //Comparison inverted as less amount (of water) = more steam
+		assertTrue("" + reactorOutputFlow[2],  reactorOutputFlow[2] == 50);  // Amount should stay at 50 as no steam is produced.
+		
 		
 	}
 	/**
@@ -308,49 +310,55 @@ public class RequirementsTests {
 		
 		condenser.setAmount(50);
 		condenser.setTemperature(120);
-		condenser.setOuputFlowRate(50);
+		
 		coolentPump.setAmount(50);
 		coolentPump.setRPM(100);
 		coolentPump.setOuputFlowRate(50);
-		valve.setAmount(50);
-		valve.setOuputFlowRate(50);
-		valve.setTemperature(120);
-		valve.calculate();
 		
+		valve.setAmount(50);
+		valve.setTemperature(120);
+		
+		valve.calculate();
+		coolentPump.calculate();
 		condenser.calculate();
-		Double cp1 = condenser.getPressure();
+		
+		Double cp1 = condenser.getPressure(); // pressure 1
 		
 		condenser.setAmount(50);
 		condenser.setTemperature(150);
-		condenser.setOuputFlowRate(50);
+		
 		coolentPump.setAmount(50);
 		coolentPump.setRPM(100);
 		coolentPump.setOuputFlowRate(50);
-		valve.setAmount(50);
-		valve.setOuputFlowRate(50);
-		valve.setTemperature(150);
-		valve.calculate();
 		
+		valve.setAmount(50);
+		valve.setTemperature(120);
+		
+		valve.calculate();
+		coolentPump.calculate();
 		condenser.calculate();
-		Double cp2 = condenser.getPressure();
+		
+		Double cp2 = condenser.getPressure(); // pressure 2 ( after temp change)
 		
 		assertTrue("" + cp1 + " " + cp2, cp1 < cp2);
 		
 		condenser.setAmount(50);
 		condenser.setTemperature(150);
-		condenser.setOuputFlowRate(50);
-		coolentPump.setAmount(50);
+		
+		coolentPump.setAmount(100);
 		coolentPump.setRPM(200);
 		coolentPump.setOuputFlowRate(100);
-		valve.setAmount(50);
-		valve.setOuputFlowRate(50);
-		valve.setTemperature(150);
-		valve.calculate();		
 		
+		valve.setAmount(50);
+		valve.setTemperature(120);
+		
+		valve.calculate();
+		coolentPump.calculate();
 		condenser.calculate();
+		
 		Double cp3 = condenser.getPressure();
 		
-		assertTrue("" + cp2 + " " + cp3, cp2 > cp3);
+		assertTrue("" + cp2 + " " + cp3, cp2 > cp3); // increasing coolant pump rpm should decrease temperature.
 	}
 	/**
 	 * The reactor temperature being displayed for the user will always be the same as the current result of the reactor temperature calculation.
@@ -467,7 +475,6 @@ public class RequirementsTests {
 		Double a4 = r.getWaterLevel();
 		
 		assertTrue("" + a1 + " " + a2, a1 > a2); //Oposite way round to what you would expect as water level goes down when steam increases.
-		
 		
 	}
 }
