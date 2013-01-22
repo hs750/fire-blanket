@@ -12,6 +12,8 @@
 <a name="um-1"/>
 ## 1. Introduction
 
+Presented by Team Anchovy, Fire Blanket is a nuclear power plant simulator... with a post-apocalyptic twist. Near the city of York, in the emerging shanty town of Town, the remnants of humanity fight for survival against a mutating horde of zombies, geese and the occasional St John's student. As the Power Plant operator, the responsibility falls to you to keep your people safe. Generate too much power and Town might explode, too little, and Town's defences may shut down.
+
 <a name="um-2"/>
 ## 2. Quick start guide
 
