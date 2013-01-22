@@ -80,42 +80,45 @@ public class GeneratorTest {
 	
 	/**
 	 * Test whether the generator calculates its values correctly
+	 * @deprecated Thus is now done by a requirements test case. 
 	 */
 	@Test
 	public void testCalc(){
-		setUpInfo1();
-		try {
-			generator1.takeInfo(info);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Valve v1 = new Valve("Valve");
-		Turbine t1 = new Turbine("T1");
+//		setUpInfo1();
+//		try {
+//			generator1.takeInfo(info);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		Valve v1 = new Valve("Valve");
+//		Turbine t1 = new Turbine("T1");
+//		
+//		t1.connectToInput(v1);
+//		t1.connectToOutput(v1);
+//		v1.connectToInput(t1);
+//		v1.connectToOutput(t1);
+//		v1.setOuputFlowRate(50);
+//		
+//		
+//		
+//		generator1.connectToInput(t1);
+//		t1.connectToOutput(generator1);
+//		t1.calculate();
+//		generator1.calculate();
+//
+//		Double elecGened = generator1.getElectrisityGenerated();
+//		Double gOPFL = generator1.getOutputFlowRate();
+//		
+//		v1.setOuputFlowRate(60);
+//		t1.calculate();
+//		generator1.calculate();
+//		
+//		Double gOPFL2 = generator1.getOutputFlowRate();
+//		Double elecGened2 = generator1.getElectrisityGenerated();
+//		
+//		assertTrue(gOPFL < gOPFL2);
+//		assertTrue(elecGened < elecGened2);
 		
-		t1.connectToInput(v1);
-		t1.connectToOutput(v1);
-		v1.connectToInput(t1);
-		v1.connectToOutput(t1);
-		v1.setOuputFlowRate(50);
 		
-		
-		
-		generator1.connectToInput(t1);
-		t1.connectToOutput(generator1);
-		t1.calculate();
-		generator1.calculate();
-
-		Double elecGened = generator1.getElectrisityGenerated();
-		Double gOPFL = generator1.getOutputFlowRate();
-		
-		v1.setOuputFlowRate(60);
-		t1.calculate();
-		generator1.calculate();
-		
-		Double gOPFL2 = generator1.getOutputFlowRate();
-		Double elecGened2 = generator1.getElectrisityGenerated();
-		
-		assertTrue(gOPFL < gOPFL2);
-		assertTrue(elecGened < elecGened2);
 	}
 }
