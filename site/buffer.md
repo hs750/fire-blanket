@@ -4,8 +4,6 @@
 
 * Excecutables for Mac/Windows/Linux **TODO**
 
-* Design Overview (including picture of powerplant) **TODO** add in user manual
-
 PDF:
 * design doc
 * system requirements
@@ -26,6 +24,8 @@ PDF:
 * user-manual.md
 
 * Source Code for deveopers
+
+* Design Overview (including picture of powerplant) **TODO** add in user manual
 
 ## Random stuff
 
