@@ -59,7 +59,7 @@ Six months have passed since the blanket of fire descended and the newly establi
 <a name="um-4"/>
 ## Functionality
 
-### Diagram of the nuclear power plant's components
+### Diagram of the nuclear power plant's default components
 
 ![Plant diagram NOLABELS](http://i.imgur.com/SBLKwR2.png)
 ![Plant diagram](http://i.imgur.com/jW00sqR.jpg)
