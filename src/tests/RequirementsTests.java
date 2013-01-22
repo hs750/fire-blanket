@@ -471,12 +471,75 @@ public class RequirementsTests {
 		assertTrue("" + a1 + " " + a2, a1 < a2); //Test increase pump rate increases water level
 		
 	}
-	
+	/**
+	 * If the amount steam being condensed is greater than the rate at which water is being pumped out of the condenser then the water level in the condenser will rise. If the steam condensation rate is less than the water pumping rate then the water level will decrease. If both the condensation rate and the water pumping rate are equal then the water level in the condenser will remain constant.
+	 * 
+	 */
 	@Test
 	public void TU43_SF27(){ //TODO implement this once condenser is ready.
 		Condenser c = new Condenser("Condenser");
 		Valve v = new Valve("Valve");
-		fail("not imped");
+		Pump p = new Pump("Pump");
+		Valve v2 = new Valve("Valve 2");
+		
+		c.connectToInput(v);
+		c.connectToOutput(p);
+		p.connectToInput(c);
+		p.connectToOutput(v2);
+	
+		v.connectToOutput(c);
+		
+		c.setAmount(50);
+		c.setCoolantpumpRPM(0);
+		c.setTemperature(50);
+		
+		p.setAmount(50);
+		p.setRPM(100);
+		p.setTemperature(50);
+		
+		v.setAmount(50);
+		v.setTemperature(50);
+		
+		v.calculate();
+		c.calculate();
+		p.calculate();
+		
+		Double a1 = c.getAmount();
+		
+		v.calculate();
+		c.calculate();
+		p.calculate();
+		
+		Double a2 = c.getAmount();
+		
+		assertTrue("" + a1 + " " + a2, a1 > a2); //Comparason of pump pumping lots of water out and not much steam being condensed.
+		
+		c.setAmount(50);
+		c.setCoolantpumpRPM(100);
+		c.setTemperature(50);
+		
+		p.setAmount(50);
+		p.setRPM(0);
+		p.setTemperature(50);
+		
+		v.setAmount(50);
+		v.setTemperature(50);
+		
+		v.calculate();
+		c.calculate();
+		p.calculate();
+		
+		a1 = c.getAmount();
+		
+		v.calculate();
+		c.calculate();
+		p.calculate();
+		
+		a2 = c.getAmount();
+		
+		assertTrue("" + a1 + " " + a2, a1 < a2); //Comparison of pump pumping low amount of water out and alot of steam being condensed.
+		
+		
 	}
 	
 	@Test
