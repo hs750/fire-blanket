@@ -16,6 +16,8 @@ import util.Pair.Label;
  */
 public class Condenser extends WaterComponent {
 	private double waterLevel = 0.0;//---DEPRECATED---
+	private double coolantpumpRPM = 10.0;
+
 	/**
 	 * @see model.Component#Component(String)
 	 */
@@ -37,6 +39,8 @@ public class Condenser extends WaterComponent {
 			case wLvl:
 				waterLevel = (Double) currentpair.second();
 				break;
+			case RPMs:
+				coolantpumpRPM = (Double) currentpair.second(); 
 			default:
 				break;
 			}
@@ -50,7 +54,16 @@ public class Condenser extends WaterComponent {
 		InfoPacket info = super.getInfo();
 		info.namedValues.add(new Pair<Double>(Label.pres, getPressure()));
 		info.namedValues.add(new Pair<Double>(Label.wLvl, getAmount()));
+		info.namedValues.add(new Pair<Double>(Label.RPMs, getCoolantpumpRPM()));
 		return info;
+	}
+	
+	public double getCoolantpumpRPM() {
+		return coolantpumpRPM;
+	}
+	
+	public void setCoolantpumpRPM(double coolantpumpRPM) {
+		this.coolantpumpRPM = coolantpumpRPM;
 	}
 	/**
 	 * {@inheritDoc}
@@ -166,6 +179,10 @@ public class Condenser extends WaterComponent {
 			switch(label){
 			case wLvl:
 				waterLevel = (Double) pair.second();
+				break;
+			case RPMs:
+				setCoolantpumpRPM((Double) pair.second());
+				break;
 			default:
 				break;
 			}
