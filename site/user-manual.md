@@ -30,7 +30,7 @@ _This is a short guide to start playing immediately. To understand and maybe mas
 
 **Step 2.** Enter `new game <NAME>`. Replace `<NAME>` with your name.
 
-**Step 3.** Enter `load` <NAME of saved file>. 
+**Step 3.** Enter `load <NAME of saved file>`. 
 
 **Step 4.** Type in [commands](#um-5) to control the nuclear power plant.
 
