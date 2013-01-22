@@ -12,7 +12,7 @@ Outputs to&Condenser
 
 Name of component&Reactor
 Controll rod level&30.0
-Water level&50.0
+Amount&500.0
 Temperature&50.0
 Pressure&50.0
 Output flow rate&200.0
