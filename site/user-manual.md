@@ -126,7 +126,7 @@ Item description
 * Saves using the FILENAME provided.
 
 
-Saves the current state of the plant to a file. Doesn't interrupt the game (check the [autosave](#um-autosave) feature).
+Saves the current state of the plant to a file. Doesn't interrupt the game (check the [autosave](#um-4) feature).
 
 
 <a name="um-6"/>
