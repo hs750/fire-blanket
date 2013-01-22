@@ -14,7 +14,7 @@ This guide is a good place to start for developers wishing to use and expand Fir
 
 ### Getting the code
 
-If you want to use Github to manage the project, getting the code is as simple as [forking](https://help.github.com/articles/fork-a-repo) our repo. Either way, to download a local copy you can do this (on a *nix machine):
+If you want to use Github to manage the project, getting the code is as simple as [forking our repo](https://github.com/cjd515/fire-blanket)(what's [forking](https://help.github.com/articles/fork-a-repo), you ask?). Either way, to download a local copy you can do this (on a *nix machine):
 
 ```bash
   bash-4.2$ cd ~/git
