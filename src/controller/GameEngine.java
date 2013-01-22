@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.io.*;
@@ -595,6 +596,7 @@ public class GameEngine {
 		String componentName = new String();
 		String componentDescriptionModi = new String();
 		String componentDescriptionNon = new String();
+		DecimalFormat threeSignificant = new DecimalFormat("#.###");
 		while (packetIter.hasNext()) {
 
 			pckt = packetIter.next();
@@ -617,23 +619,23 @@ public class GameEngine {
 					break;*/
 				case temp:
 					componentDescriptionNon += "Temperature: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case pres:
 					componentDescriptionNon += "Pressure: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case coRL:
 					componentDescriptionModi += "Control rod level: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case wLvl:
 					componentDescriptionNon += "Water level: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case RPMs:
 					componentDescriptionModi += "RPMs: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case psit:
 					componentDescriptionModi += "Position: "
@@ -641,11 +643,11 @@ public class GameEngine {
 					break;
 				case elec:
 					componentDescriptionNon += "Electricity generated: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				case OPFL:
 					componentDescriptionNon += "Output flow rate: "
-							+ pair.second().toString() + '\n';
+							+ Double.valueOf(threeSignificant.format(pair.second())).toString() + '\n';
 					break;
 				default:
 					break;
