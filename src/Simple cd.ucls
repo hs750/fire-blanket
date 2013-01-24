@@ -1,0 +1,237 @@
+<class-diagram version="1.0.11" icons="false" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="controller.GameEngine" project="Anchovy" 
+    file="/Anchovy/src/controller/GameEngine.java" binary="false">    
+    <position height="35" width="111" x="544" y="62"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="model.Reactor" project="Anchovy" 
+    file="/Anchovy/src/model/Reactor.java" binary="false">    
+    <position height="-1" width="-1" x="481" y="360"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="model.Condenser" project="Anchovy" 
+    file="/Anchovy/src/model/Condenser.java" binary="false">    
+    <position height="-1" width="-1" x="353" y="360"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="model.Infrastructure" project="Anchovy" 
+    file="/Anchovy/src/model/Infrastructure.java" binary="false">    
+    <position height="-1" width="-1" x="494" y="275"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="model.Generator" project="Anchovy" 
+    file="/Anchovy/src/model/Generator.java" binary="false">    
+    <position height="-1" width="-1" x="350" y="275"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="model.Turbine" project="Anchovy" 
+    file="/Anchovy/src/model/Turbine.java" binary="false">    
+    <position height="-1" width="-1" x="701" y="360"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="model.Pump" project="Anchovy" 
+    file="/Anchovy/src/model/Pump.java" binary="false">    
+    <position height="-1" width="-1" x="591" y="360"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="8" corner="TOP_LEFT" language="java" name="model.Component" project="Anchovy" 
+    file="/Anchovy/src/model/Component.java" binary="false">    
+    <position height="-1" width="-1" x="598" y="172"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="9" corner="BOTTOM_RIGHT" language="java" name="model.Valve" project="Anchovy" 
+    file="/Anchovy/src/model/Valve.java" binary="false">    
+    <position height="-1" width="-1" x="810" y="360"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="10" corner="BOTTOM_RIGHT" language="java" name="model.WaterComponent" project="Anchovy" 
+    file="/Anchovy/src/model/WaterComponent.java" binary="false">    
+    <position height="-1" width="-1" x="664" y="275"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="11" corner="BOTTOM_RIGHT" language="java" name="util.InfoPacket" project="Anchovy" 
+    file="/Anchovy/src/util/InfoPacket.java" binary="false">    
+    <position height="-1" width="-1" x="450" y="76"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="12" corner="BOTTOM_RIGHT" language="java" name="view.Console" project="Anchovy" 
+    file="/Anchovy/src/view/Console.java" binary="false">    
+    <position height="-1" width="-1" x="906" y="127"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="view.MainWindow" project="Anchovy" 
+    file="/Anchovy/src/view/MainWindow.java" binary="false">    
+    <position height="-1" width="-1" x="908" y="59"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="14" corner="BOTTOM_RIGHT" language="java" name="view.Parser" project="Anchovy" 
+    file="/Anchovy/src/view/Parser.java" binary="false">    
+    <position height="-1" width="-1" x="905" y="199"/>    
+    <display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="16">    
+    <bendpoint x="762" y="293"/>    
+    <bendpoint x="753" y="275"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="17" name="outputsWaterTo"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="20">    
+    <bendpoint x="679" y="195"/>    
+    <bendpoint x="674" y="174"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="21" name="receivesInputFrom"/>      
+      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="24">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="powrPlntComponents"/>      
+      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <generalization id="28">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="29">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="30" name="console"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="33" name="window"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="36" name="engine"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="39">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="40" name="parser"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <generalization id="42">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <association id="44">    
+    <bendpoint x="513" y="197"/>    
+    <bendpoint x="510" y="184"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="45" name="outputsTo"/>      
+      <multiplicity id="46" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="false"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="false" package="true" initial-value="false" signature="false" 
+    visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="false"/>
+</class-diagram>
